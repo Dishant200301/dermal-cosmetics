@@ -1,0 +1,224 @@
+import React, { useState } from "react";
+import { MapPin, Phone, Calendar, Clock } from "lucide-react";
+
+const ContactSection: React.FC = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
+    email: "",
+    service: "",
+    date: "",
+    time: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: hook your API / toast here
+    console.log("Contact form submitted:", formData);
+
+    setFormData({
+      fullName: "",
+      phone: "",
+      email: "",
+      service: "",
+      date: "",
+      time: "",
+      message: "",
+    });
+  };
+
+  return (
+    <section className="bg-[#fef7f8] py-12 md:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-0">
+        {/* Rounded main container */}
+        <div className="rounded-[30px] bg-[#F7F0F2] border border-[#E3D4D9] px-4 py-8 sm:p-8 lg:p-10 xl:p-12">
+          <div className="grid gap-10 lg:gap-16 lg:grid-cols-2 items-start">
+            {/* LEFT: Address + Map (second on mobile) */}
+            <div className="order-2 lg:order-1 space-y-6">
+              {/* Top address / phone row */}
+              <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
+                {/* Address Box */}
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="flex h-[50px] w-[50px] items-center justify-center rounded-[16px] bg-[#24544B]">
+                    <MapPin className="h-5 w-5 text-white" />
+                  </div>
+                  <p className="font-body text-[15px] sm:text-[16px] md:text-[18px] leading-snug text-[#7B798C]">
+                    2464 Royal Ln. Mesa,
+                    <br />
+                    New Jersey 45463
+                  </p>
+                </div>
+
+                {/* Phone Box */}
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="flex h-[50px] w-[50px] items-center justify-center rounded-[16px] bg-[#24544B]">
+                    <Phone className="h-5 w-5 text-white" />
+                  </div>
+                  <div className="font-body text-[15px] sm:text-[16px] md:text-[18px] leading-snug text-[#7B798C]">
+                    <p>(684) 555-012</p>
+                    <p>(704) 555-127</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Map */}
+              <div className="rounded-[30px] overflow-hidden h-[350px] sm:h-[380px] md:h-[420px] lg:h-[600px]">
+                <iframe
+                  title="Dermal Clinic Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9934.510697047333!2d-0.13001682567447082!3d51.50329788119752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce5b5e1851%3A0x676f5c2d8eab73e0!2sLondon%20Eye!5e0!3m2!1sen!2suk!4v1701234567890!5m2!1sen!2suk"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+
+            {/* RIGHT: Form (first on mobile) */}
+            <div className="order-1 lg:order-2">
+              {/* Heading */}
+              <div className="mb-6 sm:mb-8">
+                <div className="mb-3 flex items-center gap-2">
+                  <span className="inline-block h-2 w-2 rounded-full bg-[#24544B]" />
+                  <span className="font-body text-[14px] sm:text-[15px] md:text-[16px] text-[#7B798C]">
+                    Book A Appointment
+                  </span>
+                </div>
+                <h2 className="font-heading text-[28px] leading-tight text-[#1C4942] sm:text-[32px] md:text-[40px] lg:text-[50px] mb-3">
+                  Reach out to us today!
+                </h2>
+                <p className="font-body text-[14px] sm:text-[15px] md:text-[16px] text-[#7B798C] max-w-xl">
+                  It’s time to take control of your skin health! Booking your
+                  appointment is easy and fast. Choose a time that works for you
+                  and our dermatology experts will be ready.
+                </p>
+              </div>
+
+              {/* FORM */}
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Row 1 */}
+                <div className="grid grid-cols-1 gap-4 md:gap-5 md:grid-cols-2">
+                  <input
+                    type="text"
+                    name="fullName"
+                    placeholder="Full Name Here"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 font-body text-[15px] md:text-[16px] text-[#1C4942] placeholder:text-[#7B798C] focus:border-[#24544B] focus:outline-none"
+                  />
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 font-body text-[15px] md:text-[16px] text-[#1C4942] placeholder:text-[#7B798C] focus:border-[#24544B] focus:outline-none"
+                  />
+                </div>
+
+                {/* Row 2 */}
+                <div className="grid grid-cols-1 gap-4 md:gap-5 md:grid-cols-2">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 font-body text-[15px] md:text-[16px] text-[#1C4942] placeholder:text-[#7B798C] focus:border-[#24544B] focus:outline-none"
+                  />
+                  <select
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                    required
+                    className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 font-body text-[15px] md:text-[16px] text-[#7B798C] focus:border-[#24544B] focus:outline-none"
+                  >
+                    <option value="">Select Service</option>
+                    <option value="dermal-fillers">Dermal Fillers</option>
+                    <option value="chemical-peels">Chemical Peels</option>
+                    <option value="acne-treatment">Acne Treatment</option>
+                    <option value="skin-tightening">Skin Tightening</option>
+                    <option value="scar-revision">Scar Revision</option>
+                    <option value="wrinkle-reduction">Wrinkle Reduction</option>
+                  </select>
+                </div>
+
+                {/* Row 3 */}
+                <div className="grid grid-cols-1 gap-4 md:gap-5 md:grid-cols-2">
+                  {/* Date with icon */}
+                  <div className="relative">
+                    <input
+                      type="date"
+                      name="date"
+                      value={formData.date}
+                      onChange={handleChange}
+                      required
+                      className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 pr-12 font-body text-[15px] md:text-[16px] text-[#7B798C] focus:border-[#24544B] focus:outline-none"
+                    />
+                    <Calendar className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7B798C]" />
+                  </div>
+
+                  {/* Time with icon */}
+                  <div className="relative">
+                    <select
+                      name="time"
+                      value={formData.time}
+                      onChange={handleChange}
+                      required
+                      className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 pr-12 font-body text-[15px] md:text-[16px] text-[#7B798C] focus:border-[#24544B] focus:outline-none"
+                    >
+                      <option value="">Choose Time</option>
+                      <option value="9:00">9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="11:00">11:00 AM</option>
+                      <option value="14:00">2:00 PM</option>
+                      <option value="15:00">3:00 PM</option>
+                      <option value="16:00">4:00 PM</option>
+                    </select>
+                    <Clock className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7B798C]" />
+                  </div>
+                </div>
+
+                {/* Description */}
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={4}
+                  placeholder="Description here about service or your problem..."
+                  className="h-[150px] w-full resize-none rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 py-4 font-body text-[15px] md:text-[16px] text-[#1C4942] placeholder:text-[#7B798C] focus:border-[#24544B] focus:outline-none"
+                  required
+                />
+
+                {/* Button */}
+                <button
+                  type="submit"
+                  className="mt-2 inline-flex h-[50px] w-[180px] items-center justify-center rounded-[30px] bg-[#24544B] font-body text-[15px] md:text-[16px] font-medium text-white transition-colors hover:bg-[#1C4942]"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ContactSection;
