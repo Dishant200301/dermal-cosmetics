@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ArrowIcon } from './icons';
 
 const faqs = [
   {
@@ -29,7 +30,7 @@ export const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="bg-deep-green-900 py-16 lg:py-24 relative overflow-hidden">
+    <section className="bg-[#fef7f8] py-16 lg:py-10 relative overflow-hidden">
       {/* Decorative leaves */}
       <svg className="absolute bottom-0 left-0 w-32 h-32 opacity-20" viewBox="0 0 100 100" fill="none">
         <path d="M20 80C40 70 50 50 50 20C30 30 20 50 20 80Z" stroke="currentColor" strokeWidth="1" className="text-white"/>
@@ -39,8 +40,8 @@ export const FAQSection = () => {
         <circle cx="75" cy="75" r="10" stroke="currentColor" strokeWidth="1" className="text-white"/>
       </svg>
 
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="bg-deep-green-800 rounded-30 p-8 lg:p-12">
+      <div className="container mx-auto px-0 lg:px-8 xl:px-0">
+        <div className="bg-deep-green-800 lg:rounded-30 xl:rounded-30 p-8 lg:p-12 xl:p-20">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Left Content */}
             <div>
@@ -56,7 +57,7 @@ export const FAQSection = () => {
               </p>
               <Link to="/contact" className="btn-secondary w-fit">
                 View All FAQs
-                <ArrowRight className="w-4 h-4" />
+                <ArrowIcon className='text-[#1C4942]'/>
               </Link>
             </div>
 

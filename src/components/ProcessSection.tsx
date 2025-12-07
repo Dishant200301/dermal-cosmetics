@@ -1,6 +1,7 @@
 import { Check, ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
-import doctorProcedure from "@/assets/doctor-procedure.jpg";
+import doctorProcedure from "/image/doctor-procedure.png";
+import { ArrowIcon } from "./icons";
 
 const leftChecklist = [
   "Expert Dermatologists",
@@ -16,11 +17,13 @@ const rightChecklist = [
 
 export const ProcessSection = () => {
   return (
-    <section className="container mx-auto w-full h-full py-16 lg:py-24 px-6 lg:px-2">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center  rounded-[30px] bg-[#F7F0F2]">
-
-        {/* LEFT — Image with Gradient + Video CTA */}
-        <div className="relative w-full h-[450px] md:h-[600px] lg:h-[793px] rounded-[30px] lg:rounded-l-[30px] lg:rounded-r-none overflow-hidden">
+    <section className="w-full bg-[#fef7f8] mx-auto py-16 md:py-20 lg:py-16 px-0 lg:px-6 xl:px-24">
+      <div className="bg-[#F7F0F2] lg:rounded-[30px] xl:rounded-[30px] grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+        {/* =====================================================================================
+            LEFT COLUMN — IMAGE + GRADIENT + VIDEO CTA
+        ===================================================================================== */}
+        <div className="relative h-[460px] md:h-[600px] lg:h-[797px] xl:h-[630px] lg:rounded-t-[30px] xl:rounded-t-[30px] lg:rounded-l-[30px] xl:rounded-l-[30px] lg:rounded-tr-none overflow-hidden">
+          {/* Image */}
           <img
             src={doctorProcedure}
             alt="Dermatology procedure"
@@ -28,34 +31,37 @@ export const ProcessSection = () => {
           />
 
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1C4942E6] via-[#1C494266] to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(28,73,66,0)] via-[rgba(28,73,66,0.45)] to-[rgba(28,73,66,0.9)]" />
 
-          {/* Bottom Video CTA */}
-          <div className="absolute bottom-10 left-10 flex items-center gap-5">
-            <button className="w-[60px] h-[60px] border border-white rounded-full flex items-center justify-center hover:scale-105 transition-all">
+          {/* Video Button + Text */}
+          <div className="absolute bottom-12 left-10 flex items-start gap-5 ">
+            {/* Play Button */}
+            <button className="w-[60px] h-[60px] border border-white rounded-full flex items-center justify-center hover:scale-105 transition-all duration-300">
               <Play className="w-6 h-6 text-white fill-white" />
             </button>
 
+            {/* Text Block */}
             <div className="text-white">
               <p className="font-heading text-[16px] opacity-90">Our process</p>
-              <p className="font-heading text-[38px] md:text-[42px] leading-tight">
+              <p className="font-heading text-[26px] md:text-[40px] lg:text-[42px] leading-[1.1] mt-1">
                 Watch our procedure
               </p>
             </div>
           </div>
         </div>
 
-        {/* RIGHT — Text Content */}
-        <div className="lg:pl-6">
-
+        {/* =====================================================================================
+            RIGHT COLUMN — TEXT BLOCK
+        ===================================================================================== */}
+        <div className="py-14 px-6 md:px-10 lg:px-14 lg:py-6 flex flex-col justify-center">
           {/* Subheading */}
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-2 h-2 rounded-full bg-[#24544B]" />
+            <span className="w-2 h-2 rounded-full bg-[#24544B]" />
             <p className="font-body text-[16px] text-[#7B798C]">Our Process</p>
           </div>
 
           {/* Heading */}
-          <h2 className="font-heading text-[#1C4942] text-[32px] md:text-[42px] lg:text-[50px] leading-[1.15] mb-6 max-w-[550px]">
+          <h2 className="font-heading text-[#1C4942] text-[32px] md:text-[42px] lg:text-[36px] xl:text-[46px] leading-[1.12] max-w-[550px] mb-6">
             Expert dermatology care for healthy, radiant skin
           </h2>
 
@@ -66,8 +72,7 @@ export const ProcessSection = () => {
           </p>
 
           {/* CHECKLIST GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6 mb-10">
-
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-10 mb-12">
             {/* Left column */}
             <div className="space-y-5">
               {leftChecklist.map((item) => (
@@ -97,13 +102,13 @@ export const ProcessSection = () => {
             </div>
           </div>
 
-          {/* CTA Button */}
+          {/* CTA BUTTON */}
           <Link
             to="/about"
-            className="inline-flex items-center gap-2 bg-[#24544B] text-white font-body text-[16px] px-8 py-4 rounded-full hover:bg-[#1C4942] transition-colors mb-8"
+            className="inline-flex items-center gap-2 bg-[#24544B] text-white font-body text-[16px] px-8 py-4 rounded-full hover:bg-[#1C4942] transition-all duration-300 mb-8 w-fit"
           >
             Learn More
-            <ArrowRight className="w-4 h-4" />
+           <ArrowIcon/>
           </Link>
 
           {/* Bottom Text */}

@@ -1,103 +1,157 @@
-import { ArrowRight, Check, Play, Users } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Play, Users, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import doctorProcedure from '@/assets/doctor-procedure.jpg';
-import treatment1 from '@/assets/treatment-1.jpg';
 
-const RotatingBadgeDark = () => (
-  <div className="absolute -right-4 top-1/3 z-10">
-    <div className="relative w-[100px] h-[100px]">
-      <svg className="w-full h-full animate-[spin_15s_linear_infinite]" viewBox="0 0 100 100">
-        <defs>
-          <path
-            id="circlePathSmall"
-            d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
-          />
-        </defs>
-        <circle cx="50" cy="50" r="50" className="fill-deep-green-800" />
-        <text className="fill-white text-[10px] font-inter uppercase tracking-wide">
-          <textPath href="#circlePathSmall">
-            Contact Us • Contact Us •
-          </textPath>
-        </text>
-      </svg>
+// Rotating Badge Component
+const RotatingBadge = () => (
+  <div className="absolute -right-8 top-12 lg:-right-10 lg:top-16 z-20">
+    <div className="relative w-[110px] h-[110px] lg:w-[100px] lg:h-[130px]">
+      {/* Rotating Circle */}
+      <div className="absolute inset-0 animate-[spin_20s_linear_infinite] ">
+        <svg className="w-full h-full" viewBox="0 0 140 140">
+          <defs>
+            <path id="circlePath" d="M 70, 70 m -52, 0 a 52,52 0 1,1 104,0 a 52,52 0 1,1 -104,0" />
+          </defs>
+          <circle cx="70" cy="70" r="70" fill="#1C4942" />
+          <text fill="#fff" fontSize="11" fontWeight="600" letterSpacing="2.5px">
+            <textPath href="#circlePath" startOffset="0%">
+              • CONTACT US • CONTACT US • CONTACT US • 
+            </textPath>
+          </text>
+        </svg>
+      </div>
+      {/* Center Arrow */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <ArrowRight className="w-4 h-4 text-white -rotate-45" />
+        <ArrowRight className="w-6 h-6 text-white -rotate-45" strokeWidth={2.5} />
       </div>
     </div>
   </div>
 );
 
-const benefits = [
-  'Commitment to Excellence in Skin Health',
-  'State-of-the-Art Facility and Technology',
-  'Trusted by Thousands of Satisfied Patients',
-];
+const WhyChooseUs = () => {
+  const benefits = [
+    'Commitment to Excellence in Skin Health',
+    'State-of-the-Art Facility and Technology',
+    'Trusted by Thousands of Satisfied Patients',
+  ];
 
-export const WhyChooseUs = () => {
   return (
-    <section className="bg-light-pink-100 py-16 lg:py-24">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left - Images */}
-          <div className="relative">
-            <div className="relative">
+    <section className="bg-[#FDF4F4] py-10 md:py-[60px] lg:py-[80px]">
+      <div className="container mx-auto px-[5%] md:px-[7%] lg:px-20 max-w-[1440px]">
+
+        {/* Two Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
+
+          {/* LEFT COLUMN - Images */}
+          <div className="relative mb-16 md:mb-20 lg:mb-0">
+            {/* Main Image */}
+            <div className="relative w-full max-w-[500px] mx-auto lg:mx-0">
               <img
-                src={doctorProcedure}
-                alt="Doctor performing procedure"
-                className="rounded-20 w-full max-w-md object-cover h-[350px] lg:h-[420px]"
+                src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?q=80&w=1000&auto=format&fit=crop"
+                alt="Dermatologist examining patient"
+                className="w-full h-[380px] md:h-[520px] lg:h-[580px] object-cover rounded-[30px] md:rounded-[40px]"
               />
-              <RotatingBadgeDark />
+
+              {/* Rotating Badge - Tablet & Desktop Only */}
+              <div className="hidden md:block">
+                <RotatingBadge />
+              </div>
             </div>
-            <img
-              src={treatment1}
-              alt="Patient receiving treatment"
-              className="absolute -bottom-8 left-1/4 rounded-20 w-48 lg:w-64 h-36 lg:h-48 object-cover shadow-xl border-4 border-light-pink-100"
-            />
+
+            {/* Overlapping Second Image */}
+            <div className="absolute -bottom-12 md:-bottom-16 left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 lg:-right-12 w-[85%] md:w-[320px] lg:w-[340px]">
+              <img
+                src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?q=80&w=800&auto=format&fit=crop"
+                alt="Skin treatment procedure"
+                className="w-full h-[200px] md:h-[220px] object-cover rounded-[20px] border-[6px] border-[#FDF4F4] shadow-2xl"
+              />
+            </div>
           </div>
 
-          {/* Right - Content */}
-          <div className="mt-12 lg:mt-0">
-            <span className="section-label mb-4 block">About Us</span>
-            <h2 className="font-heading text-3xl lg:text-5xl text-deep-green-900 mb-6 leading-tight">
+          {/* RIGHT COLUMN - Content */}
+          <div className="flex flex-col justify-center pt-4 lg:pt-0">
+
+            {/* Tagline */}
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#1C4942]"></span>
+              <span className="text-[#6B6B6B] font-medium text-[14px] md:text-[15px] uppercase tracking-wider">
+                About Us
+              </span>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-heading text-[#1C4942] text-[28px] md:text-[36px] lg:text-[50px] leading-[110%] mb-5 lg:mb-6">
               Why choose us for all your dermatology needs
             </h2>
-            <p className="font-body text-lg text-text-gray-400 mb-8">
+
+            {/* Description */}
+            <p className="font-body text-[#7B798C] text-[16px] md:text-[17px] lg:text-[18px] leading-[1.7] mb-8 lg:mb-10 max-w-[600px]">
               We're dedicated to helping you achieve and maintain beautiful, healthy skin. Trust us to provide exceptional care tailored to you.
             </p>
 
-            <ul className="space-y-4 mb-8">
-              {benefits.map((benefit) => (
-                <li key={benefit} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded bg-deep-green-800 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-4 h-4 text-white" />
-                  </div>
-                  <span className="font-body text-lg text-deep-green-900">{benefit}</span>
-                </li>
-              ))}
-            </ul>
+            {/* Feature List + Team Card Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-8 lg:gap-10 items-start">
 
-            <div className="flex flex-wrap gap-4 mb-8">
-              <Link to="/about" className="btn-primary">
-                About More
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <button className="btn-outline">
-                <Play className="w-4 h-4 fill-current" />
-                Play Session
-              </button>
-            </div>
+              {/* Left Column: Feature List + Buttons */}
+              <div className="flex flex-col gap-6 md:gap-8">
 
-            {/* Team Counter Card */}
-            <div className="inline-flex items-center gap-4 bg-deep-green-900 rounded-20 p-6">
-              <Users className="w-8 h-8 text-white" />
-              <div>
-                <p className="font-heading text-3xl text-white">29+</p>
-                <p className="font-body text-white/80">Team Members</p>
+                {/* Feature List - Vertical Stack on Mobile, Single Line on Desktop */}
+                <ul className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-8 lg:gap-x-10">
+                  {benefits.map((benefit, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-5 h-5 mt-0.5 rounded-sm bg-[#1C4942] flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                      </div>
+                      <span className="font-body text-[#7B798C] text-[16px] md:text-[17px] lg:text-[18px] leading-relaxed md:whitespace-nowrap">
+                        {benefit}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Buttons - Below Checklist */}
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+
+                  {/* Contact Us Button */}
+                  <Link
+                    to="/contact"
+                    className="flex items-center justify-center gap-2 bg-[#1C4942] text-white px-6 py-3 md:py-4 rounded-full font-medium text-[16px] md:text-[17px] hover:bg-[#143630] hover:scale-105 transition-all duration-300"
+                  >
+                    Contact Us
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+
+                  {/* Play Session Button */}
+                  <button className="flex items-center justify-center gap-2 border border-[#1C4942] text-[#1C4942] bg-white px-6 py-3 md:py-4 rounded-full font-medium text-[16px] md:text-[17px] hover:bg-[#1C4942] hover:text-white transition-all duration-300 group">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full border border-current">
+                      <Play className="w-3 h-3 fill-current" />
+                    </span>
+                    Play Session
+                  </button>
+                </div>
+
+                {/* Team Card - Mobile Only (Below Buttons) */}
+                <div className="md:hidden bg-[#1C4942] text-white rounded-[24px] p-6 w-full flex flex-col items-center justify-center shadow-2xl mt-8">
+                  <Users className="w-10 h-10 mb-3" strokeWidth={1.5} />
+                  <div className="text-[42px] font-serif leading-none mb-2">29+</div>
+                  <div className="text-[14px] font-medium opacity-90">Team Members</div>
+                </div>
+
+              </div>
+
+              {/* Team Card - Tablet & Desktop Only (Right of Features + Buttons) */}
+              <div className="hidden lg:hidden xl:block md:flex bg-[#1C4942] text-center text-white rounded-[24px] p-6 w-[196px] h-[238px] flex-col items-center justify-center shadow-2xl flex-shrink-0">
+                <Users className="w-12 h-12 mb-3 items-center xl:ml-12 xl:mt-5" strokeWidth={1.5} />
+                <div className="text-[42px] md:text-[46px] lg:text-[50px] font-serif leading-none mb-2">29+</div>
+                <div className="text-[14px] md:text-[15px] font-medium opacity-90">Team Members</div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </section>
   );
 };
+
+export default WhyChooseUs;

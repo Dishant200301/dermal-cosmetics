@@ -88,7 +88,8 @@ const teamMembers = [
 
 export const ExpertTeamSection = () => {
     return (
-        <section className="relative bg-[#F7F0F2] rounded-[30px] mx-6 lg:mx-20 py-24 lg:py-[140px] overflow-hidden">
+        <section className="relative bg-[#fef7f8] lg:px-0 xl:py-20">
+            <div className="lg:bg-[#f7f0f2] md:bg-[#f7f0f2] md:rounded-[30px] lg:rounded-[30px] xl:rounded-[30px] mx-6 lg:mx-4 py-24 lg:py-[80px] overflow-hidden">
             {/* Decorative Leaf - Left Bottom */}
             <svg
                 className="absolute left-0 bottom-8 w-32 h-32 lg:w-[150px] lg:h-[150px] opacity-20"
@@ -132,7 +133,7 @@ export const ExpertTeamSection = () => {
             </svg>
 
             {/* Content Container */}
-            <div className="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-[60px]">
+            <div className="relative z-10 max-w-[1280px] mx-auto md:px-6 lg:px-[40px] xl:px-[0px]">
                 {/* Section Header */}
                 <SectionHeader />
 
@@ -148,6 +149,7 @@ export const ExpertTeamSection = () => {
                     ))}
                 </div>
             </div>
+        </div>
         </section>
     );
 };

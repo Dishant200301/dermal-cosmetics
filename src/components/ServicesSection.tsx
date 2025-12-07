@@ -30,9 +30,10 @@ export const ServicesSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="bg-light-pink-100 py-16 lg:py-24 relative">
+    <section className=" bg-[#fef7f8] px-2 py-16 lg:py-24 relative">
+      <div className="w-full bg-[#f7f0f2] lg:rounded-[30px] xl:rounded-[50px] py-10 px-0 lg:px-[10px] lg:py-12">
       {/* Decorative leaf */}
-      <svg className="absolute bottom-0 left-0 w-32 h-32 opacity-30" viewBox="0 0 100 100" fill="none">
+      <svg className="absolute bottom-20 left-0 w-32 h-32 opacity-30" viewBox="0 0 100 100" fill="none">
         <path d="M20 80C40 70 50 50 50 20C30 30 20 50 20 80Z" stroke="currentColor" strokeWidth="1" className="text-deep-green-800"/>
         <path d="M30 70C45 62 52 48 50 25" stroke="currentColor" strokeWidth="1" className="text-deep-green-800"/>
       </svg>
@@ -54,7 +55,7 @@ export const ServicesSection = () => {
           {services.map((service, index) => (
             <div
               key={service.title}
-              className="relative overflow-hidden rounded-[30px] h-[424px] cursor-pointer group"
+              className="relative overflow-hidden rounded-[30px] h-[324px] lg:h-[424px] cursor-pointer group"
               onClick={() => setActiveIndex(index)}
             >
               <img
@@ -97,6 +98,7 @@ export const ServicesSection = () => {
             Contact Us Today!
           </Link>
         </p>
+      </div>
       </div>
     </section>
   );

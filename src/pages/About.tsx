@@ -6,14 +6,15 @@ import { ArrowRight, Check, Play, Star, Quote, MapPin, Phone, Mail, Users, Award
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { WhyChooseUs } from '@/components/WhyChooseUs';
 import { StatsRow } from '@/components/StatsRow';
 import { MissionVisionSection } from '@/components/MissionVisionSection';
 import { CommitmentSection } from '@/components/CommitmentSection';
-import { BenefitsSection } from '@/components/BenefitsSection';
 import { ExpertTeamSection } from '@/components/ExpertTeamSection';
 import ContactSection from '@/components/ContactSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import WhyChooseUs from '@/components/WhyChooseUs';
+import { BenefitsSection } from '@/components/BenefitsSection';
+import AboutBenefitsSection from '@/components/AboutBenefitsSection';
 
 const features = [
   { icon: Users, title: 'Expert Supervision', description: 'Board-certified dermatologists overseeing every treatment' },
@@ -76,12 +77,12 @@ const About = () => {
         <title>About Us - Dermal Dermatology Clinic</title>
         <meta name="description" content="Learn about Dermal's commitment to exceptional dermatology care. Our expert team provides personalized treatments for all your skin health needs." />
       </Helmet>
-      <div className="min-h-screen bg-[#FEF7F8]">
+      <div className="min-h-screen bg-[#FEF7F8] ">
         <Header />
-        <main>
+        <main className='overflow-hidden'>
           {/* SECTION 1 - Page Header */}
-          <section className="container mx-auto px-6 lg:px-20 pt-8 lg:pt-12">
-            <div className="relative bg-[#24544B] rounded-[30px] h-[250px] md:h-[300px] flex flex-col items-center justify-center overflow-hidden">
+          <section className=" mx-auto  lg:px-8 lg:pt-2 ">
+            <div className="relative bg-[#24544B] lg:rounded-[30px] lg:h-[280px] md:h-[350px] h-[210px] flex flex-col items-center justify-center ">
               {/* Decorative Leaf - Top Left */}
               <svg
                 className="absolute top-6 left-6 md:top-10 md:left-10 w-20 h-20 md:w-28 md:h-28 opacity-20"
@@ -111,14 +112,14 @@ const About = () => {
               </svg>
 
               {/* Hero Content */}
-              <div className="font-body text-white text-sm md:text-base mb-3 z-10">
-                <span className="opacity-70">Home</span>
-                <span className="mx-2">/</span>
-                <span>About</span>
-              </div>
               <h1 className="font-heading text-white text-[32px] md:text-[40px] lg:text-[56px] z-10">
                 About Us
               </h1>
+              <div className="font-body text-white text-sm md:text-base mb-3 z-10">
+                <a href="/" className="opacity-70">Home</a>
+                <span className="mx-2">/</span>
+                <span>About</span>
+              </div>
             </div>
           </section>
 
@@ -127,12 +128,13 @@ const About = () => {
           <StatsRow />
 
           {/* SECTION 4 - Mission, Vision & Values */}
-          <MissionVisionSection />
 
+          <MissionVisionSection />
           {/* SECTION 5 - Commitment to Excellence */}
           <CommitmentSection />
 
-          <BenefitsSection />
+                   <BenefitsSection />
+
 
           {/* SECTION 7 - Innovation Section */}
           <section className="container mx-auto px-6 lg:px-20 py-12 lg:py-20">
@@ -159,7 +161,7 @@ const About = () => {
                       <span className="font-body text-[#1C4942] font-medium">Personalized Care</span>
                       <span className="font-body text-[#1C4942] font-medium">95%</span>
                     </div>
-                    <div className="h-2 bg-[#F7F0F2] rounded-full overflow-hidden">
+                    <div className="h-2 bg-[#F7F0F2] rounded-full ">
                       <div className="h-full bg-[#24544B] rounded-full" style={{ width: '95%' }}></div>
                     </div>
                   </div>
@@ -168,7 +170,7 @@ const About = () => {
                       <span className="font-body text-[#1C4942] font-medium">Advanced Treatments</span>
                       <span className="font-body text-[#1C4942] font-medium">85%</span>
                     </div>
-                    <div className="h-2 bg-[#F7F0F2] rounded-full overflow-hidden">
+                    <div className="h-2 bg-[#F7F0F2] rounded-full ">
                       <div className="h-full bg-[#24544B] rounded-full" style={{ width: '85%' }}></div>
                     </div>
                   </div>
@@ -177,14 +179,14 @@ const About = () => {
 
               {/* Right - Images */}
               <div className="relative">
-                <div className="rounded-full overflow-hidden w-full aspect-square max-w-md mx-auto">
+                <div className="rounded-full  w-full aspect-square max-w-md mx-auto">
                   <img
                     src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=600&fit=crop"
                     alt="Innovation"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute bottom-0 right-0 rounded-full overflow-hidden w-32 h-32 border-4 border-white">
+                <div className="absolute bottom-0 right-0 rounded-full  w-32 h-32 border-4 border-white">
                   <img
                     src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&fit=crop&crop=face"
                     alt="Doctor"
@@ -201,132 +203,9 @@ const About = () => {
             </div>
           </section>
 
-          {/* SECTION 8 - Our Benefits */}
-          <section className="bg-[#F7F0F2] rounded-[30px] mx-6 lg:mx-20 py-16 lg:py-[110px]">
-            <div className="container mx-auto px-6 lg:px-[60px]">
-              <div className="grid lg:grid-cols-2 gap-10 lg:gap-[60px] items-center">
-                {/* Left - Image Panel */}
-                <div className="relative h-[400px] lg:h-[610px] rounded-[30px] overflow-hidden order-2 lg:order-1">
-                  <img
-                    src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=1000&fit=crop"
-                    alt="Dermatology Treatment"
-                    className="w-full h-full object-cover"
-                  />
-
-                  {/* Gradient Overlay */}
-                  <div
-                    className="absolute bottom-0 left-0 right-0 h-[45%]"
-                    style={{
-                      background: 'linear-gradient(180deg, rgba(28,73,66,0) 0%, rgba(28,73,66,0.8) 100%)',
-                    }}
-                  />
-
-                  {/* Bottom Info */}
-                  <div className="absolute bottom-10 left-10 flex items-start gap-5 text-white">
-                    <svg
-                      className="w-[60px] h-[60px] flex-shrink-0"
-                      viewBox="0 0 60 60"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <circle cx="20" cy="20" r="8" />
-                      <circle cx="40" cy="20" r="8" />
-                      <path d="M12 35c0-8 8-12 18-12s18 4 18 12" />
-                    </svg>
-                    <div>
-                      <h3 className="font-heading text-[22px] leading-6 mb-2">
-                        Continuous Care & Follow-Up
-                      </h3>
-                      <p className="font-body text-lg leading-relaxed max-w-[380px] opacity-95">
-                        Your skin's health is our priority, so we provide ongoing care and support.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right - Content Panel */}
-                <div className="order-1 lg:order-2">
-                  {/* Section Label */}
-                  <div className="flex items-center gap-2 mb-2.5">
-                    <div className="w-2 h-2 rounded-full bg-[#24544B]"></div>
-                    <span className="font-body text-[#7B798C] text-base font-medium">
-                      Our Benefits
-                    </span>
-                  </div>
-
-                  {/* Section Heading */}
-                  <h2
-                    className="font-heading text-[#1C4942] text-3xl md:text-4xl lg:text-[50px] leading-tight lg:leading-[55px] mb-10"
-                    style={{ letterSpacing: '-1px' }}
-                  >
-                    Exceptional dermatology, every step
-                  </h2>
-
-                  {/* Benefit Item 1 */}
-                  <div className="flex gap-5 mb-10">
-                    <div className="w-[60px] h-[60px] bg-[#1C4942] rounded-[10px] flex items-center justify-center flex-shrink-0">
-                      <svg
-                        className="w-7 h-7 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-heading text-[#1C4942] text-[22px] leading-6 mb-2">
-                        Comprehensive Services
-                      </h3>
-                      <p className="font-body text-[#7B798C] text-lg leading-relaxed max-w-[540px]">
-                        Our team offers a full spectrum of solutions tailored to meet your needs. From initial consultation to project completion.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Benefit Item 2 */}
-                  <div className="flex gap-5 mb-10">
-                    <div className="w-[60px] h-[60px] bg-[#1C4942] rounded-[10px] flex items-center justify-center flex-shrink-0">
-                      <svg
-                        className="w-7 h-7 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <rect x="3" y="3" width="7" height="7" />
-                        <rect x="14" y="3" width="7" height="7" />
-                        <rect x="14" y="14" width="7" height="7" />
-                        <rect x="3" y="14" width="7" height="7" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-heading text-[#1C4942] text-[22px] leading-6 mb-2">
-                        High Safety Standards
-                      </h3>
-                      <p className="font-body text-[#7B798C] text-lg leading-relaxed max-w-[540px]">
-                        Our team offers a full spectrum of solutions tailored to meet your needs. From initial consultation to project completion.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* CTA Button */}
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center justify-center gap-2.5 w-[160px] h-[50px] bg-[#24544B] text-white rounded-full font-body text-base font-medium hover:bg-[#1C4942] transition-all duration-300 hover:scale-105 hover:shadow-lg mt-5"
-                  >
-                    Contact Us
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
-
+<AboutBenefitsSection />
           {/* SECTION 9 - Delivering Excellence */}
-          <section className="bg-[#F7F0F2] rounded-[30px] mx-6 lg:mx-20 py-16 lg:py-[100px]">
+          <section className="bg-[#F7F0F2] lg:rounded-[30px] xl:rounded-30 mx-0 lg:mx-20 py-16 lg:py-[100px]">
             <div className="container mx-auto px-6 lg:px-[100px]">
               <div className="grid lg:grid-cols-2 gap-10 lg:gap-10 items-center">
                 {/* Left - Content Panel */}

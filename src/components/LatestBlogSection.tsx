@@ -12,7 +12,7 @@ const BlogItem = ({ image, title, slug }: BlogItemProps) => {
     return (
         <Link
             to={`/blog/${slug}`}
-            className="group bg-white rounded-[30px] overflow-hidden flex flex-col transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
+            className="group xl:rounded-30 lg:rounded-[30px] overflow-hidden flex flex-col transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
         >
             {/* Blog Image */}
             <div className="h-[240px] w-full overflow-hidden rounded-[30px]">
@@ -58,8 +58,8 @@ const blogPosts = [
 
 export const LatestBlogSection = () => {
     return (
-        <section className="bg-[#F7F0F2] rounded-[30px] mx-6 lg:mx-20 py-16 lg:py-[100px] flex flex-col items-center">
-            <div className="w-full max-w-[1280px] px-6 lg:px-[60px]">
+        <section className="bg-[#fef7f8] mx-4 lg:mx-0 py-16 lg:py-[100px] flex flex-col items-center">
+            <div className="w-full max-w-[1280px] px-0 lg:px-[0px]">
                 {/* Section Label */}
                 <div className="flex items-center justify-center gap-2 mb-5">
                     <div className="w-2 h-2 rounded-full bg-[#24544B]"></div>

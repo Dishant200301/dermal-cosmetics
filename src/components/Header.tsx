@@ -5,14 +5,15 @@ import { ArrowIcon } from './icons';
 
 const Logo = () => (
   <Link to="/" className="flex items-center gap-2">
-    <div className="w-10 h-10 bg-deep-green-800 rounded-lg flex items-center justify-center">
+    <img src='/image/logo.png' alt='logo' className='w-50 h-10'/>
+    {/* <div className="w-10 h-10 bg-deep-green-800 rounded-lg flex items-center justify-center">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 3C12 3 8 7 8 12C8 17 12 21 12 21C12 21 16 17 16 12C16 7 12 3 12 3Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M12 8V12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
         <path d="M5 9C5 9 7 11 12 11C17 11 19 9 19 9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
       </svg>
-    </div>
-    <span className="font-heading text-2xl text-deep-green-900">Dermal.</span>
+    </div>*/}
+    <span className="font-heading font-bold text-2xl text-deep-green-900">Dermal.</span> 
   </Link>
 );
 

@@ -76,7 +76,7 @@ const ReviewCard = ({ review }: { review: Testimonial }) => {
     >
       {/* Quote Icon - Absolute positioned at top-left */}
       <Quote
-        className="absolute w-[60px] h-[60px]"
+        className="absolute w-[40px] h-[40px] md:w-[60px] md:h-[60px] lg:w-[60px] lg:h-[60px]"
         style={{
           color: COLORS.primaryDark,
           left: "30px",
@@ -104,7 +104,7 @@ const ReviewCard = ({ review }: { review: Testimonial }) => {
 
       {/* Testimonial Text - Absolute positioned */}
       <p
-        className="absolute font-body text-[20px] leading-[32px]"
+        className="absolute font-body text-[20px] leading-[22px] lg:leading-[32px]"
         style={{
           color: "rgba(0, 0, 0, 0.50)",
           left: "110px",
@@ -186,7 +186,7 @@ const TestimonialSection = () => {
       style={{
         backgroundColor: COLORS.sectionBackground,
         minHeight: "1000px",
-        paddingTop: '6rem',
+        paddingTop: '3rem',
         paddingBottom: '4rem',
         backgroundImage: `url("https://demo.awaikenthemes.com/dermal/wp-content/uploads/2025/03/testimonial-bg.png")`,
         backgroundPosition: "center",
@@ -213,7 +213,7 @@ const TestimonialSection = () => {
 
           {/* Main Heading */}
           <h2
-            className="font-heading mb-6 text-[32px] leading-tight tracking-tight text-[#1C4942] sm:text-[40px] md:text-[50px]"
+            className="font-heading mb-6 text-[28px] md:text-[32px] lg:text-[42px] leading-tight tracking-tight text-[#1C4942] sm:text-[40px]"
             style={{ letterSpacing: "-1px" }}
           >
             Real patient stories that reflect

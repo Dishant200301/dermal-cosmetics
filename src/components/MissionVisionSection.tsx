@@ -25,7 +25,7 @@ export const MissionVisionSection = () => {
     return (
         <section className="relative py-20 lg:py-24">
             {/* Main Wrapper with Soft Pink Background */}
-            <div className="relative bg-[#F6ECEF] rounded-[40px] mx-6 lg:mx-20 pt-16 lg:pt-24 pb-32 lg:pb-40 overflow-hidden">
+            <div className="relative bg-[#F6ECEF] lg:rounded-[40px] xl:rounded-[40px] mx-0 lg:mx-20 pt-16 lg:pt-24 pb-32 lg:pb-40 overflow-hidden">
                 {/* Decorative Leaf - Left Bottom */}
                 <svg
                     className="absolute left-0 bottom-10 w-48 h-48 lg:w-60 lg:h-60 opacity-30"

@@ -5,7 +5,7 @@ export const Marquee = () => {
   const text = "MEDICAL EXPERTS WOMEN'S HEALTH SKIN CARE CARDIAC CARE";
 
   return (
-    <div className="w-full overflow-hidden py-10 md:py-16 bg-transparent">
+    <div className="w-full overflow-hidden py-10 md:py-16 bg-[#fef7f8]">
       <div className="flex whitespace-nowrap">
         {/* First scrolling track */}
         <div className="flex items-center animate-marquee">

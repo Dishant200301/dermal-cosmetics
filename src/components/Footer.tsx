@@ -13,9 +13,9 @@ export const Footer = () => {
 
   return (
     <footer className="bg-[#FEF7F8] pt-2 lg:pt-0">
-      <div className=" mx-auto px-2 pb-2 lg:pb-6 lg:px-4">
+      <div className=" mx-auto md:px-2 md:pb-2 lg:pb-6 lg:px-4">
         {/* Main Footer Content */}
-        <div className="bg-[#24544B] rounded-[30px] px-6 sm:px-8 lg:px-16 pt-16 lg:pt-20 pb-12 lg:pb-16 relative overflow-hidden">
+        <div className="bg-[#24544B] lg:rounded-[30px] md:rounded-[30px] xl:rounded-[30px] px-6 sm:px-8 lg:px-16 pt-16 lg:pt-20 pb-12 lg:pb-16 relative overflow-hidden">
           {/* Decorative Leaf - Bottom Left */}
           <svg
             className="absolute bottom-0 left-0 w-32 h-32 lg:w-40 lg:h-40 opacity-10"
