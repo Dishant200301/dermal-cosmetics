@@ -140,67 +140,70 @@ export const Footer = () => {
               </div>
             </motion.div>
 
-            {/* Column 3: Get In Touch (3rd item) */}
-            <motion.div variants={fadeInUp}>
-              <h3 className="font-heading text-[22px] text-white mb-6">Get In Touch</h3>
-              <div className="space-y-5">
-                {/* Location */}
-                <div>
-                  <p className="font-body text-white/80 text-sm mb-1">Location</p>
-                  <p className="font-body text-white text-base leading-relaxed">
-                    6391 Elgin St. Santa Ana
-                    <br />
-                    Celina, Delaware 10299
-                  </p>
-                </div>
+            {/* Wrapper for Get In Touch + Quick Link: 2-col on mobile, flows in parent grid on md+ */}
+            <div className="col-span-1 md:col-span-2 lg:col-span-2 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-10 lg:gap-12">
+              {/* Column 3: Get In Touch (3rd item) */}
+              <motion.div variants={fadeInUp}>
+                <h3 className="font-heading text-[22px] text-white mb-6">Get In Touch</h3>
+                <div className="space-y-5">
+                  {/* Location */}
+                  <div>
+                    <p className="font-body text-white/80 text-sm mb-1">Location</p>
+                    <p className="font-body text-white text-base leading-relaxed">
+                      6391 Elgin St. Santa Ana
+                      <br />
+                      Celina, Delaware 10299
+                    </p>
+                  </div>
 
-                {/* Email */}
-                <div>
-                  <p className="font-body text-white/80 text-sm mb-1">Email</p>
-                  <p className="font-body text-white text-base">info@domain.com</p>
+                  {/* Email */}
+                  <div>
+                    <p className="font-body text-white/80 text-sm mb-1">Email</p>
+                    <p className="font-body text-white text-base">info@domain.com</p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
 
-            {/* Column 4: Quick Links (4th item) */}
-            <motion.div variants={fadeInUp}>
-              <h3 className="font-heading text-[22px] text-white mb-6">Quick Link</h3>
-              {/* To simplify staggering for the list, we treat the whole list as one motion item */}
-              <ul className="space-y-3.5">
-                <li>
-                  <Link
-                    to="/"
-                    className="font-body text-white text-lg hover:text-white/80 transition-colors"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/about"
-                    className="font-body text-white text-lg hover:text-white/80 transition-colors"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services"
-                    className="font-body text-white text-lg hover:text-white/80 transition-colors"
-                  >
-                    Services
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/contact"
-                    className="font-body text-white text-lg hover:text-white/80 transition-colors"
-                  >
-                    Contact Us
-                  </Link>
-                </li>
-              </ul>
-            </motion.div>
+              {/* Column 4: Quick Links (4th item) */}
+              <motion.div variants={fadeInUp}>
+                <h3 className="font-heading text-[22px] text-white mb-6">Quick Link</h3>
+                {/* To simplify staggering for the list, we treat the whole list as one motion item */}
+                <ul className="space-y-3.5">
+                  <li>
+                    <Link
+                      to="/"
+                      className="font-body text-white text-lg hover:text-white/80 transition-colors"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/about"
+                      className="font-body text-white text-lg hover:text-white/80 transition-colors"
+                    >
+                      About Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/services"
+                      className="font-body text-white text-lg hover:text-white/80 transition-colors"
+                    >
+                      Services
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/contact"
+                      className="font-body text-white text-lg hover:text-white/80 transition-colors"
+                    >
+                      Contact Us
+                    </Link>
+                  </li>
+                </ul>
+              </motion.div>
+            </div>
           </motion.div>
 
           {/* Bottom Bar (5th item in the sequence) */}
