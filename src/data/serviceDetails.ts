@@ -359,7 +359,8 @@ export const services: Service[] = [
       { icon: '🏆', value: '13+', label: 'Years Of Experience' },
       { icon: '🏥', value: '17+', label: 'State-Of-The-Art Facilities' }
     ]
-  }
+  },
+  
 ];
 
 export const faqItems: FAQItem[] = [
@@ -382,5 +383,6 @@ export const faqItems: FAQItem[] = [
   {
     question: 'What should I expect during my first visit?',
     answer: 'During your first visit, you\'ll meet with one of our dermatologists for a comprehensive skin assessment. We\'ll discuss your medical history, current concerns, and aesthetic goals. Based on this consultation, we\'ll recommend a personalized treatment plan and answer any questions you may have.'
-  }
+  },
+  
 ];

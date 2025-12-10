@@ -200,6 +200,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -209,6 +210,7 @@
   0% {
     transform: translateX(50%);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -220,4 +222,121 @@
 
 .animate-marquee2 {
   animation: marquee2 60s linear infinite;
+}
+.holographic-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.holographic-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at left center,
+    rgba(255, 182, 193, 0.55),
+    rgba(255, 182, 193, 0.15),
+    transparent 70%
+  );
+  opacity: 0.45;
+  transition: 0.5s ease;
+  pointer-events: none;
+}
+
+.holographic-card:hover::before {
+  opacity: 0.95;
+  transform: scale(1.08);
+  filter: blur(4px);
+}
+
+.holographic-card:hover img {
+  transform: scale(1.03);
+}
+
+/* Old holo-card styles for backward compatibility */
+.holo-card {
+  position: relative;
+  overflow: hidden;
+  transition: 0.4s ease;
+}
+
+.holo-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(0deg,
+      transparent,
+      transparent 30%,
+      rgba(0, 255, 255, 0.35));
+  transform: rotate(-45deg);
+  opacity: 0;
+  transition: 0.5s ease;
+}
+
+.holo-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
+
+.holo-card:hover::before {
+  opacity: 1;
+  transform: rotate(-45deg) translateY(100%);
+}
+
+/* Custom CSS for the Sliding Hover Effect */
+
+.btn-secondary {
+  /* Default Styles (assuming these are already set) */
+  background-color: #F7F0F2;
+  /* Light secondary background */
+  color: #1c4942;
+  /* Dark primary text color */
+  position: relative;
+  /* Essential for positioning the overlay */
+  overflow: hidden;
+  /* Essential to hide the overlay before it slides */
+  z-index: 1;
+  /* Ensure text is above the overlay */
+  /* Add padding, border-radius, font styles as needed */
+  padding: 12px 24px;
+  border-radius: 9999px;
+  /* rounded-full */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.4s ease-out;
+  /* Transition for text color change */
+}
+
+/* The Sliding Overlay Pseudo-element */
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #24544B;
+  /* The color you want it to change to on hover (Accent Color) */
+  transform: translateX(-100%);
+  /* Start hidden off the left side */
+  transition: transform 0.4s ease-out;
+  /* Transition for the sliding effect */
+  z-index: -1;
+  /* Place overlay beneath the text */
+}
+
+/* Hover State */
+.btn-secondary:hover {
+  color: #FFFFFF;
+  /* Change text color to white on hover */
+}
+
+.btn-secondary:hover::before {
+  transform: translateX(0);
+  /* Slide the overlay fully into view */
 }

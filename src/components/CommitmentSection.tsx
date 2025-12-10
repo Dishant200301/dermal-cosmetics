@@ -1,55 +1,53 @@
+import React from "react";
 import { ArrowRight, CheckSquare, Users } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-/* ---------------------- Circular Rotating Badge ---------------------- */
-const CircularBadge = () => {
-  return (
-    <div className="absolute left-20 top-28 md:left-24 md:top-32 lg:left-28 lg:top-36 w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full border-4 border-white bg-[#24544B] flex items-center justify-center shadow-xl z-20 animate-spin-slow">
-      <svg viewBox="0 0 120 120" className="w-[90%] h-[90%]">
-        <defs>
-          <path
-            id="circleTextPath"
-            d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0"
-          />
-        </defs>
-        <text className="fill-white text-[10px] tracking-[0.18em] font-medium font-body">
-          <textPath href="#circleTextPath">
-            CONTACT • US • CONTACT • US • CONTACT • US •
-          </textPath>
-        </text>
-      </svg>
-
-      <span className="absolute text-white text-xl">↗</span>
-    </div>
-  );
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
 };
 
-/* ---------------------- Expertise Badge ---------------------- */
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    }
+  }
+};
+
 const ExpertiseBadge = () => {
   return (
-    <div className="absolute -top-6 right-4 md:right-6 lg:right-8 rounded-2xl bg-[#24544B] px-6 py-4 shadow-xl flex items-center gap-4 z-20">
-      <div className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center">
-        <Users className="w-6 h-6 text-white" />
+    <motion.div variants={fadeInUp} className="absolute -top-5 md:-top-0 right-0 lg:top-10 md:right-0 lg:right-0 lg:mb-2 rounded-2xl md:rounded-[20px] bg-[#24544B] px-4 py-3 md:px-6 md:py-10 shadow-xl flex items-center gap-2 z-20">
+      <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/10 flex items-center justify-center">
+        <Users className="w-5 h-5 md:w-6 md:h-6 text-white" />
       </div>
 
       <div>
-        <p className="font-heading text-[32px] text-white leading-none">49+</p>
-        <p className="font-body text-xs text-white/90 mt-1">
+        <p className="font-heading text-[28px] md:text-[32px] text-white leading-none">49+</p>
+        <p className="font-body text-[11px] md:text-xs text-white/90 mt-0.5 md:mt-1">
           Reliable Expertise
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
-/* ---------------------- Checklist Item ---------------------- */
 const ChecklistItem = ({ text }: { text: string }) => (
-  <div className="flex items-center gap-2">
-    <CheckSquare className="w-5 h-5 text-[#24544B]" />
-    <span className="font-body text-[#24544B] text-[15px] md:text-[16px]">
+  <motion.div variants={fadeInUp} className="flex items-center gap-2.5">
+    <CheckSquare className="w-5 h-5 md:w-5 md:h-5 text-[#24544B] flex-shrink-0" />
+    <span className="font-body text-[#24544B] text-[15px] md:text-base">
       {text}
     </span>
-  </div>
+  </motion.div>
 );
 
 const checklistItems = [
@@ -61,79 +59,88 @@ const checklistItems = [
   "Comfortable Environment",
 ];
 
-/* ================================================================== */
-/* ---------------------- MAIN SECTION ------------------------------ */
-/* ================================================================== */
-
 export const CommitmentSection = () => {
   return (
-    <section className="relative bg-[#F7EFEF] py-16 md:py-20 lg:py-24">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* ---------------------- LEFT COLUMN IMAGES ---------------------- */}
-          <div className="relative order-2 lg:order-1">
-            {/* Top Image */}
-            <div className="relative overflow-hidden rounded-[28px] shadow-md">
-              <img
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=700&fit=crop"
-                className="w-full h-[420px] md:h-[480px] lg:h-[540px] object-cover"
-                alt="Dermatology Care"
-              />
+    <section className="relative bg-[#F7EFEF] py-12 md:py-16 lg:py-20 xl:py-24">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10">
+        <div className="grid xl:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
 
-              {/* Floating Badges */}
-              <CircularBadge />
-              <ExpertiseBadge />
+          {/* IMAGE PANEL */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+            className="relative order-1 xl:order-1 w-full max-w-[500px] mx-auto xl:mx-0"
+          >
+            <div className="relative">
+
+              {/* 1. Top Main Image */}
+              <motion.div variants={fadeInUp} className="group relative overflow-hidden rounded-[28px] shadow-lg w-full md:w-[280px] lg:w-[300px] xl:w-[300px] lg:h-[450px] xl:h-[540px]">
+                <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
+                <img
+                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=700&fit=crop"
+                  className="w-full h-[420px] md:h-[460px] lg:h-[500px] xl:h-[540px] object-cover"
+                  alt="Dermatology Care"
+                />
+              </motion.div>
+
+              {/* 2. Bottom Overlapping Image */}
+              <motion.div variants={fadeInUp} className="group absolute left-[35%] md:left-[58%] lg:left-[50%] xl:left-[65%] -bottom-10 md:-bottom-0 lg:-bottom-0 w-[65%] md:w-[50%] lg:w-[55%] xl:w-[50%] rounded-[24px] overflow-hidden shadow-xl border-4 border-white">
+                <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
+                <img
+                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=500&fit=crop"
+                  className="w-full h-[240px] md:h-[300px] lg:h-[320px] xl:h-[340px] object-cover"
+                  alt="Skin Treatment"
+                />
+              </motion.div>
+
             </div>
+            <ExpertiseBadge />
+          </motion.div>
 
-            {/* Bottom Overlapping Image */}
-            <div className="absolute left-24 md:left-32 lg:left-40 -bottom-12 w-[60%] md:w-[55%] lg:w-[50%] rounded-[24px] overflow-hidden shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=500&fit=crop"
-                className="w-full h-[260px] md:h-[300px] lg:h-[340px] object-cover"
-                alt="Skin Treatment"
-              />
-            </div>
-          </div>
+          {/* CONTENT PANEL */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+            className="order-2 xl:order-2 flex flex-col gap-5 md:gap-6 mt-12 md:mt-16 lg:mt-20 xl:mt-0"
+          >
 
-          {/* ---------------------- RIGHT COLUMN CONTENT ---------------------- */}
-          <div className="order-1 lg:order-2 flex flex-col gap-6">
-            {/* Label */}
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#24544B]" />
+            <motion.div variants={fadeInUp} className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#24544B]" />
               <p className="font-body text-[#24544B] text-base">Who We Are</p>
-            </div>
+            </motion.div>
 
-            {/* Heading */}
-            <h2 className="font-heading text-[#0F3E34] text-3xl md:text-4xl lg:text-[42px] leading-tight">
+            <motion.h2 variants={fadeInUp} className="font-heading text-[#0F3E34] text-[30px] md:text-[36px] lg:text-[42px] leading-[1.2] md:leading-tight">
               Committed to Excellence in Skin Health and Care
-            </h2>
+            </motion.h2>
 
-            {/* Description */}
-            <p className="font-body text-[#666] leading-relaxed text-base md:text-lg max-w-[540px]">
+            <motion.p variants={fadeInUp} className="font-body text-[#666] leading-relaxed text-base md:text-lg max-w-[540px]">
               Providing personalized dermatology solutions tailored to your
               unique skin needs, we offer expert care with a focus on long-term
               health.
-            </p>
+            </motion.p>
 
-            {/* Checklist Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            <motion.div variants={staggerContainer} className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-3.5 mt-2">
               {checklistItems.map((item) => (
                 <ChecklistItem key={item} text={item} />
               ))}
-            </div>
+            </motion.div>
 
-            {/* CTA */}
-            <Link
-              to="/services"
-              className="mt-4 bg-[#24544B] text-white font-body px-7 py-3.5 rounded-full inline-flex items-center gap-2 w-fit hover:bg-[#1C4942] transition-all duration-300 hover:scale-105 shadow-md"
-            >
-              Learn More <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+            <motion.div variants={fadeInUp}>
+              <Link
+                to="/services"
+                className="mt-4 md:mt-6 bg-[#24544B] text-white font-body text-base px-6 md:px-7 py-3 md:py-3.5 rounded-full inline-flex items-center gap-2 w-fit hover:bg-[#1C4942] transition-all duration-300 hover:scale-105 shadow-md"
+              >
+                Learn More <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Spinning animation */}
       <style>
         {`
           @keyframes spin-slow {
@@ -141,7 +148,7 @@ export const CommitmentSection = () => {
             100% { transform: rotate(360deg); }
           }
           .animate-spin-slow {
-            animation: spin-slow 18s linear infinite;
+            animation: spin-slow 20s linear infinite;
           }
         `}
       </style>

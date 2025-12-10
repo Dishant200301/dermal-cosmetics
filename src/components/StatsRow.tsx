@@ -1,4 +1,33 @@
 import React from "react";
+import { motion } from "framer-motion"; // <-- Import motion
+
+// ====================================================================
+// FRAMER MOTION VARIANTS (Defined once for reuse)
+// ====================================================================
+
+// 1. Variant for Individual Elements (Fade Up)
+const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: { 
+            duration: 0.6, // Animation duration
+            ease: "easeOut" 
+        } 
+    }
+};
+
+// 2. Container Variant (Staggering)
+const staggerContainer = {
+    hidden: {}, 
+    visible: {
+      transition: {
+        staggerChildren: 0.15, // Delay between the start of each child's animation
+      }
+    }
+};
+
 
 const stats = [
   {
@@ -50,13 +79,23 @@ const stats = [
 export const StatsRow = () => {
   return (
     <section className="bg-[#FDF7F7] py-12">
-      <div className="container mx-auto px-6 lg:px-20">
+      <div className="container mx-auto px-6 lg:px-20 xl:px-28">
 
-        {/* Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+        {/* Responsive Grid (STAGGER CONTAINER) */}
+        <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12"
+        >
 
           {stats.map((stat, index) => (
-            <div key={index} className="flex flex-col items-start space-y-2">
+            <motion.div 
+                key={index} 
+                variants={fadeInUp} // Apply individual fade-up animation to each stat block
+                className="flex flex-col items-start space-y-2"
+            >
 
               {/* Icon + Value (always left icon, right value) */}
               <div className="flex items-center gap-4">
@@ -72,10 +111,10 @@ export const StatsRow = () => {
                 {stat.label}
               </p>
 
-            </div>
+            </motion.div>
           ))}
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,32 +1,35 @@
 import React from 'react';
 import { ArrowRight, Play, Users, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-// Rotating Badge Component
-const RotatingBadge = () => (
-  <div className="absolute -right-8 top-12 lg:-right-10 lg:top-16 z-20">
-    <div className="relative w-[110px] h-[110px] lg:w-[100px] lg:h-[130px]">
-      {/* Rotating Circle */}
-      <div className="absolute inset-0 animate-[spin_20s_linear_infinite] ">
-        <svg className="w-full h-full" viewBox="0 0 140 140">
-          <defs>
-            <path id="circlePath" d="M 70, 70 m -52, 0 a 52,52 0 1,1 104,0 a 52,52 0 1,1 -104,0" />
-          </defs>
-          <circle cx="70" cy="70" r="70" fill="#1C4942" />
-          <text fill="#fff" fontSize="11" fontWeight="600" letterSpacing="2.5px">
-            <textPath href="#circlePath" startOffset="0%">
-              • CONTACT US • CONTACT US • CONTACT US • 
-            </textPath>
-          </text>
-        </svg>
-      </div>
-      {/* Center Arrow */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <ArrowRight className="w-6 h-6 text-white -rotate-45" strokeWidth={2.5} />
-      </div>
-    </div>
-  </div>
-);
+// ====================================================================
+// FRAMER MOTION VARIANTS (Defined once for reuse)
+// ====================================================================
+
+// 1. Variant for Individual Elements (Fade Up)
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6, // Animation duration
+      ease: "easeOut"
+    }
+  }
+};
+
+// 2. Container Variant (Staggering)
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15, // Delay between the start of each child's animation
+    }
+  }
+};
+
 
 const WhyChooseUs = () => {
   const benefits = [
@@ -40,76 +43,102 @@ const WhyChooseUs = () => {
       <div className="container mx-auto px-[5%] md:px-[7%] lg:px-20 max-w-[1440px]">
 
         {/* Two Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 xl:gap-0 items-center">
 
-          {/* LEFT COLUMN - Images */}
-          <div className="relative mb-16 md:mb-20 lg:mb-0">
-            {/* Main Image */}
-            <div className="relative w-full max-w-[500px] mx-auto lg:mx-0">
+          {/* LEFT COLUMN - Images (Single Animation Block) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0 }}
+            variants={fadeInUp}
+            className="relative mb-16 md:mb-20 lg:mb-0"
+          >
+            <div className="group relative w-full max-w-[400px] mx-auto lg:mx-20 xl:mx-0 overflow-hidden rounded-[30px] md:rounded-[40px]">
+
+              <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
+
               <img
                 src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?q=80&w=1000&auto=format&fit=crop"
                 alt="Dermatologist examining patient"
-                className="w-full h-[380px] md:h-[520px] lg:h-[580px] object-cover rounded-[30px] md:rounded-[40px]"
+                className="w-full h-[380px] md:h-[520px] lg:h-[580px] object-cover transition-transform duration-700 "
               />
+            </div>
 
-              {/* Rotating Badge - Tablet & Desktop Only */}
-              <div className="hidden md:block">
-                <RotatingBadge />
+            <div className="absolute -bottom-12 md:-bottom-16 left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 lg:-right-16 xl:right-20 w-[85%] md:w-[320px] lg:w-[340px]">
+              <div className="group relative overflow-hidden rounded-[20px]">
+
+                <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
+
+                <img
+                  src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?q=80&w=800&auto=format&fit=crop"
+                  alt="Skin treatment procedure"
+                  className="w-full h-[200px] md:h-[220px] object-cover rounded-[20px] border-[6px] border-[#FDF4F4] shadow-2xl transition-transform duration-700"
+                />
               </div>
             </div>
+          </motion.div>
 
-            {/* Overlapping Second Image */}
-            <div className="absolute -bottom-12 md:-bottom-16 left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 lg:-right-12 w-[85%] md:w-[320px] lg:w-[340px]">
-              <img
-                src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?q=80&w=800&auto=format&fit=crop"
-                alt="Skin treatment procedure"
-                className="w-full h-[200px] md:h-[220px] object-cover rounded-[20px] border-[6px] border-[#FDF4F4] shadow-2xl"
-              />
-            </div>
-          </div>
+          {/* RIGHT COLUMN - Content (STAGGER CONTAINER) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer} // Parent controls the stagger sequence
+            className="flex flex-col justify-center pt-4 lg:pt-0"
+          >
 
-          {/* RIGHT COLUMN - Content */}
-          <div className="flex flex-col justify-center pt-4 lg:pt-0">
-
-            {/* Tagline */}
-            <div className="flex items-center gap-2 mb-4">
+            {/* 1. Tagline */}
+            <motion.div variants={fadeInUp} className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-[#1C4942]"></span>
               <span className="text-[#6B6B6B] font-medium text-[14px] md:text-[15px] uppercase tracking-wider">
                 About Us
               </span>
-            </div>
+            </motion.div>
 
-            {/* Main Heading */}
-            <h2 className="font-heading text-[#1C4942] text-[28px] md:text-[36px] lg:text-[50px] leading-[110%] mb-5 lg:mb-6">
+            {/* 2. Main Heading */}
+            <motion.h2 variants={fadeInUp} className="font-heading text-[#1C4942] text-[28px] md:text-[36px] lg:text-[50px] leading-[110%] mb-5 lg:mb-6">
               Why choose us for all your dermatology needs
-            </h2>
+            </motion.h2>
 
-            {/* Description */}
-            <p className="font-body text-[#7B798C] text-[16px] md:text-[17px] lg:text-[18px] leading-[1.7] mb-8 lg:mb-10 max-w-[600px]">
+            {/* 3. Description */}
+            <motion.p variants={fadeInUp} className="font-body text-[#7B798C] text-[16px] md:text-[17px] lg:text-[18px] leading-[1.7] mb-8 lg:mb-10 max-w-[600px]">
               We're dedicated to helping you achieve and maintain beautiful, healthy skin. Trust us to provide exceptional care tailored to you.
-            </p>
+            </motion.p>
 
-            {/* Feature List + Team Card Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-8 lg:gap-10 items-start">
+            {/* 4. Feature List + Team Card Grid (The content of this grid is the 4th motion block) */}
+            <motion.div variants={fadeInUp} className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-8 lg:gap-10 items-start">
 
               {/* Left Column: Feature List + Buttons */}
               <div className="flex flex-col gap-6 md:gap-8">
 
-                {/* Feature List - Vertical Stack on Mobile, Single Line on Desktop */}
+                {/* Feature List - The list items themselves can be staggered for a cooler effect */}
                 <ul className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-8 lg:gap-x-10">
+                  {/* Since the outer div already uses fadeInUp, we manually apply stagger here to the LI items */}
                   {benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start gap-3">
+                    <motion.li
+                      key={index}
+                      // Manual transition for nested stagger effect: starts after previous block
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{
+                        duration: 0.5,
+                        ease: "easeOut",
+                        delay: 0.2 + (index * 0.1) // Base delay + sequential delay
+                      }}
+                      className="flex items-start gap-3"
+                    >
                       <div className="w-5 h-5 mt-0.5 rounded-sm bg-[#1C4942] flex items-center justify-center flex-shrink-0">
                         <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
                       <span className="font-body text-[#7B798C] text-[16px] md:text-[17px] lg:text-[18px] leading-relaxed md:whitespace-nowrap">
                         {benefit}
                       </span>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
 
-                {/* Buttons - Below Checklist */}
+                {/* Buttons - Below Checklist (Treated as one motion block, still part of the outer stagger) */}
                 <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
 
                   {/* Contact Us Button */}
@@ -145,9 +174,9 @@ const WhyChooseUs = () => {
                 <div className="text-[42px] md:text-[46px] lg:text-[50px] font-serif leading-none mb-2">29+</div>
                 <div className="text-[14px] md:text-[15px] font-medium opacity-90">Team Members</div>
               </div>
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

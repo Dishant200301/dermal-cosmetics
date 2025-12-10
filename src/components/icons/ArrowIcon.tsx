@@ -7,7 +7,7 @@ interface ArrowIconProps {
 
 export const ArrowIcon = ({
     className = '',
-    fill = 'white',
+    fill = 'currentColor', // Use currentColor to inherit parent's text color
     width = 18,
     height = 14
 }: ArrowIconProps) => {
@@ -18,7 +18,7 @@ export const ArrowIcon = ({
             viewBox="0 0 18 14"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className={className}
+            className={`transition-colors duration-400 ${className}`} // Add transition for smooth color change
         >
             <path
                 fillRule="evenodd"

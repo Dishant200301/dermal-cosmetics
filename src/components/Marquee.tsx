@@ -1,4 +1,23 @@
 import React from "react";
+import { motion } from "framer-motion"; // <-- Import motion
+
+// ====================================================================
+// FRAMER MOTION VARIANTS
+// ====================================================================
+
+// Variant for the entire Marquee block (Fade Up)
+const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: { 
+            duration: 0.8, // Slightly longer duration for the whole block
+            ease: "easeOut" 
+        } 
+    }
+};
+
 
 export const Marquee = () => {
   // Single text item that will be repeated
@@ -6,7 +25,16 @@ export const Marquee = () => {
 
   return (
     <div className="w-full overflow-hidden py-10 md:py-16 bg-[#fef7f8]">
-      <div className="flex whitespace-nowrap">
+      {/* Apply Framer Motion to the container holding the two scrolling tracks.
+        This animates the entire marquee block ONCE when it enters the viewport.
+      */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }} // Trigger when 30% in view, only once
+        variants={fadeInUp} // Apply the fade-up animation
+        className="flex whitespace-nowrap"
+      >
         {/* First scrolling track */}
         <div className="flex items-center animate-marquee">
           {[...Array(6)].map((_, i) => (
@@ -74,7 +102,7 @@ export const Marquee = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

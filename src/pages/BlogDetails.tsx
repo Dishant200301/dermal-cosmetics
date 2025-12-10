@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useState, useEffect } from 'react';
 import { blogs } from '@/data/blogData';
+import { motion } from 'framer-motion';
 
 const BlogDetails = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -55,6 +56,22 @@ const BlogDetails = () => {
     }));
   };
 
+  // Framer Motion variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
   if (!currentBlog) {
     return null;
   }
@@ -71,39 +88,23 @@ const BlogDetails = () => {
 
         <main>
           {/* ===== HERO SECTION ===== */}
-          <section className="pt-6 lg:pt-8 px-4 md:px-6 lg:px-4">
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeInUp}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="pt-0 lg:pt-8 px-0 md:px-6 lg:px-4"
+          >
             <div className=" mx-auto max-w-[1440px]">
-              <div className="relative bg-[#24544B] rounded-[30px] py-16 lg:py-24 px-6 lg:px-12 overflow-hidden">
-                {/* Decorative Leaf - Left */}
-                <div className="absolute top-0 left-0 w-24 h-24 lg:w-40 lg:h-40 opacity-20 -translate-x-4 -translate-y-4">
-                  <svg viewBox="0 0 100 100" className="w-full h-full text-white" fill="none">
-                    <path
-                      d="M20 80C20 80 30 60 40 50C50 40 60 30 80 20C60 30 50 40 40 50C30 60 20 80 20 80Z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    />
-                    <path
-                      d="M25 75C25 75 35 60 42 52C48 45 55 38 70 28"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
+              <div className="relative bg-[#24544B] xl:rounded-[30px] lg:rounded-[30px] py-16 lg:py-24 px-6 lg:px-12 overflow-hidden">
+                {/* Decorative Leaf - Bottom Left */}
+                <div className="absolute bottom-0 left-0 animate-[float_6s_ease-in-out_infinite]">
+                  <img src="/image/leaf-bottom-left.png" alt="Leaf" className="w-20 h-20 md:w-32 md:h-32 lg:w-48 lg:h-48" />
                 </div>
-
-                {/* Decorative Leaf - Right */}
-                <div className="absolute bottom-0 right-0 w-24 h-24 lg:w-40 lg:h-40 opacity-20 translate-x-4 translate-y-4">
-                  <svg viewBox="0 0 100 100" className="w-full h-full text-white" fill="none">
-                    <path
-                      d="M80 20C80 20 70 40 60 50C50 60 40 70 20 80C40 70 50 60 60 50C70 40 80 20 80 20Z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    />
-                    <path
-                      d="M75 25C75 25 65 40 58 48C52 55 45 62 30 72"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
+                {/* Decorative Leaf - Top Right */}
+                <div className="absolute top-0 right-0 animate-[float_8s_ease-in-out_infinite]">
+                  <img src="/image/leaf-top-right.png" alt="Leaf" className="w-100 h-100 md:w-100 md:h-100 lg:w-50 lg:h-50 xl:w-100 xl:h-100" />
                 </div>
 
                 {/* Hero Content */}
@@ -125,12 +126,22 @@ const BlogDetails = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* ===== MAIN IMAGE ===== */}
-          <section className="py-10 lg:py-16 px-4 md:px-6 lg:px-8">
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeInUp}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="py-10 lg:py-16 px-4 md:px-6 lg:px-8"
+          >
             <div className=" mx-auto max-w-7xl">
-              <div className="rounded-[30px] overflow-hidden shadow-lg">
+              <div className="group relative rounded-[30px] overflow-hidden shadow-lg">
+                {/* Shine Effect */}
+                <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
+
                 <img
                   src={currentBlog.contentImage}
                   alt={currentBlog.title}
@@ -138,59 +149,111 @@ const BlogDetails = () => {
                 />
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* ===== ARTICLE CONTENT ===== */}
-          <section className="pb-16 lg:pb-24 px-4 md:px-6 lg:px-8">
-            <div className=" mx-auto max-w-[1100px]">
+          <section className="pb-16 lg:pb-24 px-4 md:px-6 lg:px-8 xl:px-0">
+            <div className=" mx-auto max-w-[1250px]">
               {/* Intro Paragraphs */}
-              {currentBlog.content.map((paragraph, index) => (
-                <p
-                  key={index}
-                  className="font-body text-[#7B798C] text-base lg:text-lg leading-relaxed mb-6"
-                >
-                  {paragraph}
-                </p>
-              ))}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={containerVariants}
+              >
+                {currentBlog.content.map((paragraph, index) => (
+                  <motion.p
+                    key={index}
+                    variants={fadeInUp}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="font-body text-[#7B798C] text-base lg:text-lg leading-relaxed mb-6"
+                  >
+                    {paragraph}
+                  </motion.p>
+                ))}
+              </motion.div>
 
               {/* Blockquote */}
-              <div className="bg-[#1C4942] rounded-[20px] p-8 lg:p-10 my-10 flex flex-col lg:flex-row items-start gap-4">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInUp}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="bg-[#1C4942] rounded-[20px] p-8 lg:p-10 my-10 flex flex-col lg:flex-row items-start gap-4"
+              >
                 <Quote className="w-10 h-10 lg:w-12 lg:h-12 text-white flex-shrink-0" />
                 <p className="font-heading text-lg lg:text-xl text-white leading-relaxed">
                   {currentBlog.quote}
                 </p>
-              </div>
+              </motion.div>
 
               {/* Subheading */}
-              <h2 className="font-heading text-[28px] lg:text-[36px] text-[#1C4942] mb-6 mt-12">
+              <motion.h2
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInUp}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="font-heading text-[28px] lg:text-[36px] text-[#1C4942] mb-6 mt-12"
+              >
                 {currentBlog.subheading}
-              </h2>
+              </motion.h2>
 
               {/* Summary */}
-              <p className="font-body text-[#7B798C] text-base lg:text-lg leading-relaxed mb-8">
+              <motion.p
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInUp}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="font-body text-[#7B798C] text-base lg:text-lg leading-relaxed mb-8"
+              >
                 {currentBlog.summary}
-              </p>
+              </motion.p>
 
               {/* Takeaways List */}
-              <ul className="space-y-4 mb-8">
+              <motion.ul
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={containerVariants}
+                className="space-y-4 mb-8"
+              >
                 {currentBlog.takeaways.map((takeaway, index) => (
-                  <li
+                  <motion.li
                     key={index}
+                    variants={fadeInUp}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                     className="flex items-start gap-3 font-body text-[#7B798C] text-base lg:text-lg"
                   >
                     <span className="mt-2 w-2 h-2 bg-[#1C4942] rounded-full flex-shrink-0" />
                     <span>{takeaway}</span>
-                  </li>
+                  </motion.li>
                 ))}
-              </ul>
+              </motion.ul>
 
               {/* Closing Paragraph */}
-              <p className="font-body text-[#7B798C] text-base lg:text-lg leading-relaxed mb-10">
+              <motion.p
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInUp}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="font-body text-[#7B798C] text-base lg:text-lg leading-relaxed mb-10"
+              >
                 {currentBlog.closingParagraph}
-              </p>
+              </motion.p>
 
               {/* Tags */}
-              <div className="flex flex-wrap items-center gap-3 mb-16 pb-12 border-b border-[#7B798C]/20">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInUp}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="flex flex-wrap items-center gap-3 mb-16 pb-12 border-b border-[#7B798C]/20"
+              >
                 <span className="font-heading text-xl lg:text-[22px] text-[#1C4942]">
                   Tags:
                 </span>
@@ -202,18 +265,37 @@ const BlogDetails = () => {
                     {tag}
                   </span>
                 ))}
-              </div>
+              </motion.div>
 
               {/* ===== COMMENT FORM ===== */}
-              <div className="pt-12">
-                <h3 className="font-heading text-[28px] lg:text-[30px] text-[#1C4942] mb-4">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={containerVariants}
+                className="pt-12"
+              >
+                <motion.h3
+                  variants={fadeInUp}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="font-heading text-[28px] lg:text-[30px] text-[#1C4942] mb-4"
+                >
                   Leave a Reply
-                </h3>
-                <p className="font-body text-[#7B798C] text-base lg:text-lg mb-8">
+                </motion.h3>
+                <motion.p
+                  variants={fadeInUp}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="font-body text-[#7B798C] text-base lg:text-lg mb-8"
+                >
                   Your email address will not be published. Required fields are marked *
-                </p>
+                </motion.p>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <motion.form
+                  variants={fadeInUp}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  onSubmit={handleSubmit}
+                  className="space-y-6"
+                >
                   {/* Comment Textarea */}
                   <div>
                     <label
@@ -317,8 +399,8 @@ const BlogDetails = () => {
                   >
                     Post Comment
                   </button>
-                </form>
-              </div>
+                </motion.form>
+              </motion.div>
             </div>
           </section>
 

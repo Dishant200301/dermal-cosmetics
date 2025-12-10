@@ -1,6 +1,36 @@
+import { motion } from 'framer-motion'; // <-- Import motion
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, Headphones, Facebook, Instagram, Dribbble } from 'lucide-react';
 import { useState } from 'react';
+import { ArrowIcon } from './icons';
+
+// ====================================================================
+// FRAMER MOTION VARIANTS
+// ====================================================================
+
+// 1. Variant for Individual Elements (Fade Up)
+const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: { 
+            duration: 0.6, // Animation duration
+            ease: "easeOut" 
+        } 
+    }
+};
+
+// 2. Container Variant (Staggering)
+const staggerContainer = {
+    hidden: {}, 
+    visible: {
+      transition: {
+        staggerChildren: 0.15, // Delay between the start of each child's animation (0.15s)
+      }
+    }
+};
+
 
 export const Footer = () => {
   const [email, setEmail] = useState('');
@@ -15,69 +45,40 @@ export const Footer = () => {
     <footer className="bg-[#FEF7F8] pt-2 lg:pt-0">
       <div className=" mx-auto md:px-2 md:pb-2 lg:pb-6 lg:px-4">
         {/* Main Footer Content */}
-        <div className="bg-[#24544B] lg:rounded-[30px] md:rounded-[30px] xl:rounded-[30px] px-6 sm:px-8 lg:px-16 pt-16 lg:pt-20 pb-12 lg:pb-16 relative overflow-hidden">
+        <div className="bg-[#24544B] lg:rounded-[30px] md:rounded-[30px] xl:rounded-[30px] px-6 sm:px-8 lg:px-16 xl:px-24 pt-16 lg:pt-20 pb-12 lg:pb-16 relative overflow-hidden">
           {/* Decorative Leaf - Bottom Left */}
-          <svg
-            className="absolute bottom-0 left-0 w-32 h-32 lg:w-40 lg:h-40 opacity-10"
-            viewBox="0 0 100 100"
-            fill="none"
-          >
-            <path
-              d="M20 80C20 80 30 60 40 50C50 40 60 30 80 20C60 30 50 40 40 50C30 60 20 80 20 80Z"
-              stroke="white"
-              strokeWidth="2"
-              fill="none"
+          <div className="absolute bottom-0 left-0 animate-[float_6s_ease-in-out_infinite] pointer-events-none">
+            <img
+              src="/image/leaf-bottom-left.png"
+              alt="Decorative leaf"
+              className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48 opacity-70 "
             />
-            <path
-              d="M25 75C25 75 35 60 42 52C48 45 55 38 70 28"
-              stroke="white"
-              strokeWidth="1.5"
-              fill="none"
-            />
-          </svg>
+          </div>
 
           {/* Decorative Leaf - Top Right */}
-          <svg
-            className="absolute top-8 right-8 w-32 h-32 lg:w-40 lg:h-40 opacity-10"
-            viewBox="0 0 100 100"
-            fill="none"
-          >
-            <path
-              d="M80 20C80 20 70 40 60 50C50 60 40 70 20 80C40 70 50 60 60 50C70 40 80 20 80 20Z"
-              stroke="white"
-              strokeWidth="2"
-              fill="none"
+          <div className="absolute top-0 right-0 animate-[float_6s_ease-in-out_infinite] pointer-events-none">
+            <img
+              src="/image/leaf-top-right.png"
+              alt="Decorative leaf"
+              className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-[900px] xl:h-[800px] opacity-70 "
             />
-            <path
-              d="M75 25C75 25 65 40 58 48C52 55 45 62 30 72"
-              stroke="white"
-              strokeWidth="1.5"
-              fill="none"
-            />
-          </svg>
+          </div>
+          
 
-          {/* 4 Column Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 relative z-10">
-            {/* Column 1: Brand + Newsletter */}
-            <div className="lg:col-span-1">
+          {/* 4 Column Grid (STAGGER CONTAINER) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer} // Parent controls the stagger
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 relative z-10"
+          >
+            {/* Column 1: Brand + Newsletter (1st item) */}
+            <motion.div variants={fadeInUp} className="lg:col-span-1">
               {/* Logo */}
               <Link to="/" className="flex items-center gap-2.5 mb-5">
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M12 3C12 3 8 7 8 12C8 17 12 21 12 21C12 21 16 17 16 12C16 7 12 3 12 3Z"
-                      stroke="#24544B"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 8V12"
-                      stroke="#24544B"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+                  <img src="/image/logo.png" alt="" className="w-8 h-8 object-contain text-white" />
                 </div>
                 <span className="font-heading text-[28px] text-white">Dermal.</span>
               </Link>
@@ -102,13 +103,13 @@ export const Footer = () => {
                   className="w-[50px] h-[50px] bg-[#24544B] rounded-lg flex items-center justify-center hover:bg-[#1C4942] transition-colors"
                   aria-label="Subscribe"
                 >
-                  <ArrowRight className="w-5 h-5 text-white" />
+                  <ArrowIcon />
                 </button>
               </form>
-            </div>
+            </motion.div>
 
-            {/* Column 2: Contact Us */}
-            <div>
+            {/* Column 2: Contact Us (2nd item) */}
+            <motion.div variants={fadeInUp}>
               <h3 className="font-heading text-[22px] text-white mb-6">Contact Us</h3>
               <div className="space-y-5">
                 {/* For more information */}
@@ -133,10 +134,10 @@ export const Footer = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Column 3: Get In Touch */}
-            <div>
+            {/* Column 3: Get In Touch (3rd item) */}
+            <motion.div variants={fadeInUp}>
               <h3 className="font-heading text-[22px] text-white mb-6">Get In Touch</h3>
               <div className="space-y-5">
                 {/* Location */}
@@ -155,11 +156,12 @@ export const Footer = () => {
                   <p className="font-body text-white text-base">info@domain.com</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Column 4: Quick Links */}
-            <div>
+            {/* Column 4: Quick Links (4th item) */}
+            <motion.div variants={fadeInUp}>
               <h3 className="font-heading text-[22px] text-white mb-6">Quick Link</h3>
+              {/* To simplify staggering for the list, we treat the whole list as one motion item */}
               <ul className="space-y-3.5">
                 <li>
                   <Link
@@ -194,11 +196,18 @@ export const Footer = () => {
                   </Link>
                 </li>
               </ul>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          {/* Bottom Bar */}
-          <div className="mt-12 lg:mt-16 pt-8 border-t border-white/[0.14] flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+          {/* Bottom Bar (5th item in the sequence) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeInUp}
+            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }} // Manually delay after the 4 columns finish (4 * 0.15s = 0.6s)
+            className="mt-12 lg:mt-16 pt-8 border-t border-white/[0.14] flex flex-col md:flex-row items-center justify-between gap-6 relative z-10"
+          >
             {/* Copyright */}
             <p className="font-body text-white text-base lg:text-lg">
               Copyright © 2025 All Rights Reserved.
@@ -231,7 +240,7 @@ export const Footer = () => {
                 <Instagram className="w-5 h-5 text-[#24544B]" />
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </footer>

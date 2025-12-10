@@ -6,6 +6,9 @@ import { Helmet } from 'react-helmet-async';
 import { ChevronRight, Play, Phone, Check } from 'lucide-react';
 import { services } from '../data/serviceDetails';
 import { faqItems } from '../data/serviceDetails';
+import { ArrowIcon } from '@/components/icons';
+import { motion } from 'framer-motion';
+
 const ServiceDetail = () => {
     const [selectedServiceId, setSelectedServiceId] = useState<string>('dermal-fillers');
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -14,6 +17,29 @@ const ServiceDetail = () => {
 
     const toggleFaq = (index: number) => {
         setOpenFaqIndex(openFaqIndex === index ? null : index);
+    };
+
+    // Framer Motion variants
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: [0.0, 0.0, 0.2, 1.0] as const
+            }
+        }
+    };
+
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.15
+            }
+        }
     };
 
     return (
@@ -28,47 +54,21 @@ const ServiceDetail = () => {
 
                 <main>
                     {/* Hero Banner */}
-          <section className=" mx-auto  lg:px-8 lg:pt-2">
-            <div className="relative bg-[#24544B] lg:rounded-[30px] lg:h-[280px] md:h-[350px] h-[210px] flex flex-col items-center justify-center overflow-hidden">
-                            {/* Decorative Leaf - Top Left */}
-                            <svg
-                                className="absolute top-6 left-6 md:top-10 md:left-10 w-20 h-20 md:w-28 md:h-28 opacity-20"
-                                viewBox="0 0 100 100"
-                                fill="none"
-                            >
-                                <path
-                                    d="M20 80C20 80 30 60 40 50C50 40 60 30 80 20C60 30 50 40 40 50C30 60 20 80 20 80Z"
-                                    stroke="white"
-                                    strokeWidth="2"
-                                    fill="none"
-                                />
-                                <path
-                                    d="M25 75C25 75 35 60 42 52C48 45 55 38 70 28"
-                                    stroke="white"
-                                    strokeWidth="1.5"
-                                    fill="none"
-                                />
-                            </svg>
-
-                            {/* Decorative Leaf - Bottom Right */}
-                            <svg
-                                className="absolute bottom-6 right-6 md:bottom-10 md:right-10 w-20 h-20 md:w-28 md:h-28 opacity-20"
-                                viewBox="0 0 100 100"
-                                fill="none"
-                            >
-                                <path
-                                    d="M80 20C80 20 70 40 60 50C50 60 40 70 20 80C40 70 50 60 60 50C70 40 80 20 80 20Z"
-                                    stroke="white"
-                                    strokeWidth="2"
-                                    fill="none"
-                                />
-                                <path
-                                    d="M75 25C75 25 65 40 58 48C52 55 45 62 30 72"
-                                    stroke="white"
-                                    strokeWidth="1.5"
-                                    fill="none"
-                                />
-                            </svg>
+                    <motion.section
+                        className="container mx-auto  lg:px-8 lg:pt-2"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                        variants={fadeInUp}
+                    >
+                        <div className="relative bg-[#24544B] lg:rounded-[30px] lg:h-[280px] md:h-[350px] h-[210px] flex flex-col items-center justify-center overflow-hidden">
+                            <div className="absolute bottom-0 left-0 animate-[float_6s_ease-in-out_infinite]">
+                                <img src="/image/leaf-bottom-left.png" alt="Leaf" className="w-20 h-20 md:w-32 md:h-32 lg:w-48 lg:h-48" />
+                            </div>
+                            {/* Decorative Leaf - Top Right */}
+                            <div className="absolute top-0 right-0 animate-[float_8s_ease-in-out_infinite]">
+                                <img src="/image/leaf-top-right.png" alt="Leaf" className="w-100 h-100 md:w-100 md:h-100 lg:w-50 lg:h-50 xl:w-100 xl:h-100" />
+                            </div>
 
                             {/* Hero Content */}
                             <h1 className="font-heading text-white text-[32px] md:text-[40px] lg:text-[56px] mb-4 md:mb-5 z-10">
@@ -82,17 +82,23 @@ const ServiceDetail = () => {
                                 <span>{currentService.name}</span>
                             </div>
                         </div>
-                    </section>
+                    </motion.section>
 
                     {/* Main Content: Two-Column Layout */}
-                    <section className=" mx-auto px-6 lg:px-32 py-12 lg:py-20">
+                    <section className="container mx-auto px-6 lg:px-32 py-12 lg:py-20 xl:px-24">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
 
                             {/* LEFT SIDEBAR */}
                             <aside className="lg:col-span-3">
                                 <div className="lg:sticky lg:top-24 space-y-8">
                                     {/* Services Category Card */}
-                                    <div className="bg-[#F7F0F2] rounded-[30px] p-4">
+                                    <motion.div
+                                        className="bg-[#F7F0F2] rounded-[30px] p-4"
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, amount: 0.3 }}
+                                        variants={fadeInUp}
+                                    >
                                         <h3 className="font-heading text-[#1C4942] text-[22px] mb-6">
                                             Services Category
                                         </h3>
@@ -114,23 +120,27 @@ const ServiceDetail = () => {
                                                     >
                                                         {service.name}
                                                     </span>
-                                                    <ChevronRight
-                                                        className={`w-5 h-5 transition-transform ${selectedServiceId === service.id
-                                                            ? 'text-[#24544B] transform rotate-90'
+                                                    <ArrowIcon
+                                                        className={`w-5 h-5 transition-transform invert ${selectedServiceId === service.id
+                                                            ? 'text-[#24544B]'
                                                             : 'text-[#7B798C]'
                                                             }`}
                                                     />
                                                 </button>
                                             ))}
                                         </div>
-                                    </div>
+                                    </motion.div>
 
                                     {/* Promo Card */}
-                                    <div
+                                    <motion.div
                                         className="relative rounded-[30px] overflow-hidden h-[400px] bg-cover bg-center"
                                         style={{
                                             backgroundImage: 'url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=800&fit=crop)'
                                         }}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, amount: 0.3 }}
+                                        variants={fadeInUp}
                                     >
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#1C4942]/95 via-[#1C4942]/70 to-transparent" />
                                         <div className="absolute inset-0 p-6 flex flex-col justify-between">
@@ -143,9 +153,9 @@ const ServiceDetail = () => {
                                                 </h4>
                                             </div>
 
-                                            <div className="bg-white rounded-lg p-4 flex items-center gap-3">
-                                                <div className="bg-[#24544B] rounded-full p-3">
-                                                    <Phone className="w-5 h-5 text-white" />
+                                            <div className="bg-white rounded-lg p-4 flex items-center gap-3 group cursor-pointer hover:shadow-lg transition-all duration-300">
+                                                <div className="bg-white border-[1px] border-[#24544B] rounded-lg p-3 transition-all duration-300 group-hover:bg-[#24544B]">
+                                                    <Phone className="w-5 h-5 text-[#24544B] transition-colors duration-300 group-hover:text-white" strokeWidth={2} />
                                                 </div>
                                                 <div>
                                                     <p className="font-body text-[#7B798C] text-sm">Call Us</p>
@@ -153,54 +163,94 @@ const ServiceDetail = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 </div>
                             </aside>
 
                             {/* RIGHT MAIN CONTENT */}
                             <div className="lg:col-span-9">
                                 {/* Hero Service Image */}
-                                <div className="rounded-[30px] overflow-hidden mb-8 transition-opacity duration-500">
+                                <motion.div
+                                    className="group relative rounded-[30px] overflow-hidden mb-8 transition-opacity duration-500"
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    variants={fadeInUp}
+                                >
+                                    {/* Shine Effect */}
+                                    <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
+
                                     <img
                                         src={currentService.heroImage}
                                         alt={currentService.name}
                                         className="w-full h-[400px] md:h-[500px] object-cover"
                                     />
-                                </div>
+                                </motion.div>
 
                                 {/* Intro Text & Bullet List */}
-                                <div className="mb-12">
+                                <motion.div
+                                    className="mb-12"
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    variants={staggerContainer}
+                                >
                                     {currentService.description.map((paragraph, idx) => (
-                                        <p key={idx} className="font-body text-[#7B798C] text-[16px] md:text-[18px] leading-relaxed mb-4">
+                                        <motion.p
+                                            key={idx}
+                                            className="font-body text-[#7B798C] text-[16px] md:text-[18px] leading-relaxed mb-4"
+                                            variants={fadeInUp}
+                                        >
                                             {paragraph}
-                                        </p>
+                                        </motion.p>
                                     ))}
 
-                                    <div className="grid md:grid-cols-2 gap-4 mt-8">
+                                    <motion.div
+                                        className="grid md:grid-cols-2 gap-4 mt-8"
+                                        variants={fadeInUp}
+                                    >
                                         {currentService.bulletPoints.map((point, idx) => (
-                                            <div key={idx} className="flex items-start gap-3">
-                                                <div className="bg-[#24544B] rounded-full p-1 mt-1 flex-shrink-0">
-                                                    <Check className="w-3 h-3 text-white" />
+                                            <div key={idx} className="flex items-start gap-3 group">
+                                                <div className="bg-white border-2 border-[#24544B] rounded-lg p-2 mt-0.5 flex-shrink-0 transition-all duration-300 group-hover:bg-[#24544B]">
+                                                    <Check className="w-4 h-4 text-[#24544B] transition-colors duration-300 group-hover:text-white" strokeWidth={2.5} />
                                                 </div>
                                                 <span className="font-body text-[#1C4942] text-[16px]">{point}</span>
                                             </div>
                                         ))}
-                                    </div>
-                                </div>
+                                    </motion.div>
+                                </motion.div>
 
                                 {/* Comprehensive Care Section */}
-                                <div className="mb-16">
-                                    <h2 className="font-heading text-[#1C4942] text-[32px] md:text-[42px] lg:text-[50px] mb-4">
+                                <motion.div
+                                    className="mb-16"
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, amount: 0.2 }}
+                                    variants={staggerContainer}
+                                >
+                                    <motion.h2
+                                        className="font-heading text-[#1C4942] text-[32px] md:text-[42px] lg:text-[50px] mb-4"
+                                        variants={fadeInUp}
+                                    >
                                         Comprehensive care for your skin
-                                    </h2>
-                                    <p className="font-body text-[#7B798C] text-[16px] md:text-[18px] leading-relaxed mb-8">
+                                    </motion.h2>
+                                    <motion.p
+                                        className="font-body text-[#7B798C] text-[16px] md:text-[18px] leading-relaxed mb-8"
+                                        variants={fadeInUp}
+                                    >
                                         Our holistic approach combines advanced medical treatments with personalized care to deliver exceptional results for every patient.
-                                    </p>
+                                    </motion.p>
 
                                     {/* Images Row */}
-                                    <div className="grid md:grid-cols-2 gap-6 mb-8">
+                                    <motion.div
+                                        className="grid md:grid-cols-2 gap-6 mb-8"
+                                        variants={fadeInUp}
+                                    >
                                         {currentService.comprehensiveImages.map((img, idx) => (
-                                            <div key={idx} className="rounded-[30px] overflow-hidden">
+                                            <div key={idx} className="group relative rounded-[30px] overflow-hidden">
+                                                {/* Shine Effect */}
+                                                <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
+
                                                 <img
                                                     src={img}
                                                     alt={`Treatment ${idx + 1}`}
@@ -208,10 +258,13 @@ const ServiceDetail = () => {
                                                 />
                                             </div>
                                         ))}
-                                    </div>
+                                    </motion.div>
 
                                     {/* Feature Cards Grid */}
-                                    <div className="grid md:grid-cols-2 gap-6">
+                                    <motion.div
+                                        className="grid md:grid-cols-2 gap-6"
+                                        variants={fadeInUp}
+                                    >
                                         {currentService.featureCards.map((card, idx) => (
                                             <div
                                                 key={idx}
@@ -240,22 +293,35 @@ const ServiceDetail = () => {
                                                 </p>
                                             </div>
                                         ))}
-                                    </div>
-                                </div>
+                                    </motion.div>
+                                </motion.div>
 
                                 {/* Enhancing Natural Beauty Section */}
-                                <div className="mb-16">
-                                    <h2 className="font-heading text-[#1C4942] text-[32px] md:text-[42px] lg:text-[50px] mb-4">
+                                <motion.div
+                                    className="mb-16"
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, amount: 0.2 }}
+                                    variants={staggerContainer}
+                                >
+                                    <motion.h2
+                                        className="font-heading text-[#1C4942] text-[32px] md:text-[42px] lg:text-[50px] mb-4"
+                                        variants={fadeInUp}
+                                    >
                                         Enhancing your natural beauty
-                                    </h2>
-                                    <p className="font-body text-[#7B798C] text-[16px] md:text-[18px] leading-relaxed mb-8">
+                                    </motion.h2>
+                                    <motion.p
+                                        className="font-body text-[#7B798C] text-[16px] md:text-[18px] leading-relaxed mb-8"
+                                        variants={fadeInUp}
+                                    >
                                         {currentService.enhancingText}
-                                    </p>
+                                    </motion.p>
 
                                     {/* Video Card */}
-                                    <div
+                                    <motion.div
                                         className="relative rounded-[30px] overflow-hidden h-[400px] bg-cover bg-center mb-8"
                                         style={{ backgroundImage: `url(${currentService.videoThumbnail})` }}
+                                        variants={fadeInUp}
                                     >
                                         <div className="absolute inset-0 bg-black/20" />
                                         <button className="absolute inset-0 flex items-center justify-center">
@@ -263,10 +329,13 @@ const ServiceDetail = () => {
                                                 <Play className="w-8 h-8 text-white fill-white ml-1" />
                                             </div>
                                         </button>
-                                    </div>
+                                    </motion.div>
 
                                     {/* Stats Row */}
-                                    <div className="grid md:grid-cols-3 gap-8">
+                                    <motion.div
+                                        className="grid md:grid-cols-3 gap-8"
+                                        variants={fadeInUp}
+                                    >
                                         {currentService.stats.map((stat, idx) => (
                                             <div key={idx} className="text-center">
                                                 <div className="text-[40px] mb-2">{stat.icon}</div>
@@ -278,15 +347,26 @@ const ServiceDetail = () => {
                                                 </div>
                                             </div>
                                         ))}
-                                    </div>
-                                </div>
+                                    </motion.div>
+                                </motion.div>
 
                                 {/* FAQ Section */}
-                                <div>
-                                    <h2 className="font-heading text-[#1C4942] text-[32px] md:text-[40px] mb-8">
+                                <motion.div
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, amount: 0.2 }}
+                                    variants={staggerContainer}
+                                >
+                                    <motion.h2
+                                        className="font-heading text-[#1C4942] text-[32px] md:text-[40px] mb-8"
+                                        variants={fadeInUp}
+                                    >
                                         Frequently asked questions
-                                    </h2>
-                                    <div className="space-y-4">
+                                    </motion.h2>
+                                    <motion.div
+                                        className="space-y-4"
+                                        variants={fadeInUp}
+                                    >
                                         {faqItems.map((faq, idx) => (
                                             <div
                                                 key={idx}
@@ -316,8 +396,8 @@ const ServiceDetail = () => {
                                                 </div>
                                             </div>
                                         ))}
-                                    </div>
-                                </div>
+                                    </motion.div>
+                                </motion.div>
                             </div>
                         </div>
                     </section>

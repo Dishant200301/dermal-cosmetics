@@ -29,7 +29,7 @@ const Index = () => {
         <main className='overflow-hidden'>
           <Hero />
           <ContactInfoStrip />
-           <WhyChooseUs />
+          <WhyChooseUs />
           <StatsRow />
           <ServicesSection />
           <WhyChooseUsSection />
