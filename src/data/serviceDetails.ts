@@ -1,3 +1,5 @@
+import { LucideIcon } from 'lucide-react';
+
 // ============================================================
 // TYPE DEFINITIONS
 // ============================================================
@@ -15,14 +17,14 @@ export interface Service {
 }
 
 export interface FeatureCard {
-  icon: string;
+  icon: string; // Lucide icon name
   title: string;
   description: string;
   variant: 'dark' | 'light';
 }
 
 export interface Stat {
-  icon: string;
+  icon: string; // Lucide icon name
   value: string;
   label: string;
 }
@@ -58,25 +60,25 @@ export const services: Service[] = [
     ],
     featureCards: [
       {
-        icon: '🎯',
+        icon: 'Target',
         title: 'Tailored Treatment Plans',
         description: 'Every skin is unique, and so are our solutions. We create personalized treatment plans designed.',
         variant: 'dark'
       },
       {
-        icon: '💎',
+        icon: 'Sparkles',
         title: 'Advanced Skin Technology',
         description: 'Every skin is unique, and so are our solutions. We create personalized treatment plans designed.',
         variant: 'light'
       },
       {
-        icon: '⏱️',
+        icon: 'Clock',
         title: 'Quick Procedure',
         description: 'Most treatments take 30-60 minutes with minimal discomfort and immediate results.',
         variant: 'light'
       },
       {
-        icon: '✨',
+        icon: 'Star',
         title: 'Long-Lasting Results',
         description: 'Enjoy beautiful results that can last from 6 months to over a year depending on the product.',
         variant: 'light'
@@ -85,9 +87,9 @@ export const services: Service[] = [
     enhancingText: 'Our dermal filler treatments are designed to enhance your natural beauty while maintaining facial harmony. We take a personalized approach to ensure results that look and feel authentic to you.',
     videoThumbnail: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=600&fit=crop',
     stats: [
-      { icon: '📊', value: '74%', label: 'Patient Satisfaction' },
-      { icon: '🏆', value: '13+', label: 'Years Of Experience' },
-      { icon: '🏥', value: '17+', label: 'State-Of-The-Art Facilities' }
+      { icon: '/image/about-icon-1.png', value: '74%', label: 'Patient Satisfaction' },
+      { icon: '/image/about-icon-4.png', value: '13+', label: 'Years Of Experience' },
+      { icon: '/image/about-icon-3.png', value: '17+', label: 'State-Of-The-Art Facilities' }
     ]
   },
   {
@@ -112,25 +114,25 @@ export const services: Service[] = [
     ],
     featureCards: [
       {
-        icon: '🔬',
+        icon: 'Microscope',
         title: 'Medical-Grade Formulas',
         description: 'We use professional-strength peels that deliver superior results safely and effectively.',
         variant: 'dark'
       },
       {
-        icon: '🎨',
+        icon: 'Palette',
         title: 'Customized Approach',
         description: 'Each peel is tailored to your unique skin type, concerns, and desired outcomes.',
         variant: 'light'
       },
       {
-        icon: '🌟',
+        icon: 'Sparkle',
         title: 'Visible Improvement',
         description: 'See noticeable improvements in skin clarity, texture, and overall radiance.',
         variant: 'light'
       },
       {
-        icon: '🛡️',
+        icon: 'ShieldCheck',
         title: 'Safe & Controlled',
         description: 'Performed by trained professionals in a controlled clinical environment.',
         variant: 'light'
@@ -139,9 +141,9 @@ export const services: Service[] = [
     enhancingText: 'Chemical peels offer a transformative solution for achieving smoother, more youthful-looking skin. Our expert team ensures a comfortable experience with outstanding results.',
     videoThumbnail: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=1200&h=600&fit=crop',
     stats: [
-      { icon: '📊', value: '74%', label: 'Patient Satisfaction' },
-      { icon: '🏆', value: '13+', label: 'Years Of Experience' },
-      { icon: '🏥', value: '17+', label: 'State-Of-The-Art Facilities' }
+      { icon: '/image/about-icon-1.png', value: '74%', label: 'Patient Satisfaction' },
+      { icon: '/image/about-icon-2.png', value: '13+', label: 'Years Of Experience' },
+      { icon: '/image/about-icon-3.png', value: '17+', label: 'State-Of-The-Art Facilities' }
     ]
   },
   {
@@ -166,25 +168,25 @@ export const services: Service[] = [
     ],
     featureCards: [
       {
-        icon: '🔍',
+        icon: 'Search',
         title: 'Root Cause Analysis',
         description: 'We identify underlying causes of acne to create effective, targeted treatment strategies.',
         variant: 'dark'
       },
       {
-        icon: '💊',
+        icon: 'Pill',
         title: 'Multi-Modal Approach',
         description: 'Combining topical, oral, and procedural treatments for comprehensive acne management.',
         variant: 'light'
       },
       {
-        icon: '📈',
+        icon: 'LineChart',
         title: 'Progressive Results',
         description: 'See continuous improvement with our systematic treatment protocols.',
         variant: 'light'
       },
       {
-        icon: '🌿',
+        icon: 'Leaf',
         title: 'Gentle Yet Effective',
         description: 'Treatments that clear acne while maintaining skin health and barrier function.',
         variant: 'light'
@@ -193,9 +195,9 @@ export const services: Service[] = [
     enhancingText: 'Clear, confident skin is within reach. Our acne treatment programs are designed to not only clear existing breakouts but prevent future ones for lasting results.',
     videoThumbnail: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=600&fit=crop',
     stats: [
-      { icon: '📊', value: '74%', label: 'Patient Satisfaction' },
-      { icon: '🏆', value: '13+', label: 'Years Of Experience' },
-      { icon: '🏥', value: '17+', label: 'State-Of-The-Art Facilities' }
+      { icon: '/image/about-icon-1.png', value: '74%', label: 'Patient Satisfaction' },
+      { icon: '/image/about-icon-4.png', value: '13+', label: 'Years Of Experience' },
+      { icon: '/image/about-icon-3.png', value: '17+', label: 'State-Of-The-Art Facilities' }
     ]
   },
   {
@@ -220,25 +222,25 @@ export const services: Service[] = [
     ],
     featureCards: [
       {
-        icon: '⚡',
+        icon: 'Zap',
         title: 'Advanced Technology',
         description: 'State-of-the-art devices that deliver controlled energy for optimal skin tightening.',
         variant: 'dark'
       },
       {
-        icon: '🎯',
+        icon: 'Focus',
         title: 'Targeted Treatment',
         description: 'Precisely target areas of concern for customized skin tightening results.',
         variant: 'light'
       },
       {
-        icon: '⏰',
+        icon: 'Timer',
         title: 'No Downtime',
         description: 'Resume normal activities immediately after treatment with no recovery period.',
         variant: 'light'
       },
       {
-        icon: '📅',
+        icon: 'CalendarCheck',
         title: 'Long-Term Benefits',
         description: 'Results continue to improve over months as new collagen forms.',
         variant: 'light'
@@ -247,9 +249,9 @@ export const services: Service[] = [
     enhancingText: 'Turn back the clock without surgery. Our skin tightening treatments offer a safe, effective way to achieve firmer, more youthful-looking skin.',
     videoThumbnail: 'https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1200&h=600&fit=crop',
     stats: [
-      { icon: '📊', value: '74%', label: 'Patient Satisfaction' },
-      { icon: '🏆', value: '13+', label: 'Years Of Experience' },
-      { icon: '🏥', value: '17+', label: 'State-Of-The-Art Facilities' }
+      { icon: '/image/about-icon-1.png', value: '74%', label: 'Patient Satisfaction' },
+      { icon: '/image/about-icon-4.png', value: '13+', label: 'Years Of Experience' },
+      { icon: '/image/about-icon-3.png', value: '17+', label: 'State-Of-The-Art Facilities' }
     ]
   },
   {
@@ -274,25 +276,25 @@ export const services: Service[] = [
     ],
     featureCards: [
       {
-        icon: '🔧',
+        icon: 'Wrench',
         title: 'Multi-Technique Approach',
         description: 'Combining laser, microneedling, and injectables for comprehensive scar improvement.',
         variant: 'dark'
       },
       {
-        icon: '🎨',
+        icon: 'Paintbrush',
         title: 'Texture Refinement',
         description: 'Smooth out raised or depressed scars for more even skin texture.',
         variant: 'light'
       },
       {
-        icon: '🌈',
+        icon: 'Pipette',
         title: 'Color Correction',
         description: 'Address discoloration to help scars blend with surrounding skin tone.',
         variant: 'light'
       },
       {
-        icon: '💪',
+        icon: 'Heart',
         title: 'Confidence Restoration',
         description: 'Regain confidence with visibly improved skin appearance.',
         variant: 'light'
@@ -301,9 +303,9 @@ export const services: Service[] = [
     enhancingText: 'Scars don\'t have to be permanent. Our scar revision treatments can significantly improve their appearance, helping you feel more confident in your skin.',
     videoThumbnail: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=600&fit=crop',
     stats: [
-      { icon: '📊', value: '74%', label: 'Patient Satisfaction' },
-      { icon: '🏆', value: '13+', label: 'Years Of Experience' },
-      { icon: '🏥', value: '17+', label: 'State-Of-The-Art Facilities' }
+      { icon: '/image/about-icon-1.png', value: '74%', label: 'Patient Satisfaction' },
+      { icon: '/image/about-icon-4.png', value: '13+', label: 'Years Of Experience' },
+      { icon: '/image/about-icon-3.png', value: '17+', label: 'State-Of-The-Art Facilities' }
     ]
   },
   {
@@ -328,25 +330,25 @@ export const services: Service[] = [
     ],
     featureCards: [
       {
-        icon: '💉',
+        icon: 'Syringe',
         title: 'Injectable Expertise',
         description: 'Expert administration of Botox and fillers for smooth, natural results.',
         variant: 'dark'
       },
       {
-        icon: '🔆',
+        icon: 'Sun',
         title: 'Laser Technology',
         description: 'Advanced laser treatments that stimulate collagen and reduce wrinkles.',
         variant: 'light'
       },
       {
-        icon: '🎭',
+        icon: 'Smile',
         title: 'Expression Preservation',
         description: 'Maintain natural facial expressions while smoothing unwanted lines.',
         variant: 'light'
       },
       {
-        icon: '🕐',
+        icon: 'Clock3',
         title: 'Preventative Care',
         description: 'Start early to prevent deep wrinkles from forming over time.',
         variant: 'light'
@@ -355,9 +357,9 @@ export const services: Service[] = [
     enhancingText: 'Age gracefully with our comprehensive wrinkle reduction treatments. We help you maintain a refreshed, youthful appearance while preserving your natural expressions.',
     videoThumbnail: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=1200&h=600&fit=crop',
     stats: [
-      { icon: '📊', value: '74%', label: 'Patient Satisfaction' },
-      { icon: '🏆', value: '13+', label: 'Years Of Experience' },
-      { icon: '🏥', value: '17+', label: 'State-Of-The-Art Facilities' }
+      { icon: '../image/about-icon-1.png', value: '74%', label: 'Patient Satisfaction' },
+      { icon: '../image/about-icon-4.png', value: '13+', label: 'Years Of Experience' },
+      { icon: '../image/about-icon-3.png', value: '17+', label: 'State-Of-The-Art Facilities' }
     ]
   },
   

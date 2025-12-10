@@ -171,10 +171,10 @@ const WhyChooseUs = () => {
                 </ul>
 
                 {/* Buttons - Below Checklist (Treated as one motion block, still part of the outer stagger) */}
-                <div className="flex flex-row md:flex-col lg:flex-col xl:flex-row gap-3 md:gap-3">
+                <div className="grid grid-cols-1 md:flex md:flex-row lg:flex-row xl:flex-row gap-3 md:gap-3">
 
                   {/* About More Button - Animated Slide Effect */}
-                  <AnimatedButton to="/about" variant="primary" >
+                  <AnimatedButton to="/about" variant="primary" className='py-3' >
                     About Us
                   </AnimatedButton>
 

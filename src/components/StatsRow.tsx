@@ -136,18 +136,23 @@ export const StatsRow = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 lg:gap-12"
         >
 
           {stats.map((stat, index) => (
             <motion.div
               key={index}
               variants={fadeInUp} // Apply individual fade-up animation to each stat block
-              className="flex flex-col items-start space-y-2"
+              className="flex flex-col items-center md:items-start space-y-2"
             >
 
-              {/* Icon + Value (always left icon, right value) */}
-              <div className="flex items-center gap-4">
+              {/* Mobile: Vertical Stack (icon, value, label) | Tablet+: Horizontal (icon + value, then label) */}
+
+              {/* Icon - Centered on mobile, left-aligned on md+ */}
+              <div className="flex-shrink-0 md:hidden">{stat.icon}</div>
+
+              {/* Icon + Value Row - Hidden on mobile, shown on md+ */}
+              <div className="hidden md:flex items-center gap-4">
                 <div className="flex-shrink-0">{stat.icon}</div>
 
                 {/* Animated Counter */}
@@ -157,8 +162,14 @@ export const StatsRow = () => {
                 />
               </div>
 
-              {/* Label Below - aligned with value, not icon */}
-              <p className="font-body text-[14px] md:text-[15px] lg:text-[16px] text-[#6C6C6C] pl-[64px] md:pl-[72px]">
+              {/* Value - Centered on mobile, hidden on md+ */}
+              <AnimatedCounter
+                value={stat.value}
+                className="md:hidden font-heading text-[32px] text-[#1C4942] leading-none"
+              />
+
+              {/* Label - Centered on mobile, left-aligned with padding on md+ */}
+              <p className="font-body text-[14px] md:text-[15px] lg:text-[16px] text-[#6C6C6C] text-center md:text-left md:pl-[64px] lg:pl-[72px]">
                 {stat.label}
               </p>
 

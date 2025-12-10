@@ -4,6 +4,7 @@ import { Footer } from '@/components/Footer';
 import { Marquee } from '@/components/Marquee';
 import { Helmet } from 'react-helmet-async';
 import { ChevronRight, Play, Phone, Check } from 'lucide-react';
+import * as Icons from 'lucide-react';
 import { services } from '../data/serviceDetails';
 import { faqItems } from '../data/serviceDetails';
 import { ArrowIcon } from '@/components/icons';
@@ -285,34 +286,47 @@ const ServiceDetail = () => {
                                         className="grid md:grid-cols-2 gap-6"
                                         variants={fadeInUp}
                                     >
-                                        {currentService.featureCards.map((card, idx) => (
-                                            <div
-                                                key={idx}
-                                                className={`rounded-[30px] p-6 ${card.variant === 'dark'
-                                                    ? 'bg-[#1C4942] text-white'
-                                                    : 'bg-white'
-                                                    }`}
-                                            >
+                                        {currentService.featureCards.map((card, idx) => {
+                                            const IconComponent = Icons[card.icon as keyof typeof Icons] as React.ComponentType<{ className?: string; strokeWidth?: number }> | undefined;
+                                            return (
                                                 <div
-                                                    className={`w-[60px] h-[60px] rounded-full flex items-center justify-center text-[30px] mb-4 ${card.variant === 'dark' ? 'bg-white/10' : 'bg-[#F7F0F2]'
+                                                    key={idx}
+                                                    className={`rounded-[30px] p-6 group cursor-pointer transition-all duration-300 ${card.variant === 'dark'
+                                                        ? 'bg-[#1C4942] text-white hover:bg-[#24544B]'
+                                                        : 'bg-white hover:shadow-lg'
                                                         }`}
                                                 >
-                                                    {card.icon}
+                                                    <div
+                                                        className={`w-[60px] h-[60px] rounded-[10px] flex items-center justify-center mb-4 transition-all duration-300 ${card.variant === 'dark'
+                                                            ? 'bg-white group-hover:bg-white/90'
+                                                            : 'bg-white group-hover:bg-[#1C4942]'
+                                                            }`}
+                                                    >
+                                                        {IconComponent && (
+                                                            <IconComponent
+                                                                className={`w-7 h-7 transition-colors duration-300 ${card.variant === 'dark'
+                                                                    ? 'text-[#1C4942] group-hover:text-[#1C4942]'
+                                                                    : 'text-[#1C4942] group-hover:text-white'
+                                                                    }`}
+                                                                strokeWidth={2}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                    <h4
+                                                        className={`font-heading text-[20px] md:text-[22px] mb-3 ${card.variant === 'dark' ? 'text-white' : 'text-[#1C4942]'
+                                                            }`}
+                                                    >
+                                                        {card.title}
+                                                    </h4>
+                                                    <p
+                                                        className={`font-body text-[16px] ${card.variant === 'dark' ? 'text-white/90' : 'text-[#7B798C]'
+                                                            }`}
+                                                    >
+                                                        {card.description}
+                                                    </p>
                                                 </div>
-                                                <h4
-                                                    className={`font-heading text-[20px] md:text-[22px] mb-3 ${card.variant === 'dark' ? 'text-white' : 'text-[#1C4942]'
-                                                        }`}
-                                                >
-                                                    {card.title}
-                                                </h4>
-                                                <p
-                                                    className={`font-body text-[16px] ${card.variant === 'dark' ? 'text-white/90' : 'text-[#7B798C]'
-                                                        }`}
-                                                >
-                                                    {card.description}
-                                                </p>
-                                            </div>
-                                        ))}
+                                            )
+                                        })}
                                     </motion.div>
                                 </motion.div>
 
@@ -353,20 +367,39 @@ const ServiceDetail = () => {
 
                                     {/* Stats Row */}
                                     <motion.div
-                                        className="grid md:grid-cols-3 gap-8"
+                                        className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 gap-8"
                                         variants={fadeInUp}
                                     >
-                                        {currentService.stats.map((stat, idx) => (
-                                            <div key={idx} className="text-center">
-                                                <div className="text-[40px] mb-2">{stat.icon}</div>
-                                                <div className="font-heading text-[#1C4942] text-[36px] md:text-[42px] mb-2">
-                                                    {stat.value}
+                                        {currentService.stats.map((stat, idx) => {
+                                            // Check if icon is an image path or a Lucide icon name
+                                            const isImagePath = stat.icon.includes('/') || stat.icon.includes('.');
+                                            const StatIcon = !isImagePath ? Icons[stat.icon as keyof typeof Icons] as React.ComponentType<{ className?: string; strokeWidth?: number }> | undefined : null;
+
+                                            return (
+                                                <div key={idx} className="text-center group">
+                                                    <div className="inline-flex w-[70px] h-[70px] rounded-[10px] items-center justify-center mb-4 transition-all duration-300 ">
+                                                        {isImagePath ? (
+                                                            <img
+                                                                src={stat.icon}
+                                                                alt={stat.label}
+                                                                className="w-8 h-8 object-contain transition-all duration-300 "
+                                                            />
+                                                        ) : StatIcon && (
+                                                            <StatIcon
+                                                                className="w-8 h-8 text-[#1C4942] transition-colors duration-300 "
+                                                                strokeWidth={2}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                    <div className="font-heading text-[#1C4942] text-[36px] md:text-[42px] mb-2">
+                                                        {stat.value}
+                                                    </div>
+                                                    <div className="font-body text-[#7B798C] text-[14px]">
+                                                        {stat.label}
+                                                    </div>
                                                 </div>
-                                                <div className="font-body text-[#7B798C] text-[16px]">
-                                                    {stat.label}
-                                                </div>
-                                            </div>
-                                        ))}
+                                            )
+                                        })}
                                     </motion.div>
                                 </motion.div>
 

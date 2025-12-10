@@ -51,15 +51,23 @@ export const ServicesSection = () => {
     const cardWidthRef = useRef(0);
 
     // ======================================================================================
-    // 1) Measure real card width (because mobile/tablet/laptop cards have different widths)
+    // 1) Measure real card width (mobile fix: read actual flex gap from CSS)
     // ======================================================================================
     useEffect(() => {
         function updateWidth() {
-            const firstCard = trackRef.current?.children[0] as HTMLElement;
-            if (firstCard) {
-                cardWidthRef.current = firstCard.offsetWidth + 24; // card width + 24px gap
-            }
+            const track = trackRef.current;
+            if (!track || !track.children.length) return;
+
+            const firstCard = track.children[0] as HTMLElement;
+
+            // Read the real horizontal gap used by `gap-6` (or whatever class you use)
+            const styles = window.getComputedStyle(track);
+            const rawGap =
+                parseFloat(styles.columnGap || styles.gap || '0') || 0;
+
+            cardWidthRef.current = firstCard.offsetWidth + rawGap;
         }
+
         updateWidth();
         window.addEventListener('resize', updateWidth);
         return () => window.removeEventListener('resize', updateWidth);
@@ -107,10 +115,10 @@ export const ServicesSection = () => {
 
     return (
         <section className="xl:container bg-[#fef7f8] px-2 py-16 lg:py-24 relative">
-            <div className="w-full bg-[#f7f0f2] lg:rounded-[30px] xl:rounded-[50px] py-10 px-0 lg:px-[10px] lg:py-12">
+            <div className="w-full bg-[#f7f0f2] lg:rounded-[30px] xl:rounded-[50px] py-10 px-0 lg:px-[10px] lg:py-12 relative overflow-hidden">
 
                 {/* Floating leaf */}
-                <div className="absolute bottom-20 left-0 animate-[float_6s_ease-in-out_infinite] pointer-events-none">
+                <div className="absolute bottom-0 left-0 animate-[float_6s_ease-in-out_infinite] pointer-events-none">
                     <img
                         src="/image/leaf-bottom-left.png"
                         alt="Decorative leaf"
@@ -148,7 +156,7 @@ export const ServicesSection = () => {
                     </motion.div>
 
                     {/* ======================================================================================
-                        SERVICE CAROUSEL (FULLY FIXED)
+                        SERVICE CAROUSEL
                     ====================================================================================== */}
                     <motion.div
                         initial="hidden"
@@ -237,7 +245,7 @@ export const ServicesSection = () => {
                         transition={{ duration: 0.6, delay: baseDelay + 0.15, ease: 'easeOut' }}
                         className="text-center font-body text-lg text-text-gray-400"
                     >
-                        Professional dermatology solutions for every need.{' '}
+                        Professional dermatology solutions for every need{' '}
                         <button
                             onClick={() => navigate('/contact')}
                             className="font-bold text-deep-green-900 underline hover:text-deep-green-800 cursor-pointer transition-colors duration-300"
