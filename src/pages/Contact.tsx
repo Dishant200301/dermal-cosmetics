@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { ArrowIcon } from '@/components/icons';
 import { motion } from 'framer-motion';
+import { AnimatedButton } from '@/components/AnimatedButton';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -94,7 +95,7 @@ const Contact = () => {
           </motion.section>
 
           {/* Main Contact Section */}
-          <section className="max-w-7xl mx-auto px-4 lg:px-8 py-12 lg:py-20">
+          <section className="max-w-7xl xl:container mx-auto px-4 lg:px-8  py-12 lg:py-20 xl:px-24">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -202,20 +203,16 @@ const Contact = () => {
                     required
                   />
 
-                  <button
-                    type="submit"
-                    className="bg-[#24544B] text-white font-body font-medium px-10 py-4 rounded-[30px] hover:bg-[#1C4942] transition-colors inline-flex items-center gap-2"
-                  >
+                  <AnimatedButton type="submit" variant="primary" className="mt-10 w-fit">
                     Send Message
-                    <ArrowIcon />
-                  </button>
+                  </AnimatedButton>
                 </form>
               </motion.div>
             </motion.div>
           </section>
 
           {/* Contact Info Cards */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:pb-20">
+          <section className="max-w-7xl xl:container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:pb-20 xl:px-24">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -237,7 +234,7 @@ const Contact = () => {
                   <h3 className="font-heading text-white text-lg sm:text-xl md:text-[22px] mb-1 sm:mb-2">
                     Phone
                   </h3>
-                  <p className="font-body text-white text-sm sm:text-base md:text-lg leading-[22px]">
+                  <p className="font-body text-white text-sm sm:text-base md:text-lg lg:text-md leading-[22px]">
                     +1 02 345 789<br />
                     +1 02 345 687
                   </p>
@@ -248,7 +245,7 @@ const Contact = () => {
               <motion.div
                 variants={fadeInUp}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="bg-[#1C4942] rounded-[30px] p-5 sm:p-6 lg:p-8 flex items-center gap-4 sm:gap-6 min-h-[120px] sm:min-h-[150px]"
+                className="bg-[#1C4942] rounded-[30px] p-5 sm:p-6 lg:p-6 flex items-center gap-4 sm:gap-6 min-h-[120px] sm:min-h-[150px]"
               >
                 <div className="bg-[#F7F0F2] rounded-[14px] p-3 sm:p-4 flex-shrink-0">
                   <MapPin className="w-7 h-7 text-[#1C4942]" />
@@ -257,7 +254,7 @@ const Contact = () => {
                   <h3 className="font-heading text-white text-lg sm:text-xl md:text-[22px] mb-1 sm:mb-2">
                     Address
                   </h3>
-                  <p className="font-body text-white text-sm sm:text-base md:text-lg leading-[22px]">
+                  <p className="font-body text-white text-sm sm:text-base md:text-lg  lg:text-md leading-[22px]">
                     2464 Royal Ln. Mesa,<br />
                     CA 45463, USA
                   </p>
@@ -277,7 +274,7 @@ const Contact = () => {
                   <h3 className="font-heading text-white text-lg sm:text-xl md:text-[22px] mb-1 sm:mb-2">
                     Email
                   </h3>
-                  <p className="font-body text-white text-sm sm:text-base md:text-lg leading-[22px]">
+                  <p className="font-body text-white text-sm sm:text-base md:text-lg lg:text-md leading-[22px]">
                     support@dermal.com<br />
                     info@dermal.com
                   </p>

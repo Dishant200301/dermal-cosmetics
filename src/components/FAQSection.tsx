@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion'; // <-- Import motion
+import { motion } from 'framer-motion';
 import { ArrowIcon } from './icons';
+import { AnimatedButton } from './AnimatedButton';
 
 // ====================================================================
 // FRAMER MOTION VARIANTS (Defined once for reuse)
@@ -11,23 +12,23 @@ import { ArrowIcon } from './icons';
 // 1. Variant for Individual Elements (Fade Up)
 const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-        opacity: 1, 
+    visible: {
+        opacity: 1,
         y: 0,
-        transition: { 
+        transition: {
             duration: 0.6, // Animation duration
-            ease: "easeOut" 
-        } 
+            ease: "easeOut"
+        }
     }
 };
 
 // 2. Container Variant (Staggering)
 const staggerContainer = {
-    hidden: {}, 
+    hidden: {},
     visible: {
-      transition: {
-        staggerChildren: 0.15, // Delay between the start of each child's animation
-      }
+        transition: {
+            staggerChildren: 0.15, // Delay between the start of each child's animation
+        }
     }
 };
 
@@ -61,7 +62,7 @@ export const FAQSection = () => {
     const toggleFaq = (index: number) => {
         setOpenIndex(openIndex === index ? -1 : index);
     };
-    
+
     // Calculate base delay needed before the accordion starts
     const baseDelay = 4 * 0.15 + 0.15; // 4 header items * 0.15s stagger + 0.15s buffer
 
@@ -79,7 +80,7 @@ export const FAQSection = () => {
             <div className="container mx-auto px-0 lg:px-8 xl:px-0">
                 <div className="bg-deep-green-800 lg:rounded-30 xl:rounded-30 p-8 lg:p-12 xl:p-20">
                     <div className="grid lg:grid-cols-2 gap-12">
-                        
+
                         {/* Left Content (STAGGER CONTAINER 1) */}
                         <motion.div
                             initial="hidden"
@@ -92,28 +93,27 @@ export const FAQSection = () => {
                                 <span className="w-2 h-2 rounded-full bg-white/80"></span>
                                 Frequently Asked Questions
                             </motion.span>
-                            
+
                             {/* 2. Heading */}
                             <motion.h2 variants={fadeInUp} className="font-heading text-3xl lg:text-4xl text-white mb-4">
                                 Frequently asked question<br />find out more
                             </motion.h2>
-                            
+
                             {/* 3. Description */}
                             <motion.p variants={fadeInUp} className="font-body text-lg text-white/70 mb-8">
                                 Have questions about our dermatology services? Our 'Frequently Asked Questions' section.
                             </motion.p>
-                            
+
                             {/* 4. CTA Button */}
                             <motion.div variants={fadeInUp}>
-                                <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-[#1C4942] px-6 py-3 rounded-full font-medium hover:bg-white/90 transition-all duration-300 w-fit">
+                                <AnimatedButton to="/contact" variant="secondary" className="w-fit">
                                     View All FAQs
-                                    <ArrowIcon className='text-[#1C4942] w-4 h-4 invert' />
-                                </Link>
+                                </AnimatedButton>
                             </motion.div>
                         </motion.div>
 
                         {/* Right - Accordion (STAGGER CONTAINER 2) */}
-                        <motion.div 
+                        <motion.div
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true, amount: 0.3 }}

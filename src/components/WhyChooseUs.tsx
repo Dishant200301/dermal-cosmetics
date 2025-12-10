@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Play, Users, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion';
+import { ArrowIcon } from './icons';
+import { AnimatedButton } from './AnimatedButton';
 
 // ====================================================================
 // FRAMER MOTION VARIANTS (Defined once for reuse)
@@ -30,6 +32,36 @@ const staggerContainer = {
   }
 };
 
+// Team Members Card Component with Count Animation
+const TeamMembersCard = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, 29, {
+        duration: 2,
+        ease: "easeOut"
+      });
+      return controls.stop;
+    }
+  }, [isInView, count]);
+
+  return (
+    <div
+      ref={ref}
+      className="md:hidden bg-[#1C4942] text-white rounded-[24px] p-6 w-full flex flex-col items-center justify-center shadow-2xl mt-8 lg:left-0"
+    >
+      <Users className="w-10 h-10 mb-3" strokeWidth={1.5} />
+      <div className="text-[42px] font-serif leading-none mb-2">
+        <motion.span>{rounded}</motion.span>+
+      </div>
+      <div className="text-[14px] font-medium opacity-90">Team Members</div>
+    </div>
+  );
+};
 
 const WhyChooseUs = () => {
   const benefits = [
@@ -39,8 +71,8 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="bg-[#FDF4F4] py-10 md:py-[60px] lg:py-[80px]">
-      <div className="container mx-auto px-[5%] md:px-[7%] lg:px-20 max-w-[1440px]">
+    <section className="bg-[#fef7f8] py-10 md:py-[60px] lg:py-[80px]">
+      <div className=" mx-auto px-[5%] md:px-[7%] lg:px-0 xl:px-28 max-w-[1440px]">
 
         {/* Two Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 xl:gap-0 items-center">
@@ -96,17 +128,17 @@ const WhyChooseUs = () => {
             </motion.div>
 
             {/* 2. Main Heading */}
-            <motion.h2 variants={fadeInUp} className="font-heading text-[#1C4942] text-[28px] md:text-[36px] lg:text-[50px] leading-[110%] mb-5 lg:mb-6">
+            <motion.h2 variants={fadeInUp} className="font-heading text-[#1C4942] text-[28px] md:text-[36px] lg:text-[30px] xl:text-[40px] leading-[110%] mb-5 lg:mb-6">
               Why choose us for all your dermatology needs
             </motion.h2>
 
             {/* 3. Description */}
-            <motion.p variants={fadeInUp} className="font-body text-[#7B798C] text-[16px] md:text-[17px] lg:text-[18px] leading-[1.7] mb-8 lg:mb-10 max-w-[600px]">
+            <motion.p variants={fadeInUp} className="font-body text-[#7B798C] text-[16px] md:text-[17px] lg:text-[18px] xl:text-[16px] leading-[1.7] mb-8 lg:mb-10 max-w-[600px]">
               We're dedicated to helping you achieve and maintain beautiful, healthy skin. Trust us to provide exceptional care tailored to you.
             </motion.p>
 
             {/* 4. Feature List + Team Card Grid (The content of this grid is the 4th motion block) */}
-            <motion.div variants={fadeInUp} className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-8 lg:gap-10 items-start">
+            <motion.div variants={fadeInUp} className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-8 lg:gap-10 xl:gap-6 items-start">
 
               {/* Left Column: Feature List + Buttons */}
               <div className="flex flex-col gap-6 md:gap-8">
@@ -131,7 +163,7 @@ const WhyChooseUs = () => {
                       <div className="w-5 h-5 mt-0.5 rounded-sm bg-[#1C4942] flex items-center justify-center flex-shrink-0">
                         <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
-                      <span className="font-body text-[#7B798C] text-[16px] md:text-[17px] lg:text-[18px] leading-relaxed md:whitespace-nowrap">
+                      <span className="font-body text-[#7B798C] text-[16px] md:text-[17px] lg:text-[18px] xl:text-[16px] leading-relaxed md:whitespace-nowrap">
                         {benefit}
                       </span>
                     </motion.li>
@@ -139,38 +171,48 @@ const WhyChooseUs = () => {
                 </ul>
 
                 {/* Buttons - Below Checklist (Treated as one motion block, still part of the outer stagger) */}
-                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+                <div className="flex flex-row md:flex-col lg:flex-col xl:flex-row gap-3 md:gap-3">
 
-                  {/* Contact Us Button */}
-                  <Link
-                    to="/contact"
-                    className="flex items-center justify-center gap-2 bg-[#1C4942] text-white px-6 py-3 md:py-4 rounded-full font-medium text-[16px] md:text-[17px] hover:bg-[#143630] hover:scale-105 transition-all duration-300"
-                  >
-                    Contact Us
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
+                  {/* About More Button - Animated Slide Effect */}
+                  <AnimatedButton to="/about" variant="primary" >
+                    About Us
+                  </AnimatedButton>
 
                   {/* Play Session Button */}
-                  <button className="flex items-center justify-center gap-2 border border-[#1C4942] text-[#1C4942] bg-white px-6 py-3 md:py-4 rounded-full font-medium text-[16px] md:text-[17px] hover:bg-[#1C4942] hover:text-white transition-all duration-300 group">
-                    <span className="flex items-center justify-center w-6 h-6 rounded-full border border-current">
-                      <Play className="w-3 h-3 fill-current" />
-                    </span>
-                    Play Session
-                  </button>
+                  <AnimatedButton to="/play-session" variant="secondary" className='border border-[#1C4942]' showArrow={false}>
+                    <div className="flex items-center gap-2">
+                      <span className="flex items-center justify-center w-6 h-6 rounded-full border border-current">
+                        <Play className="w-3 h-3 fill-current" />
+                      </span>
+                      <span>Play Session</span>
+                    </div>
+                  </AnimatedButton>
                 </div>
 
                 {/* Team Card - Mobile Only (Below Buttons) */}
-                <div className="md:hidden bg-[#1C4942] text-white rounded-[24px] p-6 w-full flex flex-col items-center justify-center shadow-2xl mt-8">
-                  <Users className="w-10 h-10 mb-3" strokeWidth={1.5} />
-                  <div className="text-[42px] font-serif leading-none mb-2">29+</div>
-                  <div className="text-[14px] font-medium opacity-90">Team Members</div>
-                </div>
+                <TeamMembersCard />
 
               </div>
 
               {/* Team Card - Tablet & Desktop Only (Right of Features + Buttons) */}
-              <div className="hidden lg:hidden xl:block md:flex bg-[#1C4942] text-center text-white rounded-[24px] p-6 w-[196px] h-[238px] flex-col items-center justify-center shadow-2xl flex-shrink-0">
-                <Users className="w-12 h-12 mb-3 items-center xl:ml-12 xl:mt-5" strokeWidth={1.5} />
+              <div className="
+                hidden md:flex lg:hidden xl:flex
+                bg-[#1C4942] text-white 
+                rounded-[24px] 
+                p-6 
+                
+                /* Responsive width & height - XL matches reference */
+                w-[196px]           /* Tablet/Desktop: Fixed 196px */
+                xl:w-[160px]        /* XL: Narrower (160px) */
+                
+                h-[238px]           /* Tablet/Desktop: 238px */
+                xl:h-[220px]        /* XL: Taller (280px) */
+                
+                flex-col items-center justify-center 
+                shadow-2xl 
+                flex-shrink-0
+              ">
+                <Users className="w-12 h-12 mb-3" strokeWidth={1.5} />
                 <div className="text-[42px] md:text-[46px] lg:text-[50px] font-serif leading-none mb-2">29+</div>
                 <div className="text-[14px] md:text-[15px] font-medium opacity-90">Team Members</div>
               </div>

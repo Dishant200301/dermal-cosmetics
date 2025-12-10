@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MapPin, Phone, Calendar, Clock } from "lucide-react";
 import { motion } from "framer-motion"; // <-- Import motion
+import { AnimatedButton } from "./AnimatedButton";
 
 // ====================================================================
 // FRAMER MOTION VARIANTS
@@ -68,7 +69,7 @@ const ContactSection: React.FC = () => {
 
   return (
     <section className="bg-[#fef7f8] py-12 md:py-16 lg:py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-0">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-0 xl:px-4">
         {/* Rounded main container */}
         <div className="rounded-[30px] bg-[#F7F0F2] border border-[#E3D4D9] px-4 py-8 sm:p-8 lg:p-10 xl:py-12 xl:px-24">
           <div className="grid gap-10 lg:gap-16 lg:grid-cols-2 items-start">
@@ -258,12 +259,9 @@ const ContactSection: React.FC = () => {
 
                 {/* Button (8th sequence item) */}
                 <motion.div variants={fadeInUp}>
-                    <button
-                        type="submit"
-                        className="mt-2 inline-flex h-[50px] w-[180px] items-center justify-center rounded-[30px] bg-[#24544B] font-body text-[15px] md:text-[16px] font-medium text-white transition-colors hover:bg-[#1C4942]"
-                    >
+                    <AnimatedButton type="submit" variant="primary" className="w-fit">
                         Send Message
-                    </button>
+                    </AnimatedButton>
                 </motion.div>
               </form>
             </motion.div>

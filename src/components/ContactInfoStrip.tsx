@@ -49,7 +49,7 @@ const contactItems = [
 
 export const ContactInfoStrip = () => {
     return (
-        <section className="bg-light-pink-100 py-12 lg:py-16 lg:px-10 xl:px-20">
+        <section className=" bg-light-pink-100 py-12 lg:py-16 lg:px-10 xl:px-20">
             <div className="container mx-auto px-4 lg:px-8">
                 {/* GRID (STAGGER CONTAINER) */}
                 <motion.div

@@ -4,7 +4,7 @@ import { Marquee } from '@/components/Marquee';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Play, Star, Quote, MapPin, Phone, Mail, Users, Award, Heart, Target, Lightbulb, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { StatsRow } from '@/components/StatsRow';
 import { MissionVisionSection } from '@/components/MissionVisionSection';
@@ -15,7 +15,47 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import { BenefitsSection } from '@/components/BenefitsSection';
 import AboutBenefitsSection from '@/components/AboutBenefitsSection';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+
+// ====================================================================
+// ANIMATED PROGRESS BAR COMPONENT
+// ====================================================================
+interface AnimatedProgressBarProps {
+  label: string;
+  percentage: number;
+}
+
+const AnimatedProgressBar: React.FC<AnimatedProgressBarProps> = ({ label, percentage }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <div className="flex justify-between items-center mb-2">
+        <span className="font-body text-[#1C4942] text-base md:text-lg font-medium">{label}</span>
+        <span className="font-body text-[#1C4942] text-base md:text-lg font-medium">{percentage}%</span>
+      </div>
+      <div className="h-2 bg-[#F7F0F2] rounded-full overflow-hidden">
+        <motion.div
+          className="h-full bg-[#24544B] rounded-full"
+          initial={{ width: 0 }}
+          animate={{ width: isInView ? `${percentage}%` : 0 }}
+          transition={{
+            duration: 1.5,
+            ease: "easeOut",
+            delay: 0.2
+          }}
+        />
+      </div>
+    </motion.div>
+  );
+};
 
 const features = [
   { icon: Users, title: 'Expert Supervision', description: 'Board-certified dermatologists overseeing every treatment' },
@@ -211,32 +251,10 @@ const About = () => {
                 {/* Progress Bars Container (4th & 5th items) */}
                 <div className="space-y-6 md:space-y-7">
                   {/* Progress Bar 1 - Personalized Care (4th item) */}
-                  <motion.div variants={fadeInUp}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-body text-[#1C4942] text-base md:text-lg font-medium">Personalized Care</span>
-                      <span className="font-body text-[#1C4942] text-base md:text-lg font-medium">95%</span>
-                    </div>
-                    <div className="h-2 bg-[#F7F0F2] rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-[#24544B] rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: '95%' }}
-                      ></div>
-                    </div>
-                  </motion.div>
+                  <AnimatedProgressBar label="Personalized Care" percentage={95} />
 
                   {/* Progress Bar 2 - Advanced Treatments (5th item) */}
-                  <motion.div variants={fadeInUp}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-body text-[#1C4942] text-base md:text-lg font-medium">Advanced Treatments</span>
-                      <span className="font-body text-[#1C4942] text-base md:text-lg font-medium">85%</span>
-                    </div>
-                    <div className="h-2 bg-[#F7F0F2] rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-[#24544B] rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: '85%' }}
-                      ></div>
-                    </div>
-                  </motion.div>
+                  <AnimatedProgressBar label="Advanced Treatments" percentage={85} />
                 </div>
               </motion.div>
 
@@ -247,7 +265,7 @@ const About = () => {
 
           {/* SECTION 8 - Excellence in Skincare */}
           <section className=" rounded-none lg:rounded-[30px] mx-0 lg:mx-10 xl:mx-0 py-10 md:py-16 lg:py-20 xl:py-[100px]">
-            <div className="container mx-auto px-6 md:px-10 lg:px-0 xl:px-[100px]">
+            <div className="container mx-auto px-6 md:px-10 lg:px-0 xl:px-[110px]">
 
               {/* Desktop: 2-column grid | Mobile/Tablet: Stack vertically */}
               <div className="grid xl:grid-cols-2 gap-10 lg:gap-12 xl:gap-16 items-center">

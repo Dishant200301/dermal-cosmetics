@@ -55,7 +55,7 @@ const ServiceDetail = () => {
                 <main>
                     {/* Hero Banner */}
                     <motion.section
-                        className="container mx-auto  lg:px-8 lg:pt-2"
+                        className="container mx-auto  px-0 lg:px-8 lg:pt-2"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.3 }}
@@ -85,7 +85,7 @@ const ServiceDetail = () => {
                     </motion.section>
 
                     {/* Main Content: Two-Column Layout */}
-                    <section className="container mx-auto px-6 lg:px-32 py-12 lg:py-20 xl:px-24">
+                    <section className="container mx-auto px-6 lg:px-6 py-12 lg:py-20 xl:px-24">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
 
                             {/* LEFT SIDEBAR */}
@@ -107,26 +107,46 @@ const ServiceDetail = () => {
                                                 <button
                                                     key={service.id}
                                                     onClick={() => setSelectedServiceId(service.id)}
-                                                    className={`w-full flex items-center justify-between p-4 rounded-lg transition-all duration-300 ${selectedServiceId === service.id
-                                                        ? 'bg-white shadow-md '
-                                                        : 'bg-white hover:shadow-sm'
-                                                        }`}
+                                                    className={`
+        w-full flex items-center justify-between p-4 rounded-lg 
+        transition-all duration-300 relative overflow-hidden group
+        ${selectedServiceId === service.id ? 'bg-white' : 'bg-white hover:shadow-sm'}
+    `}
                                                 >
+                                                    {/* Top-to-bottom sliding overlay */}
+                                                    <div
+                                                        className={`
+            absolute inset-0 bg-[#1C4942] translate-y-[-100%]
+            transition-transform duration-[400ms] ease-out z-0
+            ${selectedServiceId === service.id ? '' : 'group-hover:translate-y-0'}
+        `}
+                                                    ></div>
+
+                                                    {/* Text */}
                                                     <span
-                                                        className={`font-body text-[16px] ${selectedServiceId === service.id
-                                                            ? 'text-[#1C4942] font-semibold'
-                                                            : 'text-[#7B798C]'
-                                                            }`}
+                                                        className={`
+            font-body text-[16px] relative z-10 transition-colors duration-300 
+            ${selectedServiceId === service.id
+                                                                ? 'text-[#1C4942] font-semibold'
+                                                                : 'text-[#7B798C] group-hover:text-white'
+                                                            }
+        `}
                                                     >
                                                         {service.name}
                                                     </span>
+
+                                                    {/* Icon */}
                                                     <ArrowIcon
-                                                        className={`w-5 h-5 transition-transform invert ${selectedServiceId === service.id
-                                                            ? 'text-[#24544B]'
-                                                            : 'text-[#7B798C]'
-                                                            }`}
+                                                        className={`
+            w-5 h-5 transition-all duration-300 relative z-10
+            ${selectedServiceId === service.id
+                                                                ? 'text-[#1C4942]'
+                                                                : 'text-[#7B798C] group-hover:text-white'
+                                                            }
+        `}
                                                     />
                                                 </button>
+
                                             ))}
                                         </div>
                                     </motion.div>
@@ -211,8 +231,8 @@ const ServiceDetail = () => {
                                     >
                                         {currentService.bulletPoints.map((point, idx) => (
                                             <div key={idx} className="flex items-start gap-3 group">
-                                                <div className="bg-white border-2 border-[#24544B] rounded-lg p-2 mt-0.5 flex-shrink-0 transition-all duration-300 group-hover:bg-[#24544B]">
-                                                    <Check className="w-4 h-4 text-[#24544B] transition-colors duration-300 group-hover:text-white" strokeWidth={2.5} />
+                                                <div className="bg-white border-2 border-[#24544B] rounded-sm p-0 mt-0.5 flex-shrink-0 transition-all duration-300">
+                                                    <Check className="w-4 h-4 text-[#24544B] transition-colors duration-300 " strokeWidth={2.5} />
                                                 </div>
                                                 <span className="font-body text-[#1C4942] text-[16px]">{point}</span>
                                             </div>

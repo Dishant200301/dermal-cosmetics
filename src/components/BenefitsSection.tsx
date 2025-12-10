@@ -7,45 +7,42 @@ import {
     Database,
     ClipboardList,
 } from "lucide-react";
+
 import { motion } from "framer-motion";
-import ImageWithShine from './ImageWithShine';
+import ImageWithShine from "./ImageWithShine";
 
 import benefitsModel from "/image/benefits-model.png";
 
-// ====================================================================
-// FRAMER MOTION VARIANTS (Defined once for reuse)
-// ====================================================================
+/* --------------------------------------------------------- */
+/*   ANIMATION VARIANTS                                      */
+/* --------------------------------------------------------- */
 
-// 1. Variant for Individual Elements (Fade Up)
 const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.6, // Animation duration
-            ease: "easeOut"
-        }
-    }
+            duration: 0.55,
+            ease: "easeOut",
+        },
+    },
 };
 
-// 2. Container Variant (Staggering)
 const staggerContainer = {
     hidden: {},
     visible: {
         transition: {
-            staggerChildren: 0.15, // Delay between the start of each child's animation
-        }
-    }
+            staggerChildren: 0.15,
+        },
+    },
 };
 
-type Benefit = {
-    icon: React.ReactNode;
-    title: string;
-    description: string;
-};
+/* --------------------------------------------------------- */
+/*   BENEFIT DATA                                            */
+/* --------------------------------------------------------- */
 
-const leftBenefits: Benefit[] = [
+const leftBenefits = [
     {
         icon: <ClipboardList className="w-7 h-7 text-[#24544B]" />,
         title: "Expert Dermatologists",
@@ -65,7 +62,7 @@ const leftBenefits: Benefit[] = [
     },
 ];
 
-const rightBenefits: Benefit[] = [
+const rightBenefits = [
     {
         icon: <Layers className="w-7 h-7 text-[#24544B]" />,
         title: "Comprehensive Services",
@@ -86,204 +83,234 @@ const rightBenefits: Benefit[] = [
     },
 ];
 
-/* ---------------------------------------------------------------- */
-/* Reusable Benefit Item Component (Individual motion element) */
-/* ---------------------------------------------------------------- */
+/* --------------------------------------------------------- */
+/*   BENEFIT ITEM                                            */
+/* --------------------------------------------------------- */
 
-type BenefitItemProps = {
-    item: Benefit;
-    isRightAligned?: boolean;
-};
+const BenefitItem = ({ item, alignRight = false }) => (
+    <motion.div
+        variants={fadeInUp}
+        className={`flex items-start gap-5 ${alignRight ? "md:flex-row-reverse md:text-right xl:flex-row-reverse xl:text-right" : ""
+            }`}
+    >
+        <div className="w-[60px] h-[60px] bg-white rounded-[10px] flex items-center justify-center flex-shrink-0">
+            {item.icon}
+        </div>
 
-const BenefitItem: React.FC<BenefitItemProps> = ({
-    item,
-    isRightAligned = false,
-}) => {
+        <div className={`max-w-[300px] leading-tight`}>
+            <h3 className="font-heading text-[22px] md:text-[18px] text-white mb-2">
+                {item.title}
+            </h3>
+            <p className="font-body text-[18px] md:text-[14px] lg:text-[16px] leading-[29px] text-white">
+                {item.description}
+            </p>
+        </div>
+    </motion.div>
+);
+
+/* --------------------------------------------------------- */
+/*   MAIN SECTION                                            */
+/* --------------------------------------------------------- */
+
+export const BenefitsSection = () => {
     return (
-        <motion.div // Apply motion to the individual item
-            variants={fadeInUp}
-            className={`
-                flex items-start gap-5
-                ${isRightAligned ? "xl:flex-row-reverse xl:text-right" : ""}
-            `}
-        >
-            {/* Icon box */}
-            <div className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] bg-white rounded-[10px] flex items-center justify-center flex-shrink-0">
-                {item.icon}
-            </div>
-
-            {/* Text */}
-            <div
-                className={`
-                    leading-tight max-w-[400px]
-                    ${isRightAligned ? "xl:ml-auto" : ""}
-                `}
-            >
-                <h3 className="font-heading text-[22px] mb-2">{item.title}</h3>
-                <p className="font-body text-[16px] lg:text-[18px] leading-[29px]">
-                    {item.description}
-                </p>
-            </div>
-        </motion.div>
-    );
-};
-
-
-export const BenefitsSection: React.FC = () => {
-    return (
-        <section className="bg-[#fef7f8] py-16 md:py-20 lg:py-16 px-0 sm:px-0 lg:px-8">
+        <section className="xl:container w-full bg-[#fef7f8] py-16 lg:py-20 lg:px-2 xl:py-24 px-0 ">
             <div
                 className="
                     bg-[#24544B]
-                    lg:rounded-[30px]
-                    xl:rounded-[30px]
+                    rounded-none lg:rounded-[30px]
+                    min-h-[1036px]
                     relative
                     overflow-hidden
-                    min-h-[1036px]
-                    flex
-                    items-center
-                    px-4 sm:px-8 lg:px-16
+                    px-6 sm:px-8 lg:px-16 xl:px-24
                     py-16 lg:py-20
+                    flex items-start lg:items-center
                 "
             >
-                {/* Decorative leaves: static, no animation */}
+
+
                 <img
-                    src="/image/leaves-corner-left.png"
-                    className="pointer-events-none select-none absolute left-0 top-0 w-[220px] opacity-20"
+                    src="/image/leaf-bottom-left.png"
+                    className="absolute left-0 bottom-0 w-[220px] opacity-20 animate-[float_6s_ease-in-out_infinite]"
                     alt=""
                 />
                 <img
-                    src="/image/leaves-corner-right.png"
-                    className="pointer-events-none select-none absolute right-0 top-0 w-[220px] opacity-20"
-                    alt=""
-                />
-                <img
-                    src="/image/leaves-corner-left.png"
-                    className="pointer-events-none select-none absolute left-0 bottom-0 w-[220px] opacity-20"
-                    alt=""
-                />
-                <img
-                    src="/image/leaves-corner-right.png"
-                    className="pointer-events-none select-none absolute right-6 bottom-6 w-[220px] opacity-30"
+                    src="/image/leaf-bottom-right.png"
+                    className="absolute right-6 bottom-6 w-[220px] opacity-30 animate-[float_8s_ease-in-out_infinite]"
                     alt=""
                 />
 
-                {/* CONTENT WRAPPER to center everything vertically */}
+                {/* ---------------- TOP CONTENT ---------------- */}
                 <div className="w-full">
-
-                    {/* ---------------- TOP CONTENT (STAGGER CONTAINER 1) ---------------- */}
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
                         variants={staggerContainer}
-                        className="text-center max-w-[850px] mx-auto mb-12 md:mb-14 lg:mb-16"
+                        className="text-center max-w-[850px] mx-auto mb-16"
                     >
-                        {/* 1. Subheading label */}
-                        <motion.div variants={fadeInUp} className="flex justify-center items-center gap-2 mb-3">
+                        {/* Subheading */}
+                        <motion.div
+                            variants={fadeInUp}
+                            className="flex justify-center items-center gap-2 mb-3"
+                        >
                             <span className="w-2 h-2 rounded-full bg-white" />
-                            <p className="font-body text-[16px] font-medium text-white tracking-[-0.32px]">
+                            <p className="font-body text-[16px] text-white font-medium tracking-[-0.32px]">
                                 Our Benefits
                             </p>
                         </motion.div>
 
-                        {/* 2. Main heading */}
+                        {/* Main heading */}
                         <motion.h2
                             variants={fadeInUp}
                             className="
-                                font-heading
-                                text-white
-                                text-[32px]
-                                md:text-[40px]
-                                lg:text-[50px]
-                                leading-[40px]
-                                md:leading-[48px]
-                                lg:leading-[55px]
+                                font-heading text-white
+                                text-[32px] md:text-[40px] lg:text-[50px]
+                                leading-[40px] md:leading-[50px] lg:leading-[55px]
                                 tracking-[-1px]
-                                mb-4 md:mb-5
+                                mb-4
                             "
                         >
                             Exceptional dermatology, every step of the way
                         </motion.h2>
 
-                        {/* 3. Description paragraph */}
-                        <motion.p variants={fadeInUp} className="font-body text-[18px] leading-[29px] text-white max-w-[630px] mx-auto">
+                        {/* Description */}
+                        <motion.p
+                            variants={fadeInUp}
+                            className="font-body text-[18px] leading-[29px] text-white max-w-[630px] mx-auto"
+                        >
                             Experience personalized care, advanced treatments, and visible
                             results with our expert dermatology services.
                         </motion.p>
                     </motion.div>
 
-                    {/* ---------------- MIDDLE GRID (STAGGER CONTAINER 2) ---------------- */}
+                    {/* ---------------- DESKTOP LAYOUT ---------------- */}
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
                         variants={staggerContainer}
                         className="
-                            grid
-                            grid-cols-1
-                            gap-12
-                            xl:grid-cols-[1fr_auto_1fr]
-                            xl:gap-20
+                            hidden xl:grid
+                            grid-cols-[1fr_auto_1fr]
+                            gap-20 xl:gap-10
                             items-center
-                            text-white
                         "
                     >
-
-                        {/* LEFT COLUMN BENEFITS — desktop only */}
-                        <div className="hidden xl:flex flex-col space-y-12">
-                            {/* NOTE: We manually create a stagger array for the desktop layout */}
-                            {[
-                                ...leftBenefits.map(item => ({ ...item, isRightAligned: true })),
-                                // This is an empty placeholder to ensure the benefit sequence aligns correctly with the center image
-                                { icon: <></>, title: '', description: '', placeholder: true },
-                                { icon: <></>, title: '', description: '', placeholder: true },
-                                { icon: <></>, title: '', description: '', placeholder: true },
-                            ].filter((_, i) => i < leftBenefits.length).map((item) => (
-                                <BenefitItem key={item.title} item={item} isRightAligned />
+                        {/* Left column */}
+                        <div className="flex flex-col space-y-12">
+                            {leftBenefits.map((item) => (
+                                <BenefitItem
+                                    key={item.title}
+                                    item={item}
+                                    alignRight={true}
+                                />
                             ))}
                         </div>
 
-                        {/* CENTER OVAL IMAGE (Treated as an individual sequential item) */}
-                        <motion.div variants={fadeInUp} className="flex justify-center order-1 xl:order-none">
+                        {/* Center oval image */}
+                        <motion.div variants={fadeInUp} className="flex justify-center">
                             <div
                                 className="
-                                    w-[260px] h-[380px]
-                                    md:w-[280px] md:h-[420px]
-                                    lg:w-[320px] lg:h-[480px]
-                                    xl:w-[340px] xl:h-[512px]
+                                    w-[340px] h-[512px]
                                     rounded-[200px]
-                                    overflow-hidden
-                                    bg-[#1C4942]
-                                    shadow-xl
-                                    mx-auto
-                                    group
+                                    overflow-hidden shadow-xl bg-[#1C4942]
                                 "
                             >
                                 <ImageWithShine
                                     src={benefitsModel}
                                     alt="Dermatology model"
                                     className="w-full h-full object-cover"
-                                    rounded="rounded-[200px]"
                                 />
                             </div>
                         </motion.div>
 
-                        {/* RIGHT COLUMN BENEFITS — desktop only */}
-                        <div className="hidden xl:flex flex-col space-y-12">
+                        {/* Right column */}
+                        <div className="flex flex-col space-y-12">
                             {rightBenefits.map((item) => (
                                 <BenefitItem key={item.title} item={item} />
                             ))}
                         </div>
+                    </motion.div>
 
-                        {/* TABLET & MOBILE & LAPTOP (below xl) BENEFITS GRID */}
-                        {/* All 6 benefits are staggered here, appearing after the central image */}
-                        <div className="xl:hidden order-2 grid grid-cols-1 sm:grid-cols-2 gap-10f">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-                                {[...leftBenefits, ...rightBenefits].map((item) => (
-                                    <BenefitItem key={item.title} item={item} />
+
+                    {/* ---------------- TABLET / LAPTOP (md to lg) ---------------- */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={staggerContainer}
+                        className="hidden md:flex xl:hidden flex-col gap-12"
+                    >
+                        {/* Benefits in 2 separate columns */}
+                        <div className="grid grid-cols-2 gap-x-10">
+                            {/* Left column - 3 benefits (text right-aligned, icon on right) */}
+                            <div className="flex flex-col gap-y-10">
+                                {leftBenefits.map((item) => (
+                                    <BenefitItem key={item.title} item={item} alignRight={true} />
                                 ))}
                             </div>
+
+                            {/* Right column - 3 benefits (text left-aligned, icon on left) */}
+                            <div className="flex flex-col gap-y-10">
+                                {rightBenefits.map((item) => (
+                                    <BenefitItem key={item.title} item={item} alignRight={false} />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Oval image below */}
+                        <motion.div variants={fadeInUp} className="flex justify-center">
+                            <div
+                                className="
+                                    w-[300px] h-[420px]
+                                    lg:w-[320px] lg:h-[480px]
+                                    rounded-[200px]
+                                    overflow-hidden shadow-xl bg-[#1C4942]
+                                "
+                            >
+                                <ImageWithShine
+                                    src={benefitsModel}
+                                    alt="Dermatology model"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+
+                    {/* ---------------- MOBILE ONLY ---------------- */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={staggerContainer}
+                        className="md:hidden flex flex-col gap-12"
+                    >
+                        {/* First 3 benefits */}
+                        <div className="grid grid-cols-1 gap-10">
+                            {leftBenefits.map((item) => (
+                                <BenefitItem key={item.title} item={item} />
+                            ))}
+                        </div>
+
+                        {/* Oval image */}
+                        <motion.div variants={fadeInUp} className="flex justify-center">
+                            <div
+                                className="
+                                    w-[260px] h-[380px]
+                                    rounded-[200px]
+                                    overflow-hidden shadow-xl bg-[#1C4942]
+                                "
+                            >
+                                <ImageWithShine
+                                    src={benefitsModel}
+                                    alt="Dermatology model"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        </motion.div>
+
+                        {/* Last 3 benefits */}
+                        <div className="grid grid-cols-1 gap-10">
+                            {rightBenefits.map((item) => (
+                                <BenefitItem key={item.title} item={item} />
+                            ))}
                         </div>
                     </motion.div>
                 </div>

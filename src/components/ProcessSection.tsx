@@ -3,6 +3,7 @@ import { Check, ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import doctorProcedure from "/image/doctor-procedure.png";
 import { ArrowIcon } from "./icons";
+import { AnimatedButton } from './AnimatedButton';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -127,7 +128,7 @@ export const ProcessSection = () => {
                 <div className="w-6 h-6 border border-[#1C4942] rounded flex items-center justify-center">
                   <Check className="w-4 h-4 text-[#1C4942]" />
                 </div>
-                <span className="font-body text-[18px] text-[#7B798C]">
+                <span className="font-body text-[18px] lg:text-[14px] text-[#7B798C]">
                   {item}
                 </span>
               </motion.div>
@@ -136,17 +137,13 @@ export const ProcessSection = () => {
 
           {/* 5. CTA BUTTON */}
           <motion.div variants={fadeInUp}>
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 bg-[#24544B] text-white font-body text-[16px] px-8 py-4 rounded-full hover:bg-[#1C4942] transition-all duration-300 mb-8 w-fit"
-            >
+            <AnimatedButton to="/about" variant="primary" className="mb-8 w-fit">
               Learn More
-              <ArrowIcon />
-            </Link>
+            </AnimatedButton>
           </motion.div>
 
           {/* 6. Bottom Text */}
-          <motion.p variants={fadeInUp} className="font-body text-[18px] text-[#7B798C]">
+          <motion.p variants={fadeInUp} className="font-body text-[18px] lg:text-[16px] text-[#7B798C]">
             Your skin's transformation starts here –{" "}
             <Link
               to="/contact"

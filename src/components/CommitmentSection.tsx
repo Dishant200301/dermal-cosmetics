@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowRight, CheckSquare, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { AnimatedButton } from './AnimatedButton';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -26,13 +27,13 @@ const staggerContainer = {
 
 const ExpertiseBadge = () => {
   return (
-    <motion.div variants={fadeInUp} className="absolute -top-5 md:-top-0 right-0 lg:top-10 md:right-0 lg:right-0 lg:mb-2 rounded-2xl md:rounded-[20px] bg-[#24544B] px-4 py-3 md:px-6 md:py-10 shadow-xl flex items-center gap-2 z-20">
-      <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/10 flex items-center justify-center">
+    <motion.div variants={fadeInUp} className="absolute -top-2 md:-top-0 right-0 lg:top-0 md:right-0 lg:right-0 lg:mb-0 rounded-2xl md:rounded-[20px] bg-[#24544B] px-4 py-3 md:px-12 md:py-10 shadow-xl flex items-center gap-2 z-20">
+      <div className="w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center">
         <Users className="w-5 h-5 md:w-6 md:h-6 text-white" />
       </div>
 
       <div>
-        <p className="font-heading text-[28px] md:text-[32px] text-white leading-none">49+</p>
+        <p className="font-heading text-[18px] md:text-[32px] text-white leading-none">49+</p>
         <p className="font-body text-[11px] md:text-xs text-white/90 mt-0.5 md:mt-1">
           Reliable Expertise
         </p>
@@ -61,7 +62,7 @@ const checklistItems = [
 
 export const CommitmentSection = () => {
   return (
-    <section className="relative bg-[#F7EFEF] py-12 md:py-16 lg:py-20 xl:py-24">
+    <section className="relative bg-[#F7EFEF] py-12 md:py-16 lg:py-20 xl:py-24 xl:px-16">
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10">
         <div className="grid xl:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
 
@@ -75,28 +76,46 @@ export const CommitmentSection = () => {
           >
             <div className="relative">
 
-              {/* 1. Top Main Image */}
-              <motion.div variants={fadeInUp} className="group relative overflow-hidden rounded-[28px] shadow-lg w-full md:w-[280px] lg:w-[300px] xl:w-[300px] lg:h-[450px] xl:h-[540px]">
-                <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
-                <img
-                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=700&fit=crop"
-                  className="w-full h-[420px] md:h-[460px] lg:h-[500px] xl:h-[540px] object-cover"
-                  alt="Dermatology Care"
-                />
-              </motion.div>
+              {/* Two Vertical Images Side-by-Side */}
+              <div className="flex gap-4 md:gap-5 lg:gap-6">
 
-              {/* 2. Bottom Overlapping Image */}
-              <motion.div variants={fadeInUp} className="group absolute left-[35%] md:left-[58%] lg:left-[50%] xl:left-[65%] -bottom-10 md:-bottom-0 lg:-bottom-0 w-[65%] md:w-[50%] lg:w-[55%] xl:w-[50%] rounded-[24px] overflow-hidden shadow-xl border-4 border-white">
-                <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
-                <img
-                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=500&fit=crop"
-                  className="w-full h-[240px] md:h-[300px] lg:h-[320px] xl:h-[340px] object-cover"
-                  alt="Skin Treatment"
-                />
-              </motion.div>
+                {/* Left Image */}
+                <motion.div
+                  variants={fadeInUp}
+                  className="group relative overflow-hidden rounded-[20px] md:rounded-[24px] shadow-lg flex-1"
+                >
+                  <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
+                  <img
+                    src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=600&fit=crop"
+                    className="w-full h-[380px] md:h-[420px] lg:h-[480px] xl:h-[520px] object-cover"
+                    alt="Dermatology Treatment"
+                  />
+                </motion.div>
+
+                {/* Right Column - Image with Badge Overlay */}
+                <div className="flex-1 relative">
+
+                  {/* Right Image - Full height */}
+                  <motion.div
+                    variants={fadeInUp}
+                    className="group relative overflow-hidden top-24 md:top-[180px] rounded-[20px] md:rounded-[24px] shadow-lg h-[280px] md:h-[320px] lg:h-[330px] xl:h-[340px]"
+                  >
+                    <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
+                    <img
+                      src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=600&fit=crop"
+                      className="w-full h-full object-cover"
+                      alt="Skin Care Treatment"
+                    />
+                  </motion.div>
+
+                  {/* ExpertiseBadge - Overlaid on top of image */}
+                  <ExpertiseBadge />
+
+                </div>
+
+              </div>
 
             </div>
-            <ExpertiseBadge />
           </motion.div>
 
           {/* CONTENT PANEL */}
@@ -130,12 +149,9 @@ export const CommitmentSection = () => {
             </motion.div>
 
             <motion.div variants={fadeInUp}>
-              <Link
-                to="/services"
-                className="mt-4 md:mt-6 bg-[#24544B] text-white font-body text-base px-6 md:px-7 py-3 md:py-3.5 rounded-full inline-flex items-center gap-2 w-fit hover:bg-[#1C4942] transition-all duration-300 hover:scale-105 shadow-md"
-              >
-                Learn More <ArrowRight className="w-4 h-4" />
-              </Link>
+              <AnimatedButton to="/services" variant="primary" className="mt-4 md:mt-6 w-fit">
+                Learn More
+              </AnimatedButton>
             </motion.div>
           </motion.div>
         </div>

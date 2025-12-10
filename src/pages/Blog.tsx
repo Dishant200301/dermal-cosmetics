@@ -67,7 +67,7 @@ const Blog = () => {
 
           {/* Blog Grid Section */}
           <section className="py-12 md:py-16 lg:py-20">
-            <div className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-20">
+            <div className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-10 xl:px-28">
               <motion.div
                 initial="hidden"
                 whileInView="visible"

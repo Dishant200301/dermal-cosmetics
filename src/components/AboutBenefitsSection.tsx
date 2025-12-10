@@ -3,6 +3,7 @@ import { ArrowRight, ShieldCheck, Layers3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import benefitsImage from "/image/benefits.png";
+import { AnimatedButton } from "./AnimatedButton";
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -28,7 +29,7 @@ const staggerContainer = {
 
 const BenefitSection: React.FC = () => {
     return (
-        <section className="w-full bg-[#F7F0F2] rounded-[30px] py-14 md:py-20 lg:py-24">
+        <section className="w-full bg-[#F7F0F2] rounded-[30px] py-14 md:py-20 lg:py-24 xl:px-28">
             <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-0">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
 
@@ -126,13 +127,9 @@ const BenefitSection: React.FC = () => {
                         </div>
 
                         <motion.div variants={fadeInUp}>
-                            <Link
-                                to="/contact"
-                                className="mt-10 w-[158px] h-[50px] inline-flex items-center gap-2 bg-[#24544B] text-white px-7 py-3.5 rounded-full text-sm font-body shadow-md transition-all duration-300 hover:bg-[#1C4942] hover:scale-[1.05]"
-                            >
-                                Contact Us
-                                <ArrowRight className="w-4 h-4" />
-                            </Link>
+                           <AnimatedButton to="/contact" variant="primary" className="mt-10 w-fit">
+  Contact Us
+</AnimatedButton>
                         </motion.div>
                     </motion.div>
                 </div>

@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import { useState, useEffect } from 'react';
 import { blogs } from '@/data/blogData';
 import { motion } from 'framer-motion';
+import { AnimatedButton } from '@/components/AnimatedButton';
 
 const BlogDetails = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -86,7 +87,7 @@ const BlogDetails = () => {
       <div className="min-h-screen bg-[#FEF7F8]">
         <Header />
 
-        <main>
+        <main >
           {/* ===== HERO SECTION ===== */}
           <motion.section
             initial="hidden"
@@ -94,9 +95,9 @@ const BlogDetails = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInUp}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="pt-0 lg:pt-8 px-0 md:px-6 lg:px-4"
+            className="pt-0 lg:pt-8 px-0 md:px-0 lg:px-0 xl:px-4"
           >
-            <div className=" mx-auto max-w-[1440px]">
+            <div className="  mx-auto max-w-[1440px] lg:px-6">
               <div className="relative bg-[#24544B] xl:rounded-[30px] lg:rounded-[30px] py-16 lg:py-24 px-6 lg:px-12 overflow-hidden">
                 {/* Decorative Leaf - Bottom Left */}
                 <div className="absolute bottom-0 left-0 animate-[float_6s_ease-in-out_infinite]">
@@ -137,7 +138,7 @@ const BlogDetails = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="py-10 lg:py-16 px-4 md:px-6 lg:px-8"
           >
-            <div className=" mx-auto max-w-7xl">
+            <div className="  mx-auto max-w-9xl px-0 md:px-0 lg:px-0 xl:px-16">
               <div className="group relative rounded-[30px] overflow-hidden shadow-lg">
                 {/* Shine Effect */}
                 <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
@@ -152,7 +153,7 @@ const BlogDetails = () => {
           </motion.section>
 
           {/* ===== ARTICLE CONTENT ===== */}
-          <section className="pb-16 lg:pb-24 px-4 md:px-6 lg:px-8 xl:px-0">
+          <section className="xl:container pb-16 lg:pb-24 px-4 md:px-6 lg:px-8 xl:px-28">
             <div className=" mx-auto max-w-[1250px]">
               {/* Intro Paragraphs */}
               <motion.div
@@ -393,12 +394,9 @@ const BlogDetails = () => {
                   </div>
 
                   {/* Submit Button */}
-                  <button
-                    type="submit"
-                    className="bg-[#24544B] text-white font-body text-base lg:text-lg px-8 py-3 rounded-[24px] hover:bg-[#1C4942] transition-colors duration-300"
-                  >
+                 <AnimatedButton type="submit" variant="primary" className="mt-10 w-fit">
                     Post Comment
-                  </button>
+                  </AnimatedButton>
                 </motion.form>
               </motion.div>
             </div>

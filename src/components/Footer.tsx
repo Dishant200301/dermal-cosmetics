@@ -10,25 +10,25 @@ import { ArrowIcon } from './icons';
 
 // 1. Variant for Individual Elements (Fade Up)
 const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-        opacity: 1, 
-        y: 0,
-        transition: { 
-            duration: 0.6, // Animation duration
-            ease: "easeOut" 
-        } 
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6, // Animation duration
+      ease: "easeOut"
     }
+  }
 };
 
 // 2. Container Variant (Staggering)
 const staggerContainer = {
-    hidden: {}, 
-    visible: {
-      transition: {
-        staggerChildren: 0.15, // Delay between the start of each child's animation (0.15s)
-      }
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15, // Delay between the start of each child's animation (0.15s)
     }
+  }
 };
 
 
@@ -42,10 +42,10 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#FEF7F8] pt-2 lg:pt-0">
-      <div className=" mx-auto md:px-2 md:pb-2 lg:pb-6 lg:px-4">
+    <footer className="xl:container  bg-[#FEF7F8] pt-2 lg:pt-0">
+      <div className=" mx-auto md:px-2 md:pb-2 lg:pb-6 lg:px-4 xl:px-0">
         {/* Main Footer Content */}
-        <div className="bg-[#24544B] lg:rounded-[30px] md:rounded-[30px] xl:rounded-[30px] px-6 sm:px-8 lg:px-16 xl:px-24 pt-16 lg:pt-20 pb-12 lg:pb-16 relative overflow-hidden">
+        <div className="bg-[#24544B] lg:rounded-[30px] md:rounded-[30px] xl:rounded-[30px] px-6 sm:px-8 lg:px-16 xl:px-24 pt-16 lg:pt-10 pb-12 lg:pb-10 xl:pb-24 xl:pt-20 relative overflow-hidden">
           {/* Decorative Leaf - Bottom Left */}
           <div className="absolute bottom-0 left-0 animate-[float_6s_ease-in-out_infinite] pointer-events-none">
             <img
@@ -63,7 +63,7 @@ export const Footer = () => {
               className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-[900px] xl:h-[800px] opacity-70 "
             />
           </div>
-          
+
 
           {/* 4 Column Grid (STAGGER CONTAINER) */}
           <motion.div
@@ -89,21 +89,25 @@ export const Footer = () => {
               </p>
 
               {/* Email Subscribe */}
-              <form onSubmit={handleSubmit} className="flex items-center bg-white rounded-lg h-[60px] p-1.5">
+              {/* Email Subscribe - Different layout for LG */}
+              <form onSubmit={handleSubmit} className="relative">
+                {/* Input field */}
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="flex-1 bg-transparent px-4 font-body text-[#7B798C] placeholder:text-[#7B798C] outline-none"
+                  className="w-full bg-white rounded-lg h-[60px] px-4 pr-4 lg:pr-12 font-body text-[#7B798C] placeholder:text-[#7B798C] outline-none"
                   required
                 />
+
+                {/* Button - Separate on mobile/tablet, Inside with bg on LG/XL */}
                 <button
                   type="submit"
-                  className="w-[50px] h-[50px] bg-[#24544B] rounded-lg flex items-center justify-center hover:bg-[#1C4942] transition-colors"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 w-[50px] h-[50px] bg-[#24544B] rounded-lg flex items-center justify-center hover:bg-[#1C4942] transition-colors lg:bg-[#24544B] lg:hover:bg-[#1C4942] lg:right-2"
                   aria-label="Subscribe"
                 >
-                  <ArrowIcon />
+                  <ArrowIcon className="w-5 h-5 text-white" />
                 </button>
               </form>
             </motion.div>
@@ -119,7 +123,7 @@ export const Footer = () => {
                   </div>
                   <div>
                     <p className="font-body text-white/80 text-sm mb-1">For more information</p>
-                    <p className="font-body text-white text-base lg:text-lg">(702) 555-0122</p>
+                    <p className="font-body text-white text-base lg:text-sm xl:text-lg">(702) 555-0122</p>
                   </div>
                 </div>
 
@@ -130,7 +134,7 @@ export const Footer = () => {
                   </div>
                   <div>
                     <p className="font-body text-white/80 text-sm mb-1">Emergency toll free no</p>
-                    <p className="font-body text-white text-base lg:text-lg">(219) 555-0114</p>
+                    <p className="font-body text-white text-base lg:text-sm xl:text-lg">(219) 555-0114</p>
                   </div>
                 </div>
               </div>

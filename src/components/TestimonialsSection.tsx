@@ -23,7 +23,7 @@ const brands = ['Logoipsum', 'Logoipsum', 'Logoipsum', 'Logoipsum', 'Logoipsum']
 const defaultTestimonials: Testimonial[] = [
   {
     quote:
-      "The experts at this clinic took the time to truly understand my condition and prescribed a treatment plan that worked wonders. The combination of medical treatments.",
+      "The experts at this clinic took the time to truly understand my condition and prescribed a treatment plan that worked wonders. ",
     author: "Jane Cooper",
     role: "Beauty Treatments",
     avatar:
@@ -113,13 +113,13 @@ const ReviewCard = ({ review }: { review: Testimonial }) => {
 
       {/* Author Block - Bottom */}
       <div className="absolute left-6 md:left-20 bottom-6 md:bottom-8 flex items-center gap-3 md:gap-4">
-        <ImageWithShine
+        <img
           src={review.avatar}
           alt={review.author}
-          className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 object-cover flex-shrink-0"
+          className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 object-cover flex-shrink-0 rounded-30"
           rounded="rounded-full"
         />
-        <div className="min-w-0">
+        <div className="min-w-1">
           <p className="font-heading text-sm md:text-base lg:text-lg text-[#1C4942] font-semibold truncate">
             {review.author}
           </p>
@@ -185,7 +185,7 @@ const TestimonialSection = () => {
 
   return (
     <section
-      className="container  overflow-hidden bg-[#FDF8F9] min-h-[900px] md:min-h-[1000px] pt-12 md:pt-16 lg:pt-20 pb-16 md:pb-20 lg:pb-24"
+      className="xl:container  overflow-hidden bg-[#FDF8F9] min-h-[900px] md:min-h-[1000px] pt-12 md:pt-16 lg:pt-20 pb-16 md:pb-20 lg:pb-24 xl:px-10"
       style={{
         backgroundImage: `url("https://demo.awaikenthemes.com/dermal/wp-content/uploads/2025/03/testimonial-bg.png")`,
         backgroundPosition: "center",
@@ -323,9 +323,11 @@ const TestimonialSection = () => {
                 <div className="flex flex-nowrap items-center gap-8 min-w-max">
                   {brands.map((brand, i) => (
                     <div key={i} className="flex items-center gap-2 text-[#24544B] flex-shrink-0">
-                      <svg className="w-8 h-8" viewBox="0 0 32 32" fill="currentColor">
-                        <path d="M16 4L4 28h24L16 4zm0 6l8 14H8l8-14z" />
-                      </svg>
+                      <img
+                        src={i % 2 === 0 ? "/image/logo-1.png" : "/image/logo-2.png"}
+                        alt={`Brand logo ${i + 1}`}
+                        className="w-12 h-12 object-contain"
+                      />
                       <span className="font-heading text-[18px] whitespace-nowrap">{brand}</span>
                     </div>
                   ))}
@@ -348,7 +350,7 @@ const TestimonialSection = () => {
 
               {/* Logos - Right side (9 columns) */}
               <div className="md:col-span-9 overflow-x-auto lg:overflow-visible scrollbar-hide">
-                <div className="flex flex-nowrap lg:flex-wrap justify-start lg:justify-end items-center gap-8 lg:gap-0 xl:gap-2 min-w-max lg:min-w-0">                {brands.map((brand, i) => (
+                <div className="flex flex-nowrap lg:flex-wrap justify-start lg:justify-end items-center gap-8 lg:gap-0 xl:gap-1 min-w-max lg:min-w-0">                {brands.map((brand, i) => (
                   <div key={i} className="flex items-center gap-2 text-[#24544B] flex-shrink-0">
                     <img
                       src={i % 2 === 0 ? "/image/logo-1.png" : "/image/logo-2.png"}

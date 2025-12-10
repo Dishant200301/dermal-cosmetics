@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { ArrowRight } from 'lucide-react';
+import { AnimatedButton } from '@/components/AnimatedButton';
 
 const NotFound = () => {
   return (
@@ -14,10 +15,9 @@ const NotFound = () => {
           <p className="font-body text-lg text-text-gray-400 mb-8 max-w-md mx-auto">
             The page you're looking for doesn't exist or has been moved.
           </p>
-          <Link to="/" className="btn-primary mx-auto">
+          <AnimatedButton to="/" variant="primary" className="mx-auto w-fit">
             Return Home
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          </AnimatedButton>
         </div>
       </main>
       <Footer />

@@ -2,7 +2,8 @@ import { ArrowRight, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroModel from '/image/hero-model.png';
 import { ArrowIcon } from './icons';
-import { motion } from 'framer-motion'; // <-- Import motion
+import { motion } from 'framer-motion';
+import { AnimatedButton } from './AnimatedButton';
 
 // ====================================================================
 // FRAMER MOTION VARIANTS (Defined once for reuse)
@@ -34,13 +35,13 @@ const staggerContainer = {
 
 export const Hero = () => {
     return (
-        <section className="xl:container bg-[#f7f0f2] px-4 lg:px-8 xl:px-4 py-2 ">
+        <section className="xl:container bg-[#f7f0f2] px-0 lg:px-8 xl:px-4 py-0 ">
             <div className=" mx-auto">
-                <div className=" bg-deep-green-800 rounded-30  relative">
+                <div className=" bg-deep-green-800 lg:rounded-30 xl:rounded-30  relative">
                     {/* Decorative leaf SVGs (Static, no animation) */}
 
                     {/* Decorative Leaf - Bottom Left */}
-                    <div className="absolute bottom-0 left-0 animate-[float_6s_ease-in-out_infinite] pointer-events-none">
+                    <div className="absolute -bottom-20 left-0 animate-[float_6s_ease-in-out_infinite] pointer-events-none">
                         <img
                             src="/image/leaf-bottom-left.png"
                             alt="Decorative leaf"
@@ -66,28 +67,23 @@ export const Hero = () => {
                         className="grid lg:grid-cols-2 gap-8"
                     >
                         {/* Left Content (Inner Staggering) */}
-                        <div className="p-8 lg:p-12 xl:p-24 flex flex-col justify-center">
+                        <div className="p-6 lg:p-12 xl:p-24 flex flex-col justify-center">
 
                             {/* 1. Main Heading */}
-                            <motion.h1 variants={fadeInUp} className="font-heading text-3xl md:text-5xl xl:text-[56px] text-white leading-tight tracking-wide mb-6">
+                            <motion.h1 variants={fadeInUp} className="font-heading text-4xl md:text-5xl lg:text-[46px] xl:text-[50px] text-white leading-tight tracking-[0.02em] mb-6">
                                 Comprehensive care for your skin's health and beauty
                             </motion.h1>
 
                             {/* 2. Description */}
-                            <motion.p variants={fadeInUp} className="font-body text-md text-white/90 mb-8 max-w-lg">
+                            <motion.p variants={fadeInUp} className="font-body text-sm md:text-lg lg:text-lg xl:text-lg text-white/90 mb-8 max-w-lg">
                                 At Dermal we believe in creating digital solution that drive real-world impact. From creative strategies to cutting-edge.
                             </motion.p>
 
                             {/* 3. CTA Button */}
                             <motion.div variants={fadeInUp}>
-                                <Link
-                                    to="/services"
-                                    className="btn-secondary w-fit mb-10 group:hover:text-[#1c4942]"
-                                >
+                                <AnimatedButton to="/services" variant="secondary" className="w-fit mb-10">
                                     View Our Services
-                                    {/* Icon will inherit color from parent button text */}
-                                    <ArrowIcon className="w-4 h-4 group-hover:text-[#1c4942]" />
-                                </Link>
+                                </AnimatedButton>
                             </motion.div>
 
                             {/* 4. Review Block */}
@@ -99,7 +95,7 @@ export const Hero = () => {
                                         alt="Happy patient"
                                         className="w-14 h-14 rounded-full object-cover"
                                     />
-                                    <p className="font-body text-lg text-white flex-1">
+                                    <p className="font-body text-sm md:text-lg lg:text-lg xl:text-lg text-white flex-1">
                                         I am beyond thrilled with the results of my facelift.
                                     </p>
                                     <div className="flex items-center gap-1 bg-white px-3 py-1.5 rounded-full">
@@ -111,7 +107,7 @@ export const Hero = () => {
                         </div>
 
                         {/* Right Image (Final sequential item) */}
-                        <motion.div variants={fadeInUp} className="relative h-[400px] md:h-auto lg:h-auto">
+                        <motion.div variants={fadeInUp} className="relative h-[400px] md:h-auto lg:h-[530px] xl:h-[700px] lg:mt-32 xl:mt-24">
                             <img
                                 src={heroModel}
                                 alt="Beautiful woman with clear skin"

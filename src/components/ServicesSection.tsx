@@ -106,7 +106,7 @@ export const ServicesSection = () => {
     const baseDelay = 0.6;
 
     return (
-        <section className="bg-[#fef7f8] px-2 py-16 lg:py-24 relative">
+        <section className="xl:container bg-[#fef7f8] px-2 py-16 lg:py-24 relative">
             <div className="w-full bg-[#f7f0f2] lg:rounded-[30px] xl:rounded-[50px] py-10 px-0 lg:px-[10px] lg:py-12">
 
                 {/* Floating leaf */}

@@ -33,7 +33,7 @@ const StepItem = ({ number, title, description }) => {
                 <h3 className="font-heading text-[22px] text-[#1C4942] mb-2">
                     {title}
                 </h3>
-                <p className="font-body text-[18px] leading-[29px] text-[#7B798C] max-w-[520px]">
+                <p className="font-body text-[18px] lg:text-[16px] leading-[29px] text-[#7B798C] max-w-[520px]">
                     {description}
                 </p>
             </div>
@@ -43,8 +43,8 @@ const StepItem = ({ number, title, description }) => {
 
 export const HowWeWorkSection = () => {
     return (
-        <section className="w-full py-16 lg:py-24 px-6 lg:px-10 xl:px-20 bg-[#fef7f8]">
-            <div className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-10 lg:gap-20 items-start">
+        <section className="xl:container w-full py-16 lg:py-24 px-6 lg:px-10 xl:px-28 bg-[#fef7f8]">
+            <div className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14  lg:gap-20 items-start">
 
                 {/* ---------- RIGHT IMAGE (Single Animation Block) ---------- */}
                 <motion.div
@@ -98,12 +98,12 @@ export const HowWeWorkSection = () => {
                     </motion.div>
 
                     {/* 2. Heading */}
-                    <motion.h2 variants={fadeInUp} className="font-heading text-[#1C4942] text-[34px] md:text-[42px] lg:text-[40px] xl:text-[46px] leading-[1.15] tracking-[-1px] mb-4 max-w-[620px]">
+                    <motion.h2 variants={fadeInUp} className="font-heading text-[#1C4942] text-[34px] md:text-[42px] lg:text-[40px] xl:text-[36px] leading-[1.15] tracking-[-1px] mb-4 max-w-[620px]">
                         How we work: a commitment to your skin health
                     </motion.h2>
 
                     {/* 3. Description */}
-                    <motion.p variants={fadeInUp} className="font-body text-[18px] text-[#7B798C] leading-[29px] mb-10 max-w-[620px]">
+                    <motion.p variants={fadeInUp} className="font-body text-[18px] lg:text-[16px] text-[#7B798C] leading-[29px] mb-10 max-w-[620px]">
                         We're dedicated to helping you achieve and maintain beautiful, healthy skin. Trust us
                         to provide exceptional care tailored to you.
                     </motion.p>

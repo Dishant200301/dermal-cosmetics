@@ -116,23 +116,23 @@ const teamMembers = [
 
 export const ExpertTeamSection = () => {
     return (
-        <section className="relative bg-[#fef7f8] lg:px-0 xl:py-20">
-            <div className="lg:bg-[#f7f0f2] md:bg-[#f7f0f2] md:rounded-[30px] lg:rounded-[30px] xl:rounded-[30px] mx-6 lg:mx-4 py-24 lg:py-[80px] overflow-hidden">
+        <section className=" xl:container relative bg-[#fef7f8] lg:px-0  xl:py-10">
+            <div className="lg:bg-[#f7f0f2] md:bg-[#f7f0f2] md:rounded-[30px] lg:rounded-[30px] xl:rounded-[30px] mx-6 lg:mx-4 xl:px-20 py-24 lg:py-[80px] overflow-hidden">
                 {/* Decorative Leaf - Left Bottom */}
                 <div className="absolute bottom-20 left-5 animate-[float_6s_ease-in-out_infinite] pointer-events-none">
                     <img
-                        src="/image/leaf-bottom-left.png"
+                        src="/image/leaf-bottom-left-1.png"
                         alt="Decorative leaf"
-                        className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-[100px] xl:h-[100px] opacity-70 invert"
+                        className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-[100px] xl:h-[100px] opacity-70 "
                     />
                 </div>
 
                 {/* Decorative Leaf - Top Right */}
                 <div className="absolute top-20 right-5 animate-[float_6s_ease-in-out_infinite] pointer-events-none">
                     <img
-                        src="/image/leaf-top-right.png"
+                        src="/image/leaf-top-right-1.png"
                         alt="Decorative leaf"
-                        className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-[900px] xl:h-[800px] opacity-70 invert "
+                        className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-[900px] xl:h-[800px] opacity-70  "
                     />
                 </div>
 

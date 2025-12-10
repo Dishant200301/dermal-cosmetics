@@ -100,7 +100,42 @@
   }
 
   .btn-primary {
-    @apply btn-pill bg-deep-green-800 text-white hover:bg-deep-green-900;
+    background-color: #24544B;
+    /* Deep green background */
+    color: #FFFFFF;
+    /* White text */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    padding: 12px 24px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: color 0.4s ease-out;
+  }
+
+  /* The Sliding Overlay Pseudo-element (left to right) */
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #24544B;
+    /* Lighter green on hover */
+    transform: translateX(-100%);
+    /* Start hidden off the left side */
+    transition: transform 0.4s ease-out;
+    z-index: -1;
+  }
+
+  .btn-primary:hover::before {
+    transform: translateX(0);
+    /* Slide the overlay fully into view from left to right */
   }
 
   .btn-secondary {
@@ -223,6 +258,7 @@
 .animate-marquee2 {
   animation: marquee2 60s linear infinite;
 }
+
 .holographic-card {
   position: relative;
   overflow: hidden;
@@ -233,12 +269,10 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(
-    circle at left center,
-    rgba(255, 182, 193, 0.55),
-    rgba(255, 182, 193, 0.15),
-    transparent 70%
-  );
+  background: radial-gradient(circle at left center,
+      rgba(255, 182, 193, 0.55),
+      rgba(255, 182, 193, 0.15),
+      transparent 70%);
   opacity: 0.45;
   transition: 0.5s ease;
   pointer-events: none;
@@ -290,11 +324,11 @@
 /* Custom CSS for the Sliding Hover Effect */
 
 .btn-secondary {
-  /* Default Styles (assuming these are already set) */
-  background-color: #F7F0F2;
-  /* Light secondary background */
+  /* Default Styles - White background with deep green text */
+  background-color: #FFFFFF;
+  /* White background */
   color: #1c4942;
-  /* Dark primary text color */
+  /* Deep green text color */
   position: relative;
   /* Essential for positioning the overlay */
   overflow: hidden;
@@ -320,8 +354,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #24544B;
-  /* The color you want it to change to on hover (Accent Color) */
+  background-color: #1c4942;
+  /* Deep green background on hover */
   transform: translateX(-100%);
   /* Start hidden off the left side */
   transition: transform 0.4s ease-out;
@@ -337,6 +371,169 @@
 }
 
 .btn-secondary:hover::before {
+  transform: translateX(0);
+  /* Slide the overlay fully into view */
+}
+
+/* ====================================================================
+   PREMIUM BUTTON WITH MULTIPLE HOVER EFFECTS
+   ==================================================================== */
+
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  z-index: 1;
+}
+
+/* 1. Gradient Tint Overlay (subtle color shift on hover) */
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* 2. Background Shine Sweep (diagonal shine effect) */
+.btn-premium::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  transform: skewX(-25deg);
+  transition: left 0.6s ease-out;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Hover State - Button Lift (Scale) */
+.btn-premium:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(28, 73, 66, 0.25);
+}
+
+/* Hover State - Activate Gradient Tint */
+.btn-premium:hover::before {
+  opacity: 1;
+}
+
+/* Hover State - Activate Shine Sweep */
+.btn-premium:hover::after {
+  left: 150%;
+}
+
+/* Arrow Sliding Animation */
+.btn-premium .arrow-slide {
+  transition: transform 0.3s ease-out;
+  position: relative;
+  z-index: 2;
+}
+
+.btn-premium:hover .arrow-slide {
+  transform: translateX(4px);
+}
+
+/* ====================================================================
+   ANIMATED BUTTON - Primary Variant (#24544B -> #1C4942 on Hover)
+   ==================================================================== */
+
+.animated-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1C4942;
+  /* Darker green background on hover */
+  transform: translateX(-100%);
+  /* Start hidden off the left side */
+  transition: transform 0.4s ease-out;
+  /* Transition for the sliding effect */
+  z-index: -1;
+  /* Place overlay beneath the text */
+}
+
+.animated-btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+/* BEFORE: overlay waiting to animate in */
+.animated-btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #1C4942;
+  /* Darker green hover color */
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-out;
+  z-index: -1;
+}
+
+/* WHEN HOVERING → overlay slides in */
+.animated-btn-primary:hover::after {
+  transform: translateX(0);
+}
+
+/* AFTER HOVER → overlay instantly hides (NO reverse animation) */
+.animated-btn-primary:not(:hover)::after {
+  transition: none;
+  transform: translateX(-100%);
+}
+
+/* Hover State - Slide overlay, text stays white */
+.animated-btn-primary:hover::before {
+  transform: translateX(0);
+  /* Slide the overlay fully into view */
+}
+
+.animated-btn-primary:hover::after {
+  transform: translateX(0);
+  /* Slide the overlay fully into view */
+}
+
+/* ====================================================================
+   ANIMATED BUTTON - Secondary Variant (White -> Deep Green on Hover)
+   ==================================================================== */
+
+.animated-btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1c4942;
+  /* Deep green background on hover */
+  transform: translateX(-100%);
+  /* Start hidden off the left side */
+  transition: transform 0.4s ease-out;
+  /* Transition for the sliding effect */
+  z-index: -1;
+  /* Place overlay beneath the text */
+}
+
+/* Hover State - Slide overlay and change text to white */
+.animated-btn-secondary:hover {
+  color: #FFFFFF;
+  /* Change text color to white on hover */
+}
+
+.animated-btn-secondary:hover::before {
   transform: translateX(0);
   /* Slide the overlay fully into view */
 }

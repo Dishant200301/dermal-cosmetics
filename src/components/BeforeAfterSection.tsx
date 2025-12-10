@@ -8,6 +8,7 @@ import after1 from "/image/after-1.png";
 import before2 from "/image/before-2.png";
 import after2 from "/image/after-2.png";
 import { ArrowIcon } from "./icons";
+import { AnimatedButton } from './AnimatedButton';
 
 // ====================================================================
 // FRAMER MOTION VARIANTS (Defined once for reuse)
@@ -16,23 +17,23 @@ import { ArrowIcon } from "./icons";
 // 1. Variant for Individual Elements (Fade Up)
 const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-        opacity: 1, 
+    visible: {
+        opacity: 1,
         y: 0,
-        transition: { 
+        transition: {
             duration: 0.6, // Animation duration
-            ease: "easeOut" 
-        } 
+            ease: "easeOut"
+        }
     }
 };
 
 // 2. Container Variant (Staggering)
 const staggerContainer = {
-    hidden: {}, 
+    hidden: {},
     visible: {
-      transition: {
-        staggerChildren: 0.15, // Delay between the start of each child's animation
-      }
+        transition: {
+            staggerChildren: 0.15, // Delay between the start of each child's animation
+        }
     }
 };
 
@@ -113,17 +114,9 @@ export const BeforeAfterSection = () => {
                     transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }} // Add small delay after image grid
                     className="flex justify-center"
                 >
-                    <Link
-                        to="/results"
-                        className="
-                            flex items-center gap-2 px-8 h-[50px]
-                            bg-[#24544B] text-white rounded-full font-body text-[16px] font-medium
-                            hover:bg-[#1C4942] transition-all duration-300
-                        "
-                    >
+                    <AnimatedButton to="/results" variant="primary">
                         View All Result
-                        <ArrowIcon/>
-                    </Link>
+                    </AnimatedButton>
                 </motion.div>
             </div>
         </section>

@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion"; // <-- Import motion
+import React, { useEffect, useRef } from "react";
+import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 
 // ====================================================================
 // FRAMER MOTION VARIANTS (Defined once for reuse)
@@ -7,27 +7,76 @@ import { motion } from "framer-motion"; // <-- Import motion
 
 // 1. Variant for Individual Elements (Fade Up)
 const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-        opacity: 1, 
-        y: 0,
-        transition: { 
-            duration: 0.6, // Animation duration
-            ease: "easeOut" 
-        } 
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6, // Animation duration
+      ease: "easeOut"
     }
+  }
 };
 
 // 2. Container Variant (Staggering)
 const staggerContainer = {
-    hidden: {}, 
-    visible: {
-      transition: {
-        staggerChildren: 0.15, // Delay between the start of each child's animation
-      }
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15, // Delay between the start of each child's animation
     }
+  }
 };
 
+// ====================================================================
+// ANIMATED COUNTER COMPONENT
+// ====================================================================
+interface AnimatedCounterProps {
+  value: string;
+  className?: string;
+}
+
+const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ value, className }) => {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  // Extract number and suffix (%, +, etc.)
+  const match = value.match(/^([\d,]+)\s*(.*)$/);
+  const numberPart = match ? match[1].replace(/,/g, '') : '0';
+  const suffix = match ? match[2] : '';
+  const targetNumber = parseInt(numberPart, 10);
+
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, {
+    damping: 60,
+    stiffness: 100,
+  });
+  const [displayValue, setDisplayValue] = React.useState('0');
+
+  useEffect(() => {
+    if (isInView) {
+      motionValue.set(targetNumber);
+    }
+  }, [isInView, targetNumber, motionValue]);
+
+  useEffect(() => {
+    const unsubscribe = springValue.on('change', (latest) => {
+      // Format with commas if original had commas
+      const formatted = match && match[1].includes(',')
+        ? Math.floor(latest).toLocaleString()
+        : Math.floor(latest).toString();
+      setDisplayValue(formatted);
+    });
+
+    return unsubscribe;
+  }, [springValue, match]);
+
+  return (
+    <p ref={ref} className={className}>
+      {displayValue} {suffix}
+    </p>
+  );
+};
 
 const stats = [
   {
@@ -78,32 +127,34 @@ const stats = [
 
 export const StatsRow = () => {
   return (
-    <section className="bg-[#FDF7F7] py-12">
-      <div className="container mx-auto px-6 lg:px-20 xl:px-28">
+    <section className="xl:container mx-auto bg-[#FDF7F7] py-12">
+      <div className="px-6 lg:px-10 xl:px-20">
 
         {/* Responsive Grid (STAGGER CONTAINER) */}
         <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12"
         >
 
           {stats.map((stat, index) => (
-            <motion.div 
-                key={index} 
-                variants={fadeInUp} // Apply individual fade-up animation to each stat block
-                className="flex flex-col items-start space-y-2"
+            <motion.div
+              key={index}
+              variants={fadeInUp} // Apply individual fade-up animation to each stat block
+              className="flex flex-col items-start space-y-2"
             >
 
               {/* Icon + Value (always left icon, right value) */}
               <div className="flex items-center gap-4">
                 <div className="flex-shrink-0">{stat.icon}</div>
 
-                <p className="font-heading text-[32px] md:text-[36px] lg:text-[40px] text-[#1C4942] leading-none">
-                  {stat.value}
-                </p>
+                {/* Animated Counter */}
+                <AnimatedCounter
+                  value={stat.value}
+                  className="font-heading text-[32px] md:text-[36px] lg:text-[30px] xl:text-[40px] text-[#1C4942] leading-none"
+                />
               </div>
 
               {/* Label Below - aligned with value, not icon */}

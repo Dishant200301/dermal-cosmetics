@@ -111,13 +111,13 @@ const Services = () => {
           </motion.section>
 
           {/* Services Grid (Staggered fade-in) */}
-          <section className="container mx-auto px-6 lg:px-20 py-12 lg:py-20">
+          <section className="container mx-auto px-4 lg:px-20 py-12 lg:py-20">
             {/* 👇 Parent motion.div for stagger effect */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               // 👇 Animation must trigger ONLY when scrolled to the section
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.1 }}
               variants={staggerContainer} // Use the container variant to define stagger
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
             >
@@ -126,10 +126,11 @@ const Services = () => {
                 <motion.div
                   key={index}
                   variants={fadeInUp} // Use the fadeInUp variant for the card's animation
+                  className="relative"
                 >
                   <Link
                     to={`/services/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="group relative block w-full h-[424px] rounded-[30px] overflow-hidden cursor-pointer"
+                    className="group relative block w-full h-[400px] rounded-[30px] overflow-hidden cursor-pointer touch-manipulation"
                   >
                     {/* Shine Effect */}
                     <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-[50deg] transition-all duration-700 ease-in-out z-10 group-hover:left-[200%] pointer-events-none" />
@@ -143,7 +144,7 @@ const Services = () => {
 
                     {/* Gradient Overlay EXACT from Figma */}
                     <div
-                      className="absolute inset-0"
+                      className="absolute inset-0 pointer-events-none"
                       style={{
                         background:
                           "linear-gradient(180deg, rgba(28, 73, 66, 0) 52.13%, rgba(28, 73, 66, 0.9) 81.58%)",
@@ -151,7 +152,7 @@ const Services = () => {
                     />
 
                     {/* CONTENT — Figma bottom position converted to responsive */}
-                    <div className="absolute left-6 right-6 lg:left-8 lg:right-8 bottom-10 flex flex-col">
+                    <div className="absolute left-6 right-6 lg:left-8 lg:right-8 bottom-10 flex flex-col lg:pointer-events-none z-20">
 
                       {/* ICON BOX */}
                       <div

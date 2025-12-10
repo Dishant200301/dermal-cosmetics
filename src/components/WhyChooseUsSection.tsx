@@ -27,7 +27,7 @@ const staggerContainer = {
 
 const WhyChooseUsSection = () => {
     return (
-        <section className="w-full bg-[#fef7f8]  py-16 md:py-20 lg:py-24">
+        <section className="xl:container w-full bg-[#fef7f8]  py-16 md:py-20 lg:py-24 xl:px-24">
             <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-0">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
 
@@ -82,9 +82,9 @@ const WhyChooseUsSection = () => {
 
                             {/* CARD 1 (4th item in sequence) */}
                             <motion.div variants={fadeInUp} className="border-t border-[#7B798C24] pt-8 flex gap-5">
-                                <div className="bg-[#F7F0F2] w-10 h-10 rounded-xl flex items-center justify-center">
+                                <div className="bg-[#F7F0F2] w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-xl flex items-center justify-center">
                                     <div className="w-10 h-10  bg-[#F7F0F2] rounded-md flex items-center justify-center">
-                                        <HeartHandshake className="w-6 h-6 text-[#1C4942]" />
+                                        <HeartHandshake className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1C4942]" />
                                     </div>
                                 </div>
 
@@ -102,9 +102,9 @@ const WhyChooseUsSection = () => {
 
                             {/* CARD 2 (5th item in sequence) */}
                             <motion.div variants={fadeInUp} className="border-t border-[#7B798C24] pt-8 flex gap-5">
-                                <div className="bg-[#F7F0F2] w-10 h-10 rounded-xl flex items-center justify-center">
-                                    <div className="w-10 h-10  rounded-md flex items-center justify-center">
-                                        <Star className="w-6 h-6 text-[#1C4942]" />
+                                <div className="bg-[#F7F0F2] w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-xl flex items-center justify-center">
+                                    <div className="w-10 h-10  bg-[#F7F0F2] rounded-md flex items-center justify-center">
+                                        <Star className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1C4942]" />
                                     </div>
                                 </div>
 

@@ -24,9 +24,9 @@ const Index = () => {
         <title>Dermal - Comprehensive Dermatology & Cosmetology Clinic</title>
         <meta name="description" content="Expert dermatology care for healthy, radiant skin. From preventive care to specialized treatments, Dermal provides comprehensive skincare solutions." />
       </Helmet>
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-[#fef7f8]">
         <Header />
-        <main className='overflow-hidden'>
+        <main className='overflow-hidden bg-[#fef7f8]'>
           <Hero />
           <ContactInfoStrip />
           <WhyChooseUs />
