@@ -9,25 +9,25 @@ import { AnimatedButton } from "./AnimatedButton";
 
 // 1. Variant for Individual Elements (Fade Up)
 const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-        opacity: 1, 
-        y: 0,
-        transition: { 
-            duration: 0.6, // Animation duration
-            ease: "easeOut" 
-        } 
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6, // Animation duration
+      ease: "easeOut"
     }
+  }
 };
 
 // 2. Container Variant (Staggering)
 const staggerContainer = {
-    hidden: {}, 
-    visible: {
-      transition: {
-        staggerChildren: 0.15, // Delay between the start of each child's animation (0.15s)
-      }
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15, // Delay between the start of each child's animation (0.15s)
     }
+  }
 };
 
 
@@ -73,20 +73,20 @@ const ContactSection: React.FC = () => {
         {/* Rounded main container */}
         <div className="rounded-[30px] bg-[#F7F0F2] border border-[#E3D4D9] px-4 py-8 sm:p-8 lg:p-10 xl:py-12 xl:px-24">
           <div className="grid gap-10 lg:gap-16 lg:grid-cols-2 items-start">
-            
+
             {/* =====================================================================================
                 LEFT: Address + Map (second on mobile) - STAGGER CONTAINER
             ===================================================================================== */}
             <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={staggerContainer} // Parent controls the stagger for this column
-                className="order-2 lg:order-1 space-y-6"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={staggerContainer} // Parent controls the stagger for this column
+              className="order-2 lg:order-1 space-y-6"
             >
               {/* Top address / phone row (1st sequence item) */}
               <motion.div variants={fadeInUp} className="grid gap-4 sm:gap-6 sm:grid-cols-2">
-                
+
                 {/* Address Box (single motion.div for the whole box) */}
                 <div className="flex items-center gap-3 sm:gap-4">
                   <div className="flex h-[50px] w-[50px] items-center justify-center rounded-[16px] bg-[#24544B]">
@@ -130,11 +130,11 @@ const ContactSection: React.FC = () => {
                 RIGHT: Form (first on mobile) - STAGGER CONTAINER
             ===================================================================================== */}
             <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={staggerContainer} // Parent controls the stagger for this column
-                className="order-1 lg:order-2"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={staggerContainer} // Parent controls the stagger for this column
+              className="order-1 lg:order-2"
             >
               {/* Heading Group (1st, 2nd, 3rd sequence items) */}
               <div className="mb-6 sm:mb-8">
@@ -192,21 +192,28 @@ const ContactSection: React.FC = () => {
                     required
                     className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 font-body text-[15px] md:text-[16px] text-[#1C4942] placeholder:text-[#7B798C] focus:border-[#24544B] focus:outline-none"
                   />
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    required
-                    className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 font-body text-[15px] md:text-[16px] text-[#7B798C] focus:border-[#24544B] focus:outline-none"
-                  >
-                    <option value="">Select Service</option>
-                    <option value="dermal-fillers">Dermal Fillers</option>
-                    <option value="chemical-peels">Chemical Peels</option>
-                    <option value="acne-treatment">Acne Treatment</option>
-                    <option value="skin-tightening">Skin Tightening</option>
-                    <option value="scar-revision">Scar Revision</option>
-                    <option value="wrinkle-reduction">Wrinkle Reduction</option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      required
+                      className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 pr-12 font-body text-[15px] md:text-[16px] text-[#7B798C] focus:border-[#24544B] focus:outline-none appearance-none"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%237B798C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'right 1.25rem center',
+                      }}
+                    >
+                      <option value="">Select Service</option>
+                      <option value="dermal-fillers">Dermal Fillers</option>
+                      <option value="chemical-peels">Chemical Peels</option>
+                      <option value="acne-treatment">Acne Treatment</option>
+                      <option value="skin-tightening">Skin Tightening</option>
+                      <option value="scar-revision">Scar Revision</option>
+                      <option value="wrinkle-reduction">Wrinkle Reduction</option>
+                    </select>
+                  </div>
                 </motion.div>
 
                 {/* Row 3 (6th sequence item) */}
@@ -219,7 +226,8 @@ const ContactSection: React.FC = () => {
                       value={formData.date}
                       onChange={handleChange}
                       required
-                      className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 pr-5 font-body text-[15px] md:text-[16px] text-[#7B798C] focus:border-[#24544B] focus:outline-none"
+                      placeholder="mm/dd/yyyy"
+                      className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 pr-4 font-body text-[15px] md:text-[16px] text-[#7B798C] focus:border-[#24544B] focus:outline-none"
                     />
                   </div>
 
@@ -230,7 +238,12 @@ const ContactSection: React.FC = () => {
                       value={formData.time}
                       onChange={handleChange}
                       required
-                      className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 pr-12 font-body text-[15px] md:text-[16px] text-[#7B798C] focus:border-[#24544B] focus:outline-none"
+                      className="h-[60px] w-full rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 pr-12 font-body text-[15px] md:text-[16px] text-[#7B798C] focus:border-[#24544B] focus:outline-none appearance-none"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%237B798C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'right 1.25rem center',
+                      }}
                     >
                       <option value="">Choose Time</option>
                       <option value="9:00">9:00 AM</option>
@@ -240,28 +253,27 @@ const ContactSection: React.FC = () => {
                       <option value="15:00">3:00 PM</option>
                       <option value="16:00">4:00 PM</option>
                     </select>
-                    <Clock className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7B798C]" />
                   </div>
                 </motion.div>
 
                 {/* Description (7th sequence item) */}
                 <motion.div variants={fadeInUp}>
-                    <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        rows={4}
-                        placeholder="Description here about service or your problem..."
-                        className="h-[150px] w-full resize-none rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 py-4 font-body text-[15px] md:text-[16px] text-[#1C4942] placeholder:text-[#7B798C] focus:border-[#24544B] focus:outline-none"
-                        required
-                    />
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={4}
+                    placeholder="Description here about service or your problem..."
+                    className="h-[150px] w-full resize-none rounded-[14px] border border-[rgba(123,121,140,0.14)] bg-white px-5 py-4 font-body text-[15px] md:text-[16px] text-[#1C4942] placeholder:text-[#7B798C] focus:border-[#24544B] focus:outline-none"
+                    required
+                  />
                 </motion.div>
 
                 {/* Button (8th sequence item) */}
                 <motion.div variants={fadeInUp}>
-                    <AnimatedButton type="submit" variant="primary" className="w-fit">
-                        Send Message
-                    </AnimatedButton>
+                  <AnimatedButton type="submit" variant="primary" className="w-fit">
+                    Send Message
+                  </AnimatedButton>
                 </motion.div>
               </form>
             </motion.div>
